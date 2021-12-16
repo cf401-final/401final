@@ -1,19 +1,18 @@
-## APP IDEAS
+## App Ideas
 
-1. 
-2. 
-3. 
-4. 
+1.
+2.
+3.
+4.
 
-# Final Pitch
+# FINAL PITCH
 
--   **Name of Project:** 
--   **Problem Domain:** 
--   **MVP:** 
-    -   
-    -   
-    -   
-    -   
--   **Stretch goal:** 
--   **Stretch goal:** 
--   **Stretch goal:** 
+-   **Name of Project:**
+-   **Problem Domain:**
+-   ## **MVP:**
+    -
+    -
+    -
+-   **Stretch goal:**
+-   **Stretch goal:**
+-   **Stretch goal:**

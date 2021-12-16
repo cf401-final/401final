@@ -30,9 +30,9 @@ _Every person on your team is an asset. This is your chance to discover the hidd
 
 -   **Strengths** -
 -   **How I can use them** -
--   **Professional competencies to develop**  
-	 - Craft Competency - Technical, Tools Proficiency, Testing
-	 - Results Competency - Prioritization, Planning & Estimating
+-   **Professional competencies to develop**
+    -   Craft Competency - Technical, Tools Proficiency, Testing
+    -   Results Competency - Prioritization, Planning & Estimating
 
 ---
 
@@ -80,12 +80,12 @@ _Before beginning to tackle the project, determine how your group will communica
 
 **What hours will you be available to communicate?**
 
-| **Name**      | 12/17 | 12/18 | 12/19  | 12/20  | 12/21  | 12/22     | 12/23 | 12/26     | 12/27 | 12/28 |
-| ------------- | ----- | ----- | ------ | ------ | ------ | --------- | ----- | --------- | ----- | ----- |
-| **Alexander** |       |       |        |        |        |           |       |           |       |       |
-| **Kason**     |       |       |        |        |        |           |       |           |       |       |
-| **Ryan**      |       |       |        |        |        |           |       |           |       |       |
-| **Stefanie**  | 9a-5p | -     | 10a-5p | 4p-11p | unsure | traveling | 9a-5p | traveling | free  | free  |
+| **Name**      | Fri 12/17 | Sat 12/18 | Sun 12/19 | Mon 12/20 | Tue 12/21 | Wed 12/22 | Thu 12/23 | Fri 12/24 | Sat 12/25 | Sun 12/26 | Mon 12/27 | Tue 12/28 |
+| ------------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- |
+| **Alexander** |           |           |           |           |           |           |           |           |           |           |           |           |
+| **Kason**     |           |           |           |           |           |           |           |           |           |           |           |           |
+| **Ryan**      |           |           |           |           |           |           |           |           |           |           |           |           |
+| **Stefanie**  | 9a-5p     | kid duty  | 10a-5p    | 4p-11p    | ???       | travel    | 9a-5p     | holiday   | holiday   | travel    | 9a-11p    | 9a-11p    |
 
 **What platforms will you use to communicate (ie. Slack, phone …)?**\
 Slack, Remo, text if needed
