@@ -28,9 +28,11 @@ _Every person on your team is an asset. This is your chance to discover the hidd
 
 ### STEFANIE
 
--   **Strengths** - Process management/project management, organization, communication
--   **How I can use them** - Taking on tasks like documentation, project-based items
--   **Professional competencies to develop** - Craft Competency (Technical, Tools Proficiency, Testing), Results Competency (Prioritization, Planning & Estimating)
+-   **Strengths** -
+-   **How I can use them** -
+-   **Professional competencies to develop**  
+	 - Craft Competency - Technical, Tools Proficiency, Testing
+	 - Results Competency - Prioritization, Planning & Estimating
 
 ---
 
@@ -76,12 +78,14 @@ Maintain professionalism. If concerns aren't addressed in 1-on-1 scenario, discu
 
 _Before beginning to tackle the project, determine how your group will communicate with each other. This is not an individual effort. Make sure everyone feels comfortable with the identified methods of speaking up._
 
-**What hours will you be available to communicate?**\
+**What hours will you be available to communicate?**
 
--   Alexander:
--   Kason:
--   Ryan:
--   Stefanie:
+| **Name**      | 12/17 | 12/18 | 12/19  | 12/20  | 12/21  | 12/22     | 12/23 | 12/26     | 12/27 | 12/28 |
+| ------------- | ----- | ----- | ------ | ------ | ------ | --------- | ----- | --------- | ----- | ----- |
+| **Alexander** |       |       |        |        |        |           |       |           |       |       |
+| **Kason**     |       |       |        |        |        |           |       |           |       |       |
+| **Ryan**      |       |       |        |        |        |           |       |           |       |       |
+| **Stefanie**  | 9a-5p | -     | 10a-5p | 4p-11p | unsure | traveling | 9a-5p | traveling | free  | free  |
 
 **What platforms will you use to communicate (ie. Slack, phone …)?**\
 Slack, Remo, text if needed
