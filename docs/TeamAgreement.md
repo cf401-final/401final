@@ -82,9 +82,9 @@ _Before beginning to tackle the project, determine how your group will communica
 
 | **Name**      | Fri 12/17 | Sat 12/18 | Sun 12/19 | Mon 12/20 | Tue 12/21 | Wed 12/22 | Thu 12/23 | Fri 12/24 | Sat 12/25 | Sun 12/26 | Mon 12/27 | Tue 12/28 |
 | ------------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- |
-| **Alexander** |           |           |           |           |           |           |           |           |           |           |           |           |
-| **Kason**     |           |           |           |           |           |           |           |           |           |           |           |           |
-| **Ryan**      |           |           |           |           |           |           |           |           |           |           |           |           |
+| **Alexander** |           |           |           |           |           |           |           | holiday   | holiday   |           |           |           |
+| **Kason**     |           |           |           |           |           |           |           | holiday   | holiday   |           |           |           |
+| **Ryan**      |           |           |           |           |           |           |           | holiday   | holiday   |           |           |           |
 | **Stefanie**  | 9a-5p     | kid duty  | 10a-5p    | 4p-11p    | ???       | travel    | 9a-5p     | holiday   | holiday   | travel    | 9a-11p    | 9a-11p    |
 
 **What platforms will you use to communicate (ie. Slack, phone …)?**\
