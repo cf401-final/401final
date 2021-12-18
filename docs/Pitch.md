@@ -3,12 +3,14 @@
 1. Chatroom application with interactive posts
 2. Dating app with interest categories
 3. Social app for pets
-4. Why not something that could be all of these things to some degree?
+
+*4. Why not an app that could be all of these things?*
 
 # FINAL PITCH
 
 - **Name of Project:** Jangle
-- **Problem Domain:** We want to create an application that will allow users with unique interests, identities, and/or animal kingdom classifications connect with each other.
+- **Problem Domain:** Jangle is a web application that allows users to communicate like never before. This application features custom chat rooms with real time chatting and posting. In addition to this, users will be able to 'match' with other users based off of their custom personas and engage in one on one coversations. The ability to react to posts, make new friends, as well as share and discuss content coupled with Jangle's aesthetic UI provides an awesome social experience!
+
 - ## **MVP:**
   - signup and login capabilities
   - end-user ability to join public channels (open chats)
