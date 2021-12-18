@@ -76,7 +76,7 @@ Maintain professionalism. If concerns aren't addressed in 1-on-1 scenario, discu
 | ------------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- |
 | **Alexander** | free      |unavailable|   free    |   free    |     free    |      free    |  free   | holiday   | holiday   |  free  |  free  |  free    |   free |  free |
 | **Kason**     |  free  |  free  |  free  |  free  |  free  |  free | free | holiday  | holiday  |  somewhat-free  | free  |  free  | free  |
-| **Ryan**      | free | unavailable | half-day | free | 3p-6p | free | free | holiday   | holiday   | birthday (flexible) | free | free | free |
+| **Ryan**      | free | unavailable | half-day | free | 3p-10p | 9a-5p | free | holiday   | holiday   | birthday (flexible) | free | free | free |
 | **Stefanie**  | 9a-5p     | unavailable  | partial/studying | studying, after 4p    | spotty availability | travel    | free     | holiday   | holiday   | traveling, after 4p    | free    | free    |free          |
 
 **What platforms will you use to communicate?**\
