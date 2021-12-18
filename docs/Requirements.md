@@ -2,84 +2,68 @@
 
 ## Vision
 
-_What is the vision of this app?_
-
-<!-- We want to create a bulletin board system. Users will be able to access a wide audience when posting items for sale, and can also subscribe to a variety of topics. When new posts are made within the subscribed topic, the user will receive a notification of the new posting. -->
+We want to create an application that will allow users with unique interests, identities, and/or animal kingdom classifications to connect with each other.
 
 ## Scope (In/Out)
 
-<!-- IN - _What will your app do?_
+IN - _Our app will do the following_
 
--   The app will allow users to:
-
-    -   sign up using base64 authentication
-    -   sign in using JWT authorization
-    -   post messages/items for sale
-    -   subscribe to a topic using socket.io
-
+-   allow users to communicate via public and private rooms in real time
+-   allow users to participate in 1-1 messaging in real time
+-   provide a matching feature that allows people to match with other users that have similar interests in order to start a 1-1 conversation
 -   The app will provide basic CRUD functionality
--   Socket emit events will be triggered by new database posts
--   Only the user posting the item can delete them item from the board
+-   Socket emit events will be triggered by numerous types of frontend user interactions
+-   sign up using base64 authentication
+-   sign in using JWT authorization (admin users will use JWT authorization for administrative actions)
 
-OUT - _What will your app not do?_
+OUT - _Our app will not do the following_
 
--   This app will not process payment info to/from buyers/sellers
--   This app will not host addresses for shipping purposes
--   This app will not allow users to save posts -->
+-   file sharing capabilities
+-   voice chatting capabilities
+-   video chatting capabilities
+-   any type of location services
 
 ### Minimum Viable Product
 
-<!-- The bulletin board system will allow a user to:
-
--   sign up
--   sign in
--   subscribe to a channel or topic to receive notifications
--   add an item for sale to a database that generates a message to subscribers -->
+- Users shall be able to create accounts and login
+- Users shall be able to join public rooms
+- Users shall be able to create private rooms that any user can join with the proper credentials
+- Users can engage in 1-1 messaging with other users
+- Users can match with other users that have similar interests, as specified during account creation
 
 ### Stretch Goals
 
-<!-- -   Create multiple channels on a variety of topics
--   Post a message to a message board
--   Allow images to be included in message board postings
--   Send a direct message to another user -->
+- allow users to add a custom profile photo (cloudinary?)
+- add ability to edit user persona
+- add ability for users to edit/delete their own created private channels
+- assign random image to users upon signup
+- add admin ability to create public channels
+- add admin ability to delete public channels
+- add admin ability to delete users
+- add ability for users to add posts to a chat room's feed
+- add ability to add reactions to posts (like, heart, etc)
+- chat commands!
+- gifs in chat
 
 ## Functional Requirements
 
-<!-- 1. User can sign up to create a profile
-1. User can log in and log out of their profile
-1. User can post, update, and delete items for sale -->
+- User can sign up to create a profile
+- User can log in and log out of their profile
+- User can post, update, and delete items for sale
 
 ### Data Flow
 
-<!-- Describe the flow of data in your application. Write out what happens from the time the user begins using the app to the time the user is done with the app. Think about the “Happy Path” of the application. Describe through visuals and text what requests are made, and what data is processed, in addition to any other details about how the user moves through the site. -->
+Please refer to the image below for a depiction of Jangle's data flow
 
-<!-- ![item-search](./item-search-data-flow.png)
-
-Item Search Data Flow
-
-* Frontend: User's search data is collected and forwarded to the Backend API. User does not require authentication to search.
-* Backend API: Requests search resources from a third-party API server.
-* Backend API: Receives response resources from the third-party API server, transforms the shape into our domain model, adds a token to the data payload and returns the data to the Frontend.
-
-![login](./login-data-flow.png)
-
-Login Data Flow
-
-* Frontend: User's login data is collected, hashed and securely sent to the Backend API. User does not require authentication to login.
-* Backend: Queries the DB technology for User data matching the User's login credentials.
-* Backend: Authenticates the User and sends a token to the Frontend.
-
-![CRUD](./CRUD-item-data-flow.png)
-
-CRUD Item Data Flow
-
-* Frontend: User's item data is collected and forwarded to the Backend API. User requires authentication to use any Backend CRUD operations.
-* Backend: Routes the request and prepares the resource for CRUD operations.
-* Database: Based on the operation, the Database will CRUD the resource, returning success or failure to the Backend API.
-* Backend: Returns a token and CRUD status code to the Frontend. -->
+![Domain Model](../domainModel.png)
 
 ## Non-Functional Requirements
 
-<!-- 1. Security - we will be adding authentication using base64, and authorization using JWT.
+- Security - we will be adding authentication using base64, and authorization using JWT.
 
-2. Testability - we will be using Jest to write tests for our CRUD operations -->
+- Testing - app will have unit tests to ensure that 
+
+- Resizability - app will have an aesthetic appearance on any reasonably sized browser window
+
+- Performance - Given a good internet connection, app will not lag when in use assuming a huge amount of users are not using the app at any given time
+
