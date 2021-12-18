@@ -8,20 +8,20 @@ We want to create an application that will allow users with unique interests, id
 
 IN - _Our app will do the following_
 
--   allow users to communicate via public and private rooms in real time
--   allow users to participate in 1-1 messaging in real time
--   provide a matching feature that allows people to match with other users that have similar interests in order to start a 1-1 conversation
--   The app will provide basic CRUD functionality
--   Socket emit events will be triggered by numerous types of frontend user interactions
--   sign up using base64 authentication
--   sign in using JWT authorization (admin users will use JWT authorization for administrative actions)
+- Allow users to communicate via public and private rooms in real time
+- Allow users to participate in 1-1 messaging in real time
+- Provide a matching feature that allows people to match with other users that have similar interests in order to start a 1-1 conversation
+- The app will provide basic CRUD functionality
+- Socket emit events will be triggered by numerous types of frontend user interactions
+- Sign up using base64 authentication
+- Sign in using JWT authorization (admin users will use JWT authorization for administrative actions)
 
 OUT - _Our app will not do the following_
 
--   file sharing capabilities
--   voice chatting capabilities
--   video chatting capabilities
--   any type of location services
+- File sharing capabilities
+- Voice chatting capabilities
+- Video chatting capabilities
+- Any type of location services
 
 ### Minimum Viable Product
 
@@ -49,7 +49,7 @@ OUT - _Our app will not do the following_
 
 - The application must allow users to sign up to create a profile and login to their profiles at a later time
 - The application must feature sound security - it will implement authentication using base64, and authorization using JWT. Passwords will be stored using secure methods.
-- The application will have RBAC so that admin users can execute administrative actions with the purpose of promoting a positive + safe environment for the app's users. 
+- The application will have RBAC so that admin users can execute administrative actions with the purpose of promoting a positive + safe environment for the app's users.
 - The application must allow users to create, join, and participate in rooms.
 - The app must have a real time event system to allow users to communicate instantaneously.
 
@@ -57,11 +57,10 @@ OUT - _Our app will not do the following_
 
 Please refer to the image below for a depiction of Jangle's data flow
 
-![Domain Model](./domainModel.PNG)
+![Domain Model](../img/docs/domain-model.png)
 
 ## Non-Functional Requirements
 
-- Testing - app will have unit tests to ensure that 
+- Testing - app will have unit tests to ensure that
 - Resizability - app will have an aesthetic appearance on any reasonably sized browser window
 - Performance - Given a good internet connection, app will not lag when in use assuming a huge amount of users are not using the app at any given time
-

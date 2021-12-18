@@ -29,21 +29,21 @@
 - **Strengths** - Communication, organization, project management, operational strengths
 - **How I can use them** - Ensuring we're staying on-task with timelines. Corralling the loose ends. Wrapping the whole project up into a pretty package (i.e. slide deck/presentation).
 - **Professional competencies to develop**
-    - Craft Competency - Technical, Tools Proficiency, Testing
-    - Results Competency - Prioritization, Planning & Estimating
+  - Craft Competency - Technical, Tools Proficiency, Testing
+  - Results Competency - Prioritization, Planning & Estimating
 
 ---
 
 ### Regular check-ins at 9:00am PST
 
 - Recap the day before
-    - Successes
-    - Failures
-    - How are you doing, feeling about your work, your contributions to the project?
+  - Successes
+  - Failures
+  - How are you doing, feeling about your work, your contributions to the project?
 - Review the upcoming day
-    - What do we need to finish from yesterday?
-    - What are our priorities for MVP today?
-    - Who will be working on what?
+  - What do we need to finish from yesterday?
+  - What are our priorities for MVP today?
+  - Who will be working on what?
 
 ### Daily wrap-up - including code review of major branches/feature merges (if we haven't done so during the day)
 
@@ -64,7 +64,7 @@ Regular check-ins and communication. If something is unclear for you, ask for he
 If someone has concerns with another individual, bring it up with them in a 1-on-1 setting and not with the entire group. Be mindful, ask questions, be empathetic. It is expected that all members will contribute and be given help by the other members in doing so.
 
 **How and when will you escalate the conflict if your resolution attempts are unsuccessful?**\
-Maintain professionalism. If concerns aren't addressed in 1-on-1 scenario, discuss with other teammates. If this fails to solve the conflict, said concerns will be elevated to management. 
+Maintain professionalism. If concerns aren't addressed in 1-on-1 scenario, discuss with other teammates. If this fails to solve the conflict, said concerns will be elevated to management.
 
 ---
 

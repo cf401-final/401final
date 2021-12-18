@@ -1,36 +1,38 @@
 # Jangle - Social Platform
 
-### Team: Alexander Beers, Kason Braley, Ryan Emmans, Stefanie Riehle
+## Team Members
 
-<!-- ### Usage -->
+- Alexander Beers
+- Kason Braley
+- Ryan Emmans
+- Stefanie Riehle
 
-<!-- * This project is deployed on Heroku [here](). -->
+<!-- ## Usage -->
+
+<!-- - This project is deployed on Heroku [here](). -->
 
 ## Pitch
 
-* Pitch for this project can be found [here](./docs/Pitch.md).
+- Pitch for this project can be found [here](./docs/Pitch.md).
 
+## Software Requirements
 
+- Software requirements for this project can be found [here](./docs/Requirements.md).
 
-### Software Requirements
+## Team Agreement
 
-* Software requirements for this project can be found [here](./docs/Requirements.md).
+- Team agreement for this project can be found [here](./docs/TeamAgreement.md).
 
-### Team Agreement
+## Domain Model
 
-* Team agreement for this project can be found [here](./docs/TeamAgreement.md).
+![Domain Model](./img/docs/domain-model.png)
 
-### Domain Model
+## Initial Wireframe
 
-![Domain Model](./docs/domainModel.PNG)
+![Wireframe](./img/docs/wireframe.png)
 
-### Initial Wireframe
+## Schema
 
-![Wireframe](./docs/wireframe.PNG)
+![Schema](./img/docs/schema.png)
 
-### Schema
-
-![Schema](./docs/schema.PNG)
-
-### Dependencies
-
+## Dependencies
