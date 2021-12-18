@@ -11,28 +11,22 @@
 
 <!-- - This project is deployed on Heroku [here](). -->
 
-## Pitch
+## Project Management
 
-- Pitch for this project can be found [here](./docs/Pitch.md).
-
-## Software Requirements
-
-- Software requirements for this project can be found [here](./docs/Requirements.md).
-
-## Team Agreement
-
-- Team agreement for this project can be found [here](./docs/TeamAgreement.md).
+- [Team Agreement](./docs/TeamAgreement.md)
+- [Pitch](./docs/Pitch.md)
+- [Software Requirements](./docs/Requirements.md)
 
 ## Domain Model
 
-![Domain Model](./img/docs/domain-model.png)
+<img src="./img/docs/domain-model.png" alt="Domain Model" width="600">
 
 ## Initial Wireframe
 
-![Wireframe](./img/docs/wireframe.png)
+<img src="./img/docs/wireframe.png" alt="Wireframe" width="600">
 
 ## Schema
 
-![Schema](./img/docs/schema.png)
+<img src="./img/docs/schema.png" alt="Schema" width="600">
 
-## Dependencies
+<!-- ## Dependencies -->
