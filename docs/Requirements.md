@@ -43,27 +43,25 @@ OUT - _Our app will not do the following_
 - add ability for users to add posts to a chat room's feed
 - add ability to add reactions to posts (like, heart, etc)
 - chat commands!
-- gifs in chat
+- Allow users to communicate with plain gifs and images
 
 ## Functional Requirements
 
-- User can sign up to create a profile
-- User can log in and log out of their profile
-- User can post, update, and delete items for sale
+- The application must allow users to sign up to create a profile and login to their profiles at a later time
+- The application must feature sound security - it will implement authentication using base64, and authorization using JWT. Passwords will be stored using secure methods.
+- The application will have RBAC so that admin users can execute administrative actions with the purpose of promoting a positive + safe environment for the app's users. 
+- The application must allow users to create, join, and participate in rooms.
+- The app must have a real time event system to allow users to communicate instantaneously.
 
 ### Data Flow
 
 Please refer to the image below for a depiction of Jangle's data flow
 
-![Domain Model](../domainModel.png)
+![Domain Model](./domainModel.PNG)
 
 ## Non-Functional Requirements
 
-- Security - we will be adding authentication using base64, and authorization using JWT.
-
 - Testing - app will have unit tests to ensure that 
-
 - Resizability - app will have an aesthetic appearance on any reasonably sized browser window
-
 - Performance - Given a good internet connection, app will not lag when in use assuming a huge amount of users are not using the app at any given time
 
