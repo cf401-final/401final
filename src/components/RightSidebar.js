@@ -1,11 +1,8 @@
-import React from 'react'
-import Paper from '@mui/material/Paper';
+import React from 'react';
 
 const RightSidebar = () => {
   return (
-    <div>
-      <Paper className="right-sidebar">RIGHT SIDEBAR</Paper>
-    </div>
+    <div className="right-sidebar" elevation={10}>RIGHT SIDEBAR</div>
   )
 }
 

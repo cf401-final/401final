@@ -3,7 +3,6 @@ import MainContainer from './components/MainContainer';
 import Header from './components/Header';
 import LeftSidebar from './components/LeftSidebar';
 import RightSidebar from './components/RightSidebar';
-import Container from '@mui/material/Container';
 
 import {
   BrowserRouter,
@@ -13,9 +12,9 @@ import {
 
 const App = () => {
   return (
-    <Container sx={{ display: "flex", flexDirection: "column"}}>
+    <div className="App">
       <Header />
-      <Container sx={{ display: "flex", flexWrap: "row" }}>
+      <div className="container">
         <BrowserRouter>
           <LeftSidebar />
           <MainContainer>
@@ -28,8 +27,8 @@ const App = () => {
             <Route path="/roomchat" element={<RightSidebar />}></Route>
           </Switch>
         </BrowserRouter>
-      </Container>
-    </Container>
+      </div>
+    </div>
   );
 }
 
