@@ -3,6 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "main": "public/main.js",
+  "license": "MIT",
+  "contributors": [
+    {
+      "name": "Stefanie Riehle",
+      "url": "https://github.com/stefrie"
+    },
+    {
+      "name": "Ryan Emmans",
+      "url": "https://github.com/ryanemmans"
+    },
+    {
+      "name": "Alexander Beers",
+      "url": "https://github.com/Beers15"
+    },
+    {
+      "name": "Kason Braley",
+      "url": "https://github.com/KasonBraley"
+    }
+  ],
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
