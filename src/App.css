@@ -13,6 +13,12 @@
   width: 100%;
   margin: 0;
   border: thin solid gray;
+  min-height: 50px;
+  max-height: 50px;
+}
+
+.header h1 {
+  margin: .4rem 0 0 1rem;
 }
 
 .main-container {
@@ -25,11 +31,12 @@
 
 .left-sidebar, .right-sidebar {
   flex-grow: 1;
+  max-width: 200px;
   height: 100vh;
   border: thin solid gray;
   min-width: 200px;
 }
 
-.left-sidebar#resizable {
-  
-} 
+/* .left-sidebar#resizable {
+
+}  */
