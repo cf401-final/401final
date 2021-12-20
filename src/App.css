@@ -10,15 +10,48 @@
 }
 
 .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   width: 100%;
   margin: 0;
-  border: thin solid gray;
-  min-height: 50px;
-  max-height: 50px;
+  border-bottom: 1px solid #202225;
+  height: 45px;
+  background-color: #36393f;
+  color: #99aab5;
+}
+
+#bubble {
+  margin: .75rem .3rem 0 .1rem;
+  font-size: 1.8rem;
 }
 
 .header h1 {
-  margin: 0.4rem 0 0 1rem;
+  font-family: 'Kanit', sans-serif;
+  display: flex;
+  justify-content: center;
+  margin: -.2rem;
+  color: white;
+}
+
+#onlineUsers {
+  margin: 10px;
+  position: absolute;
+  right: 4rem;
+}
+
+#github {
+  border-radius: 22px 0 0 22px;
+  margin: 1px 0;
+  height: 44px;
+  position: absolute;
+  right: 0;
+}
+
+.btnImg {
+  width: 22px;
+  height: 22px;
+  filter: invert(1);
 }
 
 .main-container {
@@ -26,7 +59,8 @@
   min-width: 600px;
   margin: 0;
   height: 100vh;
-  border: thin solid gray;
+  background-color: #36393f;
+  color: white;
 }
 
 .left-sidebar,
@@ -34,8 +68,9 @@
   flex-grow: 1;
   max-width: 200px;
   height: 100vh;
-  border: thin solid gray;
   min-width: 200px;
+  background-color: #303136;
+  color: white;
 }
 
 .roomchat-container {
