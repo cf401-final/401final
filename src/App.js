@@ -1,6 +1,6 @@
 import './App.css';
 import MainContainer from './components/mainContainer';
-import Roomchat from './components/mainContainer/Roomchat';
+import Roomchat from './components/mainContainer/roomchat';
 import Matcher from './components/mainContainer/Matcher';
 import Landing from './components/mainContainer/Landing';
 import Header from './components/Header';

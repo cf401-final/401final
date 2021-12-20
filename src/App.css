@@ -38,6 +38,19 @@
   min-width: 200px;
 }
 
-/* .left-sidebar#resizable {
+.roomchat-container {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
 
-}  */
+.message-bar {
+  position: fixed;
+  bottom: 0;
+  margin: 0 0 20px 20px;
+}
+
+.message-container {
+  display: flex;
+  flex-direction: column;
+}
