@@ -7,11 +7,7 @@ import Header from './components/Header';
 import LeftSidebar from './components/LeftSidebar';
 import RightSidebar from './components/RightSidebar';
 
-import {
-  BrowserRouter,
-  Route,
-  Routes as Switch,
-} from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const App = () => {
   return (
@@ -22,15 +18,15 @@ const App = () => {
           <LeftSidebar />
           <MainContainer>
             MAIN CONTAINER
-            <Switch>  
+            <Routes>
               <Route exact path="/" element={<Landing />}></Route>
               <Route exact path="/roomchat" element={<Roomchat />}></Route>
               <Route exact path="/matcher" element={<Matcher />}></Route>
-            </Switch>
+            </Routes>
           </MainContainer>
-          <Switch>  
+          <Routes>
             <Route exact path="/roomchat" element={<RightSidebar />}></Route>
-          </Switch>
+          </Routes>
         </BrowserRouter>
       </div>
     </div>
