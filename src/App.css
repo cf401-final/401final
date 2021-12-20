@@ -18,7 +18,7 @@
 }
 
 .header h1 {
-  margin: .4rem 0 0 1rem;
+  margin: 0.4rem 0 0 1rem;
 }
 
 .main-container {
@@ -29,7 +29,8 @@
   border: thin solid gray;
 }
 
-.left-sidebar, .right-sidebar {
+.left-sidebar,
+.right-sidebar {
   flex-grow: 1;
   max-width: 200px;
   height: 100vh;
