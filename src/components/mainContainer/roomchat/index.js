@@ -12,7 +12,6 @@ const Roomchat = () => {
     });
   }, [socket]);
 
-
   console.log(messages, 'messages')
   return (
     <div className="roomchat-container">
