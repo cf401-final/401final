@@ -57,7 +57,7 @@ OUT - _Our app will not do the following_
 
 Please refer to the image below for a depiction of Jangle's data flow
 
-![Domain Model](../img/docs/domain-model.png)
+![Domain Model](./img/domain-model.png)
 
 ## Non-Functional Requirements
 
