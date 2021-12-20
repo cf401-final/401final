@@ -1,23 +1,20 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { TextField } from '@mui/material';
 import { SocketContext } from '../../../context/socket';
 
-const MessageBar = () => {
-  let [ message, setMessage ] = useState('');
+const MessageBar = ({ addMessage }) => {
   const socket = useContext(SocketContext);
 
   useEffect(() => { 
-    socket.emit('join', {room : 'general', user: 'a b smooth'});
-    socket.on('message', data => {
-      console.log("FROM SERVER: ", data);
-    });
-  }, [socket]);
+    socket.emit('join', {room : 'general', user: 'test'});
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setMessage(e.target.message.value);
+    let message = e.target.message.value;
+    socket.emit('message', { message, room: 'general' });
+    addMessage(message)
     e.target.message.value = '';
-    socket.emit('message', message);
   }
 
   return (
