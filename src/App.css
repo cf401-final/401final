@@ -37,6 +37,12 @@
   min-width: 200px;
 }
 
-/* .left-sidebar#resizable {
+.roomchat-container {
+  height: 90vh;
+  display: flex;
+}
 
-}  */
+.message-bar {
+  align-self: flex-end;
+  margin: 0 0 20px 20px;
+}
