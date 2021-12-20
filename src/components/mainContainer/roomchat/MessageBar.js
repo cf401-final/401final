@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { TextField } from '@mui/material';
 import { SocketContext } from '../../../context/socket';
 
-const MessageBar = ({ addMessage }) => {
+const MessageBar = () => {
   const socket = useContext(SocketContext);
 
   useEffect(() => { 
@@ -13,7 +13,7 @@ const MessageBar = ({ addMessage }) => {
     e.preventDefault();
     let message = e.target.message.value;
     socket.emit('message', { message, room: 'general' });
-    addMessage(message)
+
     e.target.message.value = '';
   }
 
