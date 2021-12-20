@@ -14,9 +14,7 @@ const LeftSidebar = () => {
         <Route path="/matcher" element={<MatcherLeftSidebar />}></Route>
       </Routes>
     </div>
-    
-  )
-}
+  );
+};
 
 export default LeftSidebar;
-

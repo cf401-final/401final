@@ -10,7 +10,7 @@ const RoomChatSidebar = () => {
       <UserDetails />
       <MatcherButton />
     </>
-  )
-}
+  );
+};
 
 export default RoomChatSidebar;

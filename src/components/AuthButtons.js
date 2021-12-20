@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Button } from '@mui/material';
 
 const AuthButtons = () => {
@@ -7,7 +7,7 @@ const AuthButtons = () => {
       <Button variant="contained">Login</Button>
       <Button variant="contained">Register</Button>
     </>
-  )
-}
+  );
+};
 
-export default AuthButtons
+export default AuthButtons;
