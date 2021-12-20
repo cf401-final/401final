@@ -1,21 +1,19 @@
 import MainContainer from './mainContainer';
-// import Roomchat from './mainContainer/roomchat';
-// import Matcher from './mainContainer/Matcher';
-// import Landing from './mainContainer/Landing';
 import Header from './Header';
-import LeftSidebar from './LeftSidebar';
-// import RightSidebar from './RightSidebar';
+import LeftSidebar from './Sidebars/LeftSidebar';
+import RightSidebar from './Sidebars/RightSidebar';
+import { useLocation } from 'react-router-dom';
 
 function Layout({ children }) {
+  const location = useLocation();
+
   return (
     <>
       <Header />
       <div className="container">
         <LeftSidebar />
-        <MainContainer>MAIN CONTAINER</MainContainer>
-        <div>
-          <main>{children}</main>
-        </div>
+        <MainContainer>{children}</MainContainer>
+        {location.pathname === "/roomchat" && <RightSidebar />}
       </div>
     </>
   );

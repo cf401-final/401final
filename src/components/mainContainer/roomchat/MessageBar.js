@@ -5,9 +5,9 @@ import { SocketContext } from '../../../context/socket';
 const MessageBar = () => {
   const socket = useContext(SocketContext);
 
-  useEffect(() => { 
-    socket.emit('join', {room : 'general', user: 'test'});
-  }, []);
+  useEffect(() => {
+    socket.emit('join', { room: 'general', user: 'test' });
+  }, [socket]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,7 +15,7 @@ const MessageBar = () => {
     socket.emit('message', { message, room: 'general' });
 
     e.target.message.value = '';
-  }
+  };
 
   return (
     <div className="message-bar">
@@ -24,7 +24,7 @@ const MessageBar = () => {
         <TextField name="message" variant="standard" />
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default MessageBar;

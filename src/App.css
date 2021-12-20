@@ -22,7 +22,7 @@
 }
 
 #bubble {
-  margin: .75rem .3rem 0 .1rem;
+  margin: 0.75rem 0.3rem 0 0.1rem;
   font-size: 1.8rem;
 }
 
@@ -30,7 +30,7 @@
   font-family: 'Kanit', sans-serif;
   display: flex;
   justify-content: center;
-  margin: -.2rem;
+  margin: -0.2rem;
   color: white;
 }
 
