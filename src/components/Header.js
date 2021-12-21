@@ -2,13 +2,11 @@ import React from 'react';
 import { Typography, Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import github from '../img/github.png';
-import LoginButton from './auth/Login';
-import LogoutButton from './auth/Logout';
-import Profile from './auth/Profile';
-import LoadingWrapper from './auth/LoadingWrapper';
+import UserButton from './auth/UserButton';
+import SignupButton from './auth/SignupButton';
 
 const theme = createTheme({
   palette: {
@@ -19,18 +17,12 @@ const theme = createTheme({
 });
 
 const Header = () => {
+  const { isAuthenticated } = useAuth0();
+
   return (
     <div className="header">
       <ThemeProvider theme={theme}>
-        <Button id="profileBtn" variant="contained" color="primary">
-          <AccountCircleIcon sx={{ fontSize: 25 }} />
-        </Button>
-
-        <LoadingWrapper>
-          <LoginButton />
-          <LogoutButton />
-          <Profile />
-        </LoadingWrapper>
+        {isAuthenticated ? <UserButton /> : <SignupButton />}
 
         <h1>
           <ForumOutlinedIcon id="bubble" />
