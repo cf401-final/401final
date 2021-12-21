@@ -134,10 +134,10 @@
 
 .myChatMessage {
   padding: 0.5rem 1rem;
-  width: 67%;
+  /* width: 67%; */
   background: linear-gradient(135deg, #7289da, #3dc6aa);
   border-radius: 20px 20px 0 20px;
-  margin: 0 0 15px 33%;
+  margin: 0 6px 15px 33%;
   /* text-shadow: 1px 1px 3px rgba(0,0,0, 0.4); */
 }
 
