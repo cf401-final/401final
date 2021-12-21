@@ -8,7 +8,7 @@ function Profile() {
     console.log(`${property}: ${user[property]}`);
   }
 
-  return isAuthenticated && <div>{user.name}</div>;
+  return isAuthenticated && <div>{user.nickname}</div>;
 }
 
 export default Profile;
