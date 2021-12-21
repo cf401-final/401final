@@ -3,16 +3,16 @@ import { Paper, InputBase } from '@mui/material';
 import { SocketContext } from '../../../context/socket';
 
 const MessageBar = () => {
-  const socket = useContext(SocketContext);
+  const { socket, currentRoom } = useContext(SocketContext);
 
   useEffect(() => {
-    socket.emit('join', { room: 'general', username: `Test-User#${Math.round(Math.random() * 1000)}` });
+    socket.emit('join', { room: currentRoom, username: `Test-User#${Math.round(Math.random() * 1000)}` });
   }, [socket]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let message = e.target.message.value;
-    socket.emit('message', { message, room: 'general' });
+    socket.emit('message', { message, room:  currentRoom });
 
     e.target.message.value = '';
   };

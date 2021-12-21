@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { SocketContext } from '../../../context/socket';
 
 const Roomchat = () => {
-  const socket = useContext(SocketContext);
+  const { socket } = useContext(SocketContext);
   let [messages, setMessages] = useState([]);
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
 import './index.css';
 import App from './App';
-import { SocketContext, socket } from './context/socket';
+import SocketProvider from './context/socket';
 
 ReactDOM.render(
   <Auth0Provider
@@ -11,9 +11,9 @@ ReactDOM.render(
     clientId={process.env.REACT_APP_CLIENT_ID}
     redirectUri={window.location.origin}
   >
-    <SocketContext.Provider value={socket}>
+    <SocketProvider>
       <App />
-    </SocketContext.Provider>
+    </SocketProvider>
   </Auth0Provider>,
   document.getElementById('root')
 );
