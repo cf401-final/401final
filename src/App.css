@@ -104,6 +104,11 @@
   font-family: 'Kanit', sans-serif;
 }
 
+#landing a {
+  color: red;
+  cursor: pointer;
+}
+
 .roomchat-container {
   height: 85.5vh;
   display: flex;
