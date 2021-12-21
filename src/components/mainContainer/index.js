@@ -1,7 +1,18 @@
 import React from 'react';
 import { Typography } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 
-const MainContainer = ({ children }) => {
+const MainContainer = (props) => {
+  const location = useLocation();
+
+  let feature;
+  if(location.pathname === "/roomchat") {
+    feature = 'Room Chat';
+  }
+  else if(location.pathname === "/matcher") {
+    feature = "Social Matcher"
+  }
+
   return (
     <>
       <div className="main-container">
@@ -10,11 +21,10 @@ const MainContainer = ({ children }) => {
           display="block"
           gutterBottom
           className="roomTitle"
-          sx={{ml: 1}}
         >
-          Name of Chat Room / Feature
+           {feature}
         </Typography>
-        {children}
+        {props.children}
       </div>
     </>
   )
