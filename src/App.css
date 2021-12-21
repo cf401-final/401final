@@ -40,7 +40,15 @@
   right: 4rem;
 }
 
-#github {
+#profileBtn {
+  border-radius: 0 22px 22px 0;
+  margin: 1px 0;
+  height: 44px;
+  position: absolute;
+  left: 0;
+}
+
+#githubBtn {
   border-radius: 22px 0 0 22px;
   margin: 1px 0;
   height: 44px;
@@ -49,8 +57,8 @@
 }
 
 .btnImg {
-  width: 22px;
-  height: 22px;
+  width: 25px;
+  height: 25px;
   filter: invert(1);
 }
 
@@ -65,12 +73,27 @@
 
 .left-sidebar,
 .right-sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem;
   flex-grow: 1;
   max-width: 200px;
   height: 100vh;
   min-width: 200px;
   background-color: #303136;
   color: white;
+}
+
+#landing {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 33%;
+  color: #99aab5;
+}
+
+#landing h1 {
+  font-family: 'Kanit', sans-serif;
 }
 
 .roomchat-container {
@@ -85,7 +108,8 @@
   margin: 0 0 20px 20px;
 }
 
-.message-container {
+.message-container, 
+.rooms-container {
   display: flex;
   flex-direction: column;
 }

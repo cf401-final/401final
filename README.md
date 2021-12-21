@@ -1,5 +1,8 @@
 # Jangle - Social Platform
 
+- [Organization](https://github.com/jangle401)  
+- [Server](https://github.com/jangle401/jangle-back)
+
 ## Team Members
 
 - Alexander Beers
