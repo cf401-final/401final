@@ -3,14 +3,12 @@ import { Typography, Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-// import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 import github from '../img/github.png';
-// import Paper from '@mui/material/Paper';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#303136',
+      main: '#36393f',
     },
   },
 });
