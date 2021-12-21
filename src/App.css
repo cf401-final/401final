@@ -123,10 +123,7 @@
 .rooms-container {
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
-  padding-bottom: 3rem;
-  margin: 0 1rem;
-  /* overflow-y: auto; */
+  margin-top: 20px;
 }
 
 .myChatMessage {
