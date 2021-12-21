@@ -27,7 +27,7 @@ const MainContainer = (props) => {
         {props.children}
       </div>
     </>
-  )
+  );
 };
 
 export default MainContainer;
