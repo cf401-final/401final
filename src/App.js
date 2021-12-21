@@ -17,7 +17,6 @@ const App = () => {
         <BrowserRouter>
           <LeftSidebar />
           <MainContainer>
-            MAIN CONTAINER
             <Routes>
               <Route exact path="/" element={<Landing />}></Route>
               <Route exact path="/roomchat" element={<Roomchat />}></Route>
