@@ -1,10 +1,10 @@
 import { createStore, combineReducers } from 'redux';
 
-import messagesReducer from './messages';
+import roomsReducer from './rooms';
 
 
 let reducers = combineReducers({ 
-  messages: messagesReducer,
+  rooms: roomsReducer,
 });
 
 const store = () => {

@@ -1,18 +1,24 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { SocketContext } from '../../../context/socket';
+import { connect } from 'react-redux';
 
-const Roomchat = () => {
-  const { socket } = useContext(SocketContext);
+const MessageStream = (props) => {
+  const { socket, currentRoom } = useContext(SocketContext);
   let [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    socket.on('message', (data) => {
-      console.log('MESSAGE SENT');
-      setMessages((messages) => [...messages, data.message]);
+    socket.on('message', () => {
+      if(props.rooms.has(currentRoom)) 
+        setMessages(props.rooms.get(currentRoom));
     });
   }, [socket]);
 
-  console.log(messages, 'messages');
+  useEffect(() => {
+    if(props.rooms.has(currentRoom)) {
+      setMessages(props.rooms.get(currentRoom));
+    }
+  }, [currentRoom]);
+
   return (
     <>
       {messages.length >= 1 && (
@@ -32,4 +38,10 @@ const Roomchat = () => {
   );
 };
 
-export default Roomchat;
+const mapStateToProps = state => {
+  return {
+    rooms: state.rooms.rooms
+  }
+};
+
+export default connect(mapStateToProps)(MessageStream);

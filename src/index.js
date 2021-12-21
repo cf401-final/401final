@@ -4,6 +4,8 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import './index.css';
 import App from './App';
 import SocketProvider from './context/socket';
+import { Provider as StoreProvider } from 'react-redux';
+import store from './store';
 
 ReactDOM.render(
   <Auth0Provider
@@ -13,9 +15,11 @@ ReactDOM.render(
     useRefreshTokens={true}
     cacheLocation="localstorage"
   >
-    <SocketProvider>
-      <App />
-    </SocketProvider>
+    <StoreProvider store={store()}>
+      <SocketProvider>
+        <App />
+      </SocketProvider>
+    </StoreProvider>
   </Auth0Provider>,
   document.getElementById('root')
 );
