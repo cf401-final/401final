@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { TreeView, TreeItem } from '@mui/lab';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { SocketContext } from '../../../../context/socket';
 
 const Rooms = () => {
+  const socket = useContext(SocketContext);
+
   let [ publicRooms, setPublicRooms ] = useState([]);
   let [ privateRooms, setPrivateRooms ] = useState([]);
 
@@ -13,6 +16,11 @@ const Rooms = () => {
       await getRooms();
     })();
   }, []);
+
+  const joinRoom = (e) => {
+    let room = e.target.innerText;
+    socket.emit('join', { room, username: `Test-User#${Math.round(Math.random() * 1000)}` });
+  }
 
   const getRooms = async () => {
     let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`);
@@ -31,12 +39,12 @@ const Rooms = () => {
       >
         <TreeItem nodeId="0" label="PUBLIC ROOMS">
           {publicRooms.map((room, idx) => {
-            return <TreeItem nodeId={idx + 1} key={idx} label={room?.roomname}/>;
+            return <TreeItem nodeId={`${idx + 1}`} key={idx} label={room?.roomname} onClick={joinRoom} />;
           })}
         </TreeItem>
         <TreeItem nodeId={`${publicRooms.length + 1}`} label="PRIVATE ROOMS">
           {privateRooms.map((room, idx) => {
-            return <TreeItem nodeId={`${idx + publicRooms.length + 2}`} key={idx} label={room?.roomname}/>;
+            return <TreeItem nodeId={`${idx + publicRooms.length + 2}`} key={idx} label={room?.roomname} onClick={joinRoom}/>;
           })}
         </TreeItem>
       </TreeView>
