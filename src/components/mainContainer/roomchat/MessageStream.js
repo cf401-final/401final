@@ -7,6 +7,7 @@ const Roomchat = () => {
 
   useEffect(() => {
     socket.on('message', (data) => {
+      console.log("MESSAGE SENT")
       setMessages((messages) => [...messages, data.message]);
     });
   }, [socket]);
@@ -16,7 +17,7 @@ const Roomchat = () => {
     <>
       {messages.length >= 1 && (
         <div className="message-container">
-          <p className="theirChatMessage">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum!</p>
+          {/* <p className="theirChatMessage">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum!</p> */}
           {messages.map((msg, idx) => {
             return (
               <p
@@ -27,7 +28,7 @@ const Roomchat = () => {
               </p>
             )
           })}
-          <p className="theirChatMessage">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum!</p>
+          {/* <p className="theirChatMessage">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum!</p> */}
         </div>
       )}
     </>

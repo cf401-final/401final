@@ -19,6 +19,7 @@ const Rooms = () => {
 
   const joinRoom = (e) => {
     let room = e.target.innerText;
+    
     try {
       socket.emit('join', { room, username: `Test-User#${Math.round(Math.random() * 1000)}` });
       setCurrentRoom(room);
