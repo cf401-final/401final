@@ -108,7 +108,7 @@
   height: 85.5vh;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
+  overflow-y: scroll;
   margin-right: 35px;
 }
 
