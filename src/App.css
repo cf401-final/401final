@@ -37,23 +37,23 @@
 #onlineUsers {
   margin: 10px;
   position: absolute;
-  right: 4rem;
+  right: 3.7rem;
 }
 
 #profileBtn {
-  border-radius: 0 22px 22px 0;
   margin: 1px 0;
   height: 44px;
   position: absolute;
   left: 0;
+  box-shadow: none;
 }
 
 #githubBtn {
-  border-radius: 22px 0 0 22px;
   margin: 1px 0;
   height: 44px;
   position: absolute;
   right: 0;
+  box-shadow: none;
 }
 
 .btnImg {
@@ -69,6 +69,12 @@
   height: 100vh;
   background-color: #36393f;
   color: white;
+  padding: .6rem;
+  /* overflow: hidden; */
+}
+
+.roomTitle {
+  color: #99aab5;
 }
 
 .left-sidebar,
@@ -97,19 +103,24 @@
 }
 
 .roomchat-container {
-  height: 90vh;
+  height: 87vh;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
 }
 
 .message-bar {
   position: fixed;
   bottom: 0;
-  margin: 0 0 20px 20px;
+  margin: 0 0 30px 20px;
+  min-width: 67%;
 }
 
-.message-container, 
+.message-container,
 .rooms-container {
   display: flex;
   flex-direction: column;
+  padding: 1.5rem;
+  padding-bottom: 3rem;
+  overflow-y: auto;
 }
