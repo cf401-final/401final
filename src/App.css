@@ -35,7 +35,7 @@
 }
 
 #onlineUsers {
-  margin: .8rem;
+  margin: 0.8rem;
   position: absolute;
   right: 3.3rem;
 }
@@ -69,7 +69,7 @@
   height: 100vh;
   background-color: #36393f;
   color: white;
-  padding: .6rem;
+  padding: 0.6rem;
   /* overflow: hidden; */
 }
 
@@ -127,18 +127,18 @@
 }
 
 .myChatMessage {
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   width: 67%;
-  background: linear-gradient(135deg, #7289DA, #3dc6aa);
+  background: linear-gradient(135deg, #7289da, #3dc6aa);
   border-radius: 20px 20px 0 20px;
   margin: 0 0 15px 33%;
   /* text-shadow: 1px 1px 3px rgba(0,0,0, 0.4); */
 }
 
 .theirChatMessage {
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   width: 67%;
-  background: linear-gradient(135deg,#9B84EE, #F47B68);
+  background: linear-gradient(135deg, #9b84ee, #f47b68);
   border-radius: 0px 20px 20px 20px;
   margin: 0 33% 15px 0;
   /* text-shadow: 1px 1px 3px rgba(0,0,0, 0.4); */

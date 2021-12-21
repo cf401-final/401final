@@ -8,8 +8,8 @@ import { SocketContext } from '../../../../context/socket';
 const Rooms = () => {
   const { socket, setCurrentRoom } = useContext(SocketContext);
 
-  let [ publicRooms, setPublicRooms ] = useState([]);
-  let [ privateRooms, setPrivateRooms ] = useState([]);
+  let [publicRooms, setPublicRooms] = useState([]);
+  let [privateRooms, setPrivateRooms] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -29,12 +29,13 @@ const Rooms = () => {
 
   const getRooms = async () => {
     let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`);
-    setPublicRooms(res.data.filter(room => !room.password ? room : false));
-    setPrivateRooms(res.data.filter(room => room.password ? room : false));
-  }
+    setPublicRooms(res.data.filter((room) => (!room.password ? room : false)));
+    setPrivateRooms(res.data.filter((room) => (room.password ? room : false)));
+  };
 
   return (
     <div className="rooms-container">
+<<<<<<< HEAD
       <TreeView
         mt={3}
         aria-label="room navigator"
@@ -53,8 +54,18 @@ const Rooms = () => {
           })}
         </TreeItem>
       </TreeView>
+=======
+      PUBLIC ROOMS
+      {publicRooms.map((room, idx) => (
+        <p key={idx}>{room?.roomname}</p>
+      ))}
+      PRIVATE ROOMS
+      {privateRooms.map((room, idx) => (
+        <p key={idx}>{room?.roomname}</p>
+      ))}
+>>>>>>> 8b866f5 ((style): Run formatter)
     </div>
-  )
-}
+  );
+};
 
 export default Rooms;
