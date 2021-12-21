@@ -113,8 +113,8 @@
   height: 85.5vh;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
-  margin-right: 35px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .message-bar {
