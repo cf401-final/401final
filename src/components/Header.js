@@ -25,7 +25,7 @@ const Header = () => {
           <ForumOutlinedIcon id="bubble" />Jangle
         </h1>
 
-        <Typography id="onlineUsers" variant="subtitle1" gutterBottom component="div">12,345 users currently online.</Typography>
+        <Typography id="onlineUsers" variant="subtitle2" gutterBottom component="div">12,345 users currently online.</Typography>
         <a href="https://github.com/jangle401/jangle-front" target="_blank" rel="noreferrer">
           <Button id="githubBtn" variant="contained" color="primary">
           <img className="btnImg" src={github} />
