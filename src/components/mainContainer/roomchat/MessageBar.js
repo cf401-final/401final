@@ -6,7 +6,7 @@ const MessageBar = () => {
   const socket = useContext(SocketContext);
 
   useEffect(() => {
-    socket.emit('join', { room: 'general', user: 'test' });
+    socket.emit('join', { room: 'general', username: `Test-User#${Math.round(Math.random() * 1000)}` });
   }, [socket]);
 
   const handleSubmit = (e) => {
