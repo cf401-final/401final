@@ -85,7 +85,8 @@
   margin: 0 0 20px 20px;
 }
 
-.message-container {
+.message-container, 
+.rooms-container {
   display: flex;
   flex-direction: column;
 }
