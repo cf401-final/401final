@@ -1,10 +1,10 @@
 import React from 'react';
 import RoomChatLeftSidebar from './roomChatLeftSidebar';
 import MatcherLeftSidebar from './roomChatLeftSidebar/MatcherSidebar';
-import LoginButton from './auth/Login';
-import LogoutButton from './auth/Logout';
-import Profile from './auth/Profile';
-import LoadingWrapper from './auth/LoadingWrapper';
+import LoginButton from '../../auth/Login';
+import LogoutButton from '../../auth/Logout';
+import Profile from '../../auth/Profile';
+import LoadingWrapper from '../../auth/LoadingWrapper';
 
 import { Route, Routes } from 'react-router-dom';
 
