@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const Rooms = () => {
-  let [ rooms, setRooms ] = useState([]);
-  
+  let [ publicRooms, setPublicRooms ] = useState([]);
+  let [ privateRooms, setPrivateRooms ] = useState([]);
+
   useEffect(() => {
     (async () => {
       await getRooms();
@@ -12,14 +13,16 @@ const Rooms = () => {
 
   const getRooms = async () => {
     let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`);
-    setRooms(res.data);
+    setPublicRooms(res.data.filter(room => !room.password ? room : false));
+    setPrivateRooms(res.data.filter(room => room.password ? room : false));
   }
 
   return (
     <div className="rooms-container">
-      {rooms.map((room, idx) => {
-        return <p key={idx}>{`${room.roomname}`}</p>
-      })}
+      PUBLIC ROOMS
+      {publicRooms.map((room, idx) => <p key={idx}>{room?.roomname}</p>)}
+      PRIVATE ROOMS
+      {privateRooms.map((room, idx) => <p key={idx}>{room?.roomname}</p>)} 
     </div>
   )
 }
