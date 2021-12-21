@@ -6,7 +6,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { SocketContext } from '../../../../context/socket';
 
 const Rooms = () => {
-  const socket = useContext(SocketContext);
+  const { socket, setCurrentRoom } = useContext(SocketContext);
 
   let [ publicRooms, setPublicRooms ] = useState([]);
   let [ privateRooms, setPrivateRooms ] = useState([]);
@@ -19,7 +19,12 @@ const Rooms = () => {
 
   const joinRoom = (e) => {
     let room = e.target.innerText;
-    socket.emit('join', { room, username: `Test-User#${Math.round(Math.random() * 1000)}` });
+    try {
+      socket.emit('join', { room, username: `Test-User#${Math.round(Math.random() * 1000)}` });
+      setCurrentRoom(room);
+    } catch(err) {
+      console.log(err);
+    }
   }
 
   const getRooms = async () => {
