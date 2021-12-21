@@ -1,5 +1,8 @@
 # Jangle - Social Platform
 
+- [Organization](https://github.com/jangle401)  
+- [Server](https://github.com/jangle401/jangle-back)
+
 ## Team Members
 
 - Alexander Beers
@@ -19,14 +22,14 @@
 
 ## Domain Model
 
-<img src="./img/docs/domain-model.png" alt="Domain Model" width="600">
+<img src="./docs/img/domain-model.png" alt="Domain Model" width="600">
 
 ## Initial Wireframe
 
-<img src="./img/docs/wireframe.png" alt="Wireframe" width="600">
+<img src="./docs/img/wireframe.png" alt="Wireframe" width="600">
 
 ## Schema
 
-<img src="./img/docs/schema.png" alt="Schema" width="600">
+<img src="./docs/img/schema.png" alt="Schema" width="600">
 
 <!-- ## Dependencies -->

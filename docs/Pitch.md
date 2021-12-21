@@ -6,7 +6,7 @@
 2. Dating app with interest categories
 3. Social app for pets
 
-*4. Why not an app that could be all of these things?*
+_4. Why not an app that could be all of these things?_
 
 ## **FINAL PITCH**
 
