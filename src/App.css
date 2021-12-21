@@ -35,25 +35,25 @@
 }
 
 #onlineUsers {
-  margin: 10px;
+  margin: .8rem;
   position: absolute;
-  right: 4rem;
+  right: 3.3rem;
 }
 
 #profileBtn {
-  border-radius: 0 22px 22px 0;
   margin: 1px 0;
   height: 44px;
   position: absolute;
   left: 0;
+  box-shadow: none;
 }
 
 #githubBtn {
-  border-radius: 22px 0 0 22px;
   margin: 1px 0;
   height: 44px;
   position: absolute;
   right: 0;
+  box-shadow: none;
 }
 
 .btnImg {
@@ -64,11 +64,17 @@
 
 .main-container {
   flex-grow: 12;
-  min-width: 600px;
-  margin: 0;
+  min-width: 400px;
+  margin-right: 200;
   height: 100vh;
   background-color: #36393f;
   color: white;
+  padding: .6rem;
+  /* overflow: hidden; */
+}
+
+.roomTitle {
+  color: #99aab5;
 }
 
 .left-sidebar,
@@ -85,11 +91,13 @@
 }
 
 #landing {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding: 33%;
+  text-align: center;
+  margin: 5rem auto;
   color: #99aab5;
+  margin: 0;
+  position: absolute;
+  top: 43%;
+  left: 50%;
 }
 
 #landing h1 {
@@ -97,19 +105,44 @@
 }
 
 .roomchat-container {
-  height: 90vh;
+  height: 85.5vh;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
+  margin-right: 35px;
 }
 
 .message-bar {
   position: fixed;
   bottom: 0;
-  margin: 0 0 20px 20px;
+  margin: 30px 20px;
+  width: 68%;
 }
 
-.message-container, 
+.message-container,
 .rooms-container {
   display: flex;
   flex-direction: column;
+  padding: 1.5rem;
+  padding-bottom: 3rem;
+  margin: 0 1rem;
+  /* overflow-y: auto; */
+}
+
+.myChatMessage {
+  padding: .5rem 1rem;
+  width: 67%;
+  background: linear-gradient(135deg, #7289DA, #3dc6aa);
+  border-radius: 20px 20px 0 20px;
+  margin: 0 0 15px 33%;
+  /* text-shadow: 1px 1px 3px rgba(0,0,0, 0.4); */
+}
+
+.theirChatMessage {
+  padding: .5rem 1rem;
+  width: 67%;
+  background: linear-gradient(135deg,#9B84EE, #F47B68);
+  border-radius: 0px 20px 20px 20px;
+  margin: 0 33% 15px 0;
+  /* text-shadow: 1px 1px 3px rgba(0,0,0, 0.4); */
 }
