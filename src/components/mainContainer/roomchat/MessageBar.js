@@ -13,7 +13,7 @@ const MessageBar = () => {
 
   useEffect(() => {
     socket.emit('join', { room: currentRoom, username });
-  }, [socket, username]);
+  }, [socket, currentRoom, username]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

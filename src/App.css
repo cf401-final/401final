@@ -63,6 +63,8 @@
 }
 
 .main-container {
+  display: flex;
+  flex-direction: column;
   flex-grow: 12;
   min-width: 400px;
   margin-right: 200;
@@ -70,6 +72,7 @@
   background-color: #36393f;
   color: white;
   padding: 0.6rem;
+  padding-right: 0;
   /* overflow: hidden; */
 }
 
@@ -113,15 +116,13 @@
   height: 85.5vh;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
-  margin-right: 35px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .message-bar {
-  position: fixed;
-  bottom: 0;
-  margin: 30px 20px;
-  width: 68%;
+  margin-top: 10px;
+  margin-right: 10px;
 }
 
 .message-container,
@@ -133,10 +134,10 @@
 
 .myChatMessage {
   padding: 0.5rem 1rem;
-  width: 67%;
+  /* width: 67%; */
   background: linear-gradient(135deg, #7289da, #3dc6aa);
   border-radius: 20px 20px 0 20px;
-  margin: 0 0 15px 33%;
+  margin: 0 6px 15px 33%;
   /* text-shadow: 1px 1px 3px rgba(0,0,0, 0.4); */
 }
 
@@ -147,4 +148,27 @@
   border-radius: 0px 20px 20px 20px;
   margin: 0 33% 15px 0;
   /* text-shadow: 1px 1px 3px rgba(0,0,0, 0.4); */
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  border-radius: 10px;
 }

@@ -7,7 +7,7 @@ const Roomchat = () => {
 
   useEffect(() => {
     socket.on('message', (data) => {
-      console.log("MESSAGE SENT")
+      console.log('MESSAGE SENT');
       setMessages((messages) => [...messages, data.message]);
     });
   }, [socket]);

@@ -25,7 +25,7 @@ const Rooms = () => {
 
   const joinRoom = (e) => {
     let room = e.target.innerText;
-    
+
     try {
       socket.emit('join', {
         room,

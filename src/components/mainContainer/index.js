@@ -6,11 +6,10 @@ const MainContainer = (props) => {
   const location = useLocation();
 
   let feature;
-  if(location.pathname === "/roomchat") {
+  if (location.pathname === '/roomchat') {
     feature = 'Room Chat';
-  }
-  else if(location.pathname === "/matcher") {
-    feature = "Social Matcher"
+  } else if (location.pathname === '/matcher') {
+    feature = 'Social Matcher';
   }
 
   return (
@@ -22,7 +21,7 @@ const MainContainer = (props) => {
           gutterBottom
           className="roomTitle"
         >
-           {feature}
+          {feature}
         </Typography>
         {props.children}
       </div>
