@@ -5,11 +5,13 @@ import CurrentRoom from './CurrentRoom';
 
 const Roomchat = () => {
   return (
-    <div className="roomchat-container">
-      <CurrentRoom />
-      <MessageStream />
+    <>
+      <div className="roomchat-container">
+        <CurrentRoom />
+        <MessageStream />
+      </div>
       <MessageBar />
-    </div>
+    </>
   );
 };
 
