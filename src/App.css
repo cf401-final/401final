@@ -105,10 +105,11 @@
 }
 
 .roomchat-container {
-  height: 87vh;
+  height: 85.5vh;
   display: flex;
   flex-direction: column;
   overflow: scroll;
+  margin-right: 35px;
 }
 
 .message-bar {

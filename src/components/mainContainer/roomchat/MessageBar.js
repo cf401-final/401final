@@ -24,12 +24,12 @@ const MessageBar = () => {
         className="msgPaper"
         onSubmit={handleSubmit}
         component="form"
-        sx={{ p: '2px 4px', backgroundColor: '#474b52' }}
+        sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', backgroundColor: '#474b52' }}
       >
         <InputBase
           className="msgInput"
           name="message"
-          sx={{ ml: 1, color: 'white' }}
+          sx={{ ml: 1, flex: 1, color: 'white' }}
           placeholder="Message"
           inputProps={{ 'aria-label': 'send message' }}
         />
