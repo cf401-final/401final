@@ -123,13 +123,13 @@ Members will start the day by pulling down the codebase. Everyone will stay in c
 **Will you be using a PR review workflow? If so, consider:**
 
 - **How many people must review a PR?**\
-    Two reviews for main branch. All PRs must be committed on individual feature branches. No review required to merge with staging branch.
+   Two reviews for main branch. All PRs must be committed on individual feature branches. No review required to merge with staging branch.
 
 - **Who merges PRs?**\
-    Whoever feels most confident in someone else's code should do this. If no member is confident, they will leave a comment in the pull request to ask for another of set of eyes on the involved code.
+   Whoever feels most confident in someone else's code should do this. If no member is confident, they will leave a comment in the pull request to ask for another of set of eyes on the involved code.
 
 - **How often will you merge?**\
-    Members will merge into staging when a feature is complete. Code will be merged into main when staging is at a working state, and when it makes sense to do so. An example would be when the group adds new feature(s) into staging.
+   Members will merge into staging when a feature is complete. Code will be merged into main when staging is at a working state, and when it makes sense to do so. An example would be when the group adds new feature(s) into staging.
 
 - **How will you communicate that it’s time to merge?**\
-    A lot of the team's communication for a specific pull request or issue should be communicated in those respective areas on Github. This way the communication persists and anyone can go back and reference it. The team will also communicate with each other via chat if not all members are in the voice chat during a given merge.
+   A lot of the team's communication for a specific pull request or issue should be communicated in those respective areas on Github. This way the communication persists and anyone can go back and reference it. The team will also communicate with each other via chat if not all members are in the voice chat during a given merge.

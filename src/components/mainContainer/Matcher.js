@@ -1,11 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const Matcher = () => {
-  return (
-    <div>
-      I AM MATCHER
-    </div>
-  )
-}
+  return <div>I AM MATCHER</div>;
+};
 
 export default Matcher;

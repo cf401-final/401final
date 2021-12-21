@@ -10,14 +10,14 @@ const MainContainer = ({ children }) => {
           display="block"
           gutterBottom
           className="roomTitle"
-          sx={{ml: 1}}
+          sx={{ ml: 1 }}
         >
           Name of Chat Room / Feature
         </Typography>
         {children}
       </div>
     </>
-  )
+  );
 };
 
 export default MainContainer;
