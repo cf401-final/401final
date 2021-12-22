@@ -16,14 +16,24 @@ const Rooms = (props) => {
     ? user.nickname
     : `Test-User#${Math.round(Math.random() * 1000)}`;
 
-  let [publicRooms, setPublicRooms] = useState([]);
-  let [privateRooms, setPrivateRooms] = useState([]);
+  const [publicRooms, setPublicRooms] = useState([]);
+  const [privateRooms, setPrivateRooms] = useState([]);
 
   useEffect(() => {
     (async () => {
-      await getRooms();
+      await (async () => {
+        let res = null
+        try {
+          res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`);
+          props.setRooms(res.data);
+          setPublicRooms(res.data.filter((room) => (!room.password ? room : false)));
+          setPrivateRooms(res.data.filter((room) => (room.password ? room : false)));
+        } catch(err) {
+          console.log(err);
+        }
+      })();
     })();
-  }, []);
+  }, [props]);
 
   const joinRoom = (e) => {
     let room = e.target.innerText;
@@ -35,18 +45,6 @@ const Rooms = (props) => {
       });
       setCurrentRoom(room);
     } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const getRooms = async () => {
-    let res = null
-    try {
-      res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`);
-      props.setRooms(res.data);
-      setPublicRooms(res.data.filter((room) => (!room.password ? room : false)));
-      setPrivateRooms(res.data.filter((room) => (room.password ? room : false)));
-    } catch(err) {
       console.log(err);
     }
   };

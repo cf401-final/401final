@@ -14,7 +14,7 @@ const SocketProvider = (props) => {
     socket.on('message', data => {
       props.addMessageToRoom({room: data.room, message: data.message});
     });
-  }, [socket]);
+  }, [props]);
 
   const values = {
     currentRoom,
