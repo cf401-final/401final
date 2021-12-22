@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#9b84ee',
+      main: '#7db1b1',
     },
   },
 });
