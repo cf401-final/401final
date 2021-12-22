@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Button } from '@mui/material';
+import { Typography, Button, Tooltip } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -25,7 +25,7 @@ const Header = () => {
         {isAuthenticated ? <UserButton /> : <SignupButton />}
 
         <h1>
-          <ForumOutlinedIcon id="bubble" />
+          <ForumOutlinedIcon id="titleBubble" />
           Jangle
         </h1>
 
@@ -42,9 +42,11 @@ const Header = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <Button id="githubBtn" variant="contained" color="primary">
-            <img className="btnImg" src={github} />
-          </Button>
+          <Tooltip title="GitHub">
+            <Button id="githubBtn" variant="contained" color="primary">
+              <img className="btnImg" src={github} />
+            </Button>
+          </Tooltip>
         </a>
       </ThemeProvider>
     </div>

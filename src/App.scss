@@ -40,7 +40,7 @@ $orange: #f47b68;
 
 }
 
-#bubble {
+#titleBubble {
   margin: 0.75rem 0.3rem 0 0.1rem;
   font-size: 1.8rem;
 }
@@ -58,6 +58,7 @@ $orange: #f47b68;
   position: absolute;
   left: 0;
   box-shadow: none;
+  border-radius: none;
 }
 
 #githubBtn {
@@ -66,6 +67,7 @@ $orange: #f47b68;
   position: absolute;
   right: 0;
   box-shadow: none;
+  border-radius: none;
 }
 
 .btnImg {
@@ -75,11 +77,10 @@ $orange: #f47b68;
 }
 
 .main-container {
-  display: flex;
+  // display: flex;
   flex-direction: column;
   flex-grow: 12;
   min-width: 400px;
-  margin-right: 200;
   height: 100vh;
   background-color: $md-dk-gray;
   color: white;
@@ -107,9 +108,7 @@ $orange: #f47b68;
 
 #landing {
   text-align: center;
-  margin: 5rem auto;
   color: $lt-gray;
-  margin: 0;
   position: absolute;
   top: 43%;
   left: 50%;
@@ -127,7 +126,7 @@ $orange: #f47b68;
 
   a:hover {
     color: $lt-gray;
-    text-decoration: underline;
+    text-decoration: none;
     transition: .3s ease-in-out;
   }
 }
@@ -138,7 +137,8 @@ $orange: #f47b68;
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
-  margin-right: 1rem;
+  padding-right: 1rem;
+  // margin-right: .5rem;
 }
 
 .message-bar {
@@ -149,47 +149,44 @@ $orange: #f47b68;
 .rooms-container {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin: 20px 1rem 0 0;
 }
 
 .myChatMessage {
-  padding: 0.5rem 1rem;
+  padding: .8rem 1.3rem;
   font-size: 1.3rem;
-  /* width: 67%; */
   background: linear-gradient(135deg, $blue, $teal);
-  border-radius: 20px 20px 0 20px;
-  margin: 0 1rem 15px 33%;
-  /* text-shadow: 1px 1px 3px rgba(0,0,0, 0.4); */
+  border-radius: 25px 25px 0 25px;
+  margin: 0 0 15px 33%;
 }
 
 .theirChatMessage {
-  padding: 0.5rem 1rem;
+  padding: .8rem 1.3rem;
   width: 67%;
   background: linear-gradient(135deg, $purple, $orange);
-  border-radius: 0px 20px 20px 20px;
+  border-radius: 0px 25px 25px 25px;
   margin: 0 33% 15px 0;
-  /* text-shadow: 1px 1px 3px rgba(0,0,0, 0.4); */
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
-  border-radius: 10px;
+  width: 7px;
+  border-radius: 4px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
   background: $md-dk-gray;
-  border-radius: 10px;
+  border-radius: 4 px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: $blk-gray;
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: $gray;
-  border-radius: 10px;
+  border-radius: 4px;
 }
