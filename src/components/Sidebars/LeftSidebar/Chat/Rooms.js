@@ -1,12 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { setRooms } from '../../../../store/rooms';
-import { TreeView, TreeItem } from '@mui/lab';
+import { TreeView } from '@mui/lab';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useAuth0 } from '@auth0/auth0-react';
+
+import { setRooms } from '../../../../store/rooms';
 import { SocketContext } from '../../../../context/socket';
+import Public from './Public';
+import Private from './Private';
+import DirectMessage from './DirectMessage';
 
 const Rooms = (props) => {
   const { socket, setCurrentRoom } = useContext(SocketContext);
@@ -21,17 +25,19 @@ const Rooms = (props) => {
 
   useEffect(() => {
     (async () => {
-      await (async () => {
-        let res = null
-        try {
-          res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`);
-          props.setRooms(res.data);
-          setPublicRooms(res.data.filter((room) => (!room.password ? room : false)));
-          setPrivateRooms(res.data.filter((room) => (room.password ? room : false)));
-        } catch(err) {
-          console.log(err);
-        }
-      })();
+      let res = null;
+      try {
+        res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`);
+        props.setRooms(res.data);
+        setPublicRooms(
+          res.data.filter((room) => (!room.password ? room : false))
+        );
+        setPrivateRooms(
+          res.data.filter((room) => (room.password ? room : false))
+        );
+      } catch (err) {
+        console.log(err);
+      }
     })();
   }, [props]);
 
@@ -58,37 +64,16 @@ const Rooms = (props) => {
         defaultExpandIcon={<ChevronRightIcon />}
         sx={{ height: 240, flexGrow: 1, maxWidth: 400 }}
       >
-        <TreeItem nodeId="0" label="PUBLIC ROOMS">
-          {publicRooms.map((room, idx) => {
-            return (
-              <TreeItem
-                nodeId={`${idx + 1}`}
-                key={idx}
-                label={room?.roomname}
-                onClick={joinRoom}
-              />
-            );
-          })}
-        </TreeItem>
-        <TreeItem nodeId={`${publicRooms.length + 1}`} label="PRIVATE ROOMS">
-          {privateRooms.map((room, idx) => {
-            return (
-              <TreeItem
-                nodeId={`${idx + publicRooms.length + 2}`}
-                key={idx}
-                label={room?.roomname}
-                onClick={joinRoom}
-              />
-            );
-          })}
-        </TreeItem>
+        <Public joinRoom={joinRoom} publicRooms={publicRooms} />
+        <Private joinRoom={joinRoom} privateRooms={privateRooms} />
+        <DirectMessage />
       </TreeView>
     </div>
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  setRooms: (rooms) => dispatch(setRooms(rooms))
+const mapDispatchToProps = (dispatch) => ({
+  setRooms: (rooms) => dispatch(setRooms(rooms)),
 });
 
 export default connect(null, mapDispatchToProps)(Rooms);
