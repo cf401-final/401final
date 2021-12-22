@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { setRooms } from '../../../../store/rooms';
 import { TreeView, TreeItem } from '@mui/lab';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useAuth0 } from '@auth0/auth0-react';
 import { SocketContext } from '../../../../context/socket';
 
-const Rooms = () => {
+const Rooms = (props) => {
   const { socket, setCurrentRoom } = useContext(SocketContext);
   const { isAuthenticated, user } = useAuth0();
 
@@ -38,9 +40,15 @@ const Rooms = () => {
   };
 
   const getRooms = async () => {
-    let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`);
-    setPublicRooms(res.data.filter((room) => (!room.password ? room : false)));
-    setPrivateRooms(res.data.filter((room) => (room.password ? room : false)));
+    let res = null
+    try {
+      res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`);
+      props.setRooms(res.data);
+      setPublicRooms(res.data.filter((room) => (!room.password ? room : false)));
+      setPrivateRooms(res.data.filter((room) => (room.password ? room : false)));
+    } catch(err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -81,4 +89,8 @@ const Rooms = () => {
   );
 };
 
-export default Rooms;
+const mapDispatchToProps = dispatch => ({
+  setRooms: (rooms) => dispatch(setRooms(rooms))
+});
+
+export default connect(null, mapDispatchToProps)(Rooms);

@@ -8,10 +8,9 @@ const MessageStream = (props) => {
 
   useEffect(() => {
     socket.on('message', () => {
-      if(props.rooms.has(currentRoom)) 
-        setMessages(props.rooms.get(currentRoom));
-    });
-  }, [socket]);
+      setMessages(props.rooms.get(currentRoom));
+    })
+  }, [currentRoom, socket, props.rooms, messages]);
 
   useEffect(() => {
     if(props.rooms.has(currentRoom)) {

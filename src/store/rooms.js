@@ -1,6 +1,7 @@
 // Actions
-//const READ = 'GET_ROOM_MESSAGES';
-const CREATE = 'ADD_MESSAGE_TO_ROOM';
+// const READ_ROOM_MESSAGES = 'READ_ROOM_MESSAGES';
+const ADD_MESSAGE_TO_ROOM = 'ADD_MESSAGE_TO_ROOM';
+const SET_ROOMS = 'READ_ROOMS'
 
 let initialState = {
   rooms: new Map(),
@@ -10,14 +11,20 @@ let initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     
-    case CREATE: 
+    case ADD_MESSAGE_TO_ROOM: 
       if(state.rooms.has(action.payload.room)) {
         state.rooms.set(action.payload.room, [ ...state.rooms.get(action.payload.room), action.payload.message ]);
       }
       else {
         state.rooms.set(action.payload.room, [action.payload.message]);
       }
-      console.log(state.rooms)
+      return state;
+    case SET_ROOMS:
+      action.rooms.forEach(room => {
+        if(!state.rooms.has(room)) {
+          state.rooms.set(room.roomname, []);
+        }
+      });
       return state;
     default: 
       return state;
@@ -25,16 +32,16 @@ export default function reducer(state = initialState, action) {
 }
 
 // Action Creators
-// export const getRoomMessages = room => {
-//   return { 
-//     type: READ,
-//     payload: room
-//   };
-// }
+export const setRooms = rooms => {
+  return { 
+    type: SET_ROOMS,
+    rooms
+  };
+}
 
 export const addMessageToRoom = payload => {
   return {
-    type: CREATE,
+    type: ADD_MESSAGE_TO_ROOM,
     payload
   }
 }

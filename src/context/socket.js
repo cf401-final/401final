@@ -12,12 +12,13 @@ const SocketProvider = (props) => {
 
   useEffect(() => {
     socket.on('message', data => {
-      console.log('data ', data)
       props.addMessageToRoom({room: data.room, message: data.message});
     });
   }, [socket]);
 
-
+  useEffect(() => {
+    console.log("STUB")
+  }, [setCurrentRoom])
 
   const values = {
     currentRoom,
