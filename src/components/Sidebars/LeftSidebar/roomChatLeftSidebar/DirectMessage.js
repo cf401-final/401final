@@ -4,7 +4,7 @@ import { TreeItem } from '@mui/lab';
 function DirectMessage() {
   return (
     <TreeItem
-      // nodeId={}
+      nodeId="2"
       label="DIRECT MESSAGES"
     ></TreeItem>
   )

@@ -7,7 +7,7 @@ function Public({ publicRooms, joinRoom }) {
       {publicRooms.map((room, idx) => {
         return (
           <TreeItem
-            nodeId={`${idx + 1}`}
+            nodeId={room.roomname}
             key={idx}
             label={room?.roomname}
             onClick={joinRoom}

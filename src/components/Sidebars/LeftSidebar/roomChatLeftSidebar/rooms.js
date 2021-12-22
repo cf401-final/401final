@@ -62,11 +62,7 @@ const Rooms = (props) => {
         sx={{ height: 240, flexGrow: 1, maxWidth: 400 }}
       >
         <Public joinRoom={joinRoom} publicRooms={publicRooms} />
-        <Private
-          joinRoom={joinRoom}
-          publicRooms={publicRooms}
-          privateRooms={privateRooms}
-        />
+        <Private joinRoom={joinRoom} privateRooms={privateRooms} />
         <DirectMessage />
       </TreeView>
     </div>
