@@ -13,7 +13,7 @@ function Layout({ children }) {
       <div className="container">
         <LeftSidebar />
         <MainContainer>{children}</MainContainer>
-        {location.pathname === "/roomchat" && <RightSidebar />}
+        {location.pathname === '/roomchat' && <RightSidebar />}
       </div>
     </>
   );
