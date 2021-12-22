@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import Roomchat from './components/mainContainer/roomchat';
 import Matcher from './components/mainContainer/Matcher';
 import Landing from './components/mainContainer/Landing';
