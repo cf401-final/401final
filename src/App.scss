@@ -37,7 +37,6 @@ $orange: #f47b68;
     margin: -0.2rem;
     color: white;
   }
-
 }
 
 #titleBubble {
@@ -104,28 +103,49 @@ $orange: #f47b68;
   min-width: 200px;
   background-color: $dk-gray;
   color: white;
+
+  .footer {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    // margin-top: 95%;
+    bottom: 1rem;
+    left: 3.8rem;
+  }
 }
 
 #landing {
-  text-align: center;
-  color: $lt-gray;
+  text-align: left;
+  color: white;
   position: absolute;
-  top: 43%;
-  left: 50%;
+  top: 33%;
+  left: 33%;
 
   h1 {
     font-family: 'Kanit', sans-serif;
+    font-size: 4rem;
+    // text-transform: uppercase;
+    text-shadow: -1px 1px #000, -2px 2px #000, -3px 3px #000, -4px 4px #000, -5px 5px #000, -6px 6px #000, -7px 7px #000, -8px 8px #000;
+    -webkit-text-stroke: 2px black;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+  }
+
+  .landBtn {
+    border-radius: 22px;
+    margin: 0 .7rem .7rem 0;
+    width: 205px;
   }
 
   a {
-    color: white;
+    color: $lt-gray;
     cursor: pointer;
     text-decoration: none;
     transition: .3s ease-in-out;
   }
 
   a:hover {
-    color: $lt-gray;
+    color: white;
     text-decoration: none;
     transition: .3s ease-in-out;
   }
