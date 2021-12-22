@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { setRooms } from '../../../../store/rooms';
 import { TreeView } from '@mui/lab';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useAuth0 } from '@auth0/auth0-react';
+
+import { setRooms } from '../../../../store/rooms';
 import { SocketContext } from '../../../../context/socket';
 import Public from './Public';
 import Private from './Private';
