@@ -9,6 +9,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { SocketContext } from '../../../../context/socket';
 import Public from './Public';
 import Private from './Private';
+import DirectMessage from './DirectMessage';
 
 const Rooms = (props) => {
   const { socket, setCurrentRoom } = useContext(SocketContext);
@@ -66,6 +67,7 @@ const Rooms = (props) => {
           publicRooms={publicRooms}
           privateRooms={privateRooms}
         />
+        <DirectMessage />
       </TreeView>
     </div>
   );
