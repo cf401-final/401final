@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Box, Button, Tooltip, Menu, MenuItem, TextField } from '@mui/material';
-
+import { Box, Button, Menu } from '@mui/material';
+import CreateRoomForm from './CreateRoomForm';
 
 const CreateRoom = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -16,18 +16,15 @@ const CreateRoom = () => {
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Tooltip title="Account settings">
-          <Button
-            onClick={handleClick}
-            size="small"
-            id="room-btn"
-            color="primary"
-            sx={{ color: 'white' }}
-          >
-            + Create a room
-          </Button>
-        </Tooltip>
-        
+        <Button
+          onClick={handleClick}
+          size="small"
+          id="room-btn"
+          color="primary"
+          sx={{ color: 'white' }}
+        >
+          + Create a room
+        </Button>  
       </Box>
       <Menu
         anchorEl={anchorEl}
@@ -62,24 +59,7 @@ const CreateRoom = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <form>
-          <MenuItem>
-            <TextField id="standard-basic" label="Room Name" variant="standard" />
-          </MenuItem>
-          <MenuItem>
-            <TextField id="standard-basic" label="Password (optional)" type="password" variant="standard" />
-          </MenuItem>
-          <Button
-            variant="contained"
-            size="small"
-            id="room-submit-btn"
-            color="primary"
-            type="submit"
-            sx={{ marginLeft: '20px' }}
-          >
-            Create
-          </Button>
-        </form>
+        <CreateRoomForm onClose={handleClose} />
       </Menu>
     </>
   )
