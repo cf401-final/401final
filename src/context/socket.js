@@ -1,11 +1,20 @@
+import { useEffect } from 'react';
 import { createContext, useState } from 'react';
 import { io } from 'socket.io-client';
+import { connect } from 'react-redux';
+import { addMessageToRoom } from '../store/rooms';
 
 export const socket = io.connect(process.env.REACT_APP_SOCKET_SERVER);
 export const SocketContext = createContext();
 
 const SocketProvider = (props) => {
   let [currentRoom, setCurrentRoom] = useState('general');
+
+  useEffect(() => {
+    socket.on('message', data => {
+      props.addMessageToRoom({room: data.room, message: data.message});
+    });
+  }, [socket]);
 
   const values = {
     currentRoom,
@@ -20,8 +29,8 @@ const SocketProvider = (props) => {
   );
 };
 
-// socket.on('connect', () => {
-//   console.log('Connected to Jangle socket server');
-// });
+const mapDispatchToProps = dispatch => ({
+  addMessageToRoom: (room) => dispatch(addMessageToRoom(room))
+});
 
-export default SocketProvider;
+export default connect(null, mapDispatchToProps)(SocketProvider);
