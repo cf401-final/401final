@@ -24,17 +24,19 @@ const Rooms = (props) => {
 
   useEffect(() => {
     (async () => {
-      await (async () => {
-        let res = null
-        try {
-          res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`);
-          props.setRooms(res.data);
-          setPublicRooms(res.data.filter((room) => (!room.password ? room : false)));
-          setPrivateRooms(res.data.filter((room) => (room.password ? room : false)));
-        } catch(err) {
-          console.log(err);
-        }
-      })();
+      let res = null;
+      try {
+        res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`);
+        props.setRooms(res.data);
+        setPublicRooms(
+          res.data.filter((room) => (!room.password ? room : false))
+        );
+        setPrivateRooms(
+          res.data.filter((room) => (room.password ? room : false))
+        );
+      } catch (err) {
+        console.log(err);
+      }
     })();
   }, [props]);
 
@@ -69,8 +71,8 @@ const Rooms = (props) => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  setRooms: (rooms) => dispatch(setRooms(rooms))
+const mapDispatchToProps = (dispatch) => ({
+  setRooms: (rooms) => dispatch(setRooms(rooms)),
 });
 
 export default connect(null, mapDispatchToProps)(Rooms);
