@@ -1,19 +1,24 @@
 import React from 'react'
-import { MenuItem, TextField, Button } from '@mui/material';
+import { MenuItem, TextField, Button, Typography, Divider } from '@mui/material';
 
 const CreateRoomForm = ({ handleClose }) => {
-  const handleSubmit = () => {
-    console.log('add room submit');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(e.target.roomname.value);
+    console.log(e.target.password.value);
     handleClose();
   }
 
   return (
     <form onSubmit={handleSubmit}>
+      <Typography variant="subtitle1" sx={{ marginLeft: '10px'}}>New Room Details</Typography>
+      <Divider />
       <MenuItem>
-        <TextField id="standard-basic" label="Room Name" variant="standard" />
+        <TextField name="roomname" label="Room Name" variant="standard" required />
       </MenuItem>
       <MenuItem>
-        <TextField id="standard-basic" label="Password (optional)" type="password" variant="standard" />
+        <TextField name="password" label="Password (optional)" type="password" variant="standard" />
       </MenuItem>
       <Button
         variant="contained"

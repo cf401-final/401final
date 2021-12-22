@@ -59,7 +59,7 @@ const CreateRoom = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <CreateRoomForm onClose={handleClose} />
+        <CreateRoomForm handleClose={handleClose} />
       </Menu>
     </>
   )
