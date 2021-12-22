@@ -1,10 +1,9 @@
 // Actions
-// const READ_ROOM_MESSAGES = 'READ_ROOM_MESSAGES';
 const ADD_MESSAGE_TO_ROOM = 'ADD_MESSAGE_TO_ROOM';
 const SET_ROOMS = 'READ_ROOMS'
 
 let initialState = {
-  rooms: new Map(),
+  rooms: new Map().set('general', []),
 }
 
 // Reducer
@@ -21,7 +20,7 @@ export default function reducer(state = initialState, action) {
       return state;
     case SET_ROOMS:
       action.rooms.forEach(room => {
-        if(!state.rooms.has(room)) {
+        if(!state.rooms.has(room.roomname)) {
           state.rooms.set(room.roomname, []);
         }
       });

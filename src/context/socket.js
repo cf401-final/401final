@@ -16,10 +16,6 @@ const SocketProvider = (props) => {
     });
   }, [socket]);
 
-  useEffect(() => {
-    console.log("STUB")
-  }, [setCurrentRoom])
-
   const values = {
     currentRoom,
     setCurrentRoom,
