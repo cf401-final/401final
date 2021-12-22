@@ -11,6 +11,7 @@ import { SocketContext } from '../../../../context/socket';
 import Public from './Public';
 import Private from './Private';
 import DirectMessage from './DirectMessage';
+import CreateRoom from './CreateRoom';
 
 const Rooms = (props) => {
   const { socket, setCurrentRoom } = useContext(SocketContext);
@@ -57,6 +58,7 @@ const Rooms = (props) => {
 
   return (
     <div className="rooms-container">
+      <CreateRoom />
       <TreeView
         mt={3}
         aria-label="room navigator"
