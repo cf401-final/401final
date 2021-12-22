@@ -1,4 +1,5 @@
 import './App.scss';
+import Profile from './components/mainContainer/Profile';
 import Roomchat from './components/mainContainer/roomchat';
 import Matcher from './components/mainContainer/Matcher';
 import Landing from './components/mainContainer/Landing';
@@ -13,6 +14,7 @@ const App = () => {
         <Layout>
           <Routes>
             <Route exact path="/" element={<Landing />}></Route>
+            <Route exact path="/profile" element={<Profile />}></Route>
             <Route exact path="/roomchat" element={<Roomchat />}></Route>
             <Route exact path="/matcher" element={<Matcher />}></Route>
           </Routes>

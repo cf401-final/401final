@@ -6,7 +6,9 @@ const MainContainer = (props) => {
   const location = useLocation();
 
   let feature;
-  if (location.pathname === '/roomchat') {
+  if (location.pathname === '/profile') {
+    feature = 'Profile';
+  } else if (location.pathname === '/roomchat') {
     feature = 'Room Chat';
   } else if (location.pathname === '/matcher') {
     feature = 'Social Matcher';

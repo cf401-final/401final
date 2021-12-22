@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Typography, Button, Tooltip } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
@@ -6,7 +7,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 import github from '../img/github.png';
 import UserButton from './auth/UserButton';
-import SignupButton from './auth/SignupButton';
+import SigninButton from './auth/SigninButton';
 
 const theme = createTheme({
   palette: {
@@ -22,12 +23,14 @@ const Header = () => {
   return (
     <div className="header">
       <ThemeProvider theme={theme}>
-        {isAuthenticated ? <UserButton /> : <SignupButton />}
+        {isAuthenticated ? <UserButton /> : <SigninButton />}
 
-        <h1>
-          <ForumOutlinedIcon id="titleBubble" />
-          Jangle
-        </h1>
+        <Link to="/" style={{textDecoration: 'none'}}>
+          <h1>
+            <ForumOutlinedIcon id="titleBubble" />
+            Jangle
+          </h1>
+        </Link>
 
         <Typography
           id="onlineUsers"
@@ -49,7 +52,7 @@ const Header = () => {
           </Tooltip>
         </a>
       </ThemeProvider>
-    </div>
+    </div >
   );
 };
 

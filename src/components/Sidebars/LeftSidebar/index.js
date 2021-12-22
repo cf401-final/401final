@@ -11,6 +11,7 @@ const LeftSidebar = () => {
         <Route path="/roomchat" element={<ChatSidebar />}></Route>
         <Route path="/matcher" element={<MatcherSidebar />}></Route>
       </Routes>
+      <p className="footer">© Jangle 2021</p>
     </div>
   );
 };
