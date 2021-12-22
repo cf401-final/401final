@@ -1,3 +1,13 @@
+$blk-gray: #202225;
+$dk-gray: #303136;
+$md-dk-gray: #36393f;
+$gray: #474b52;
+$lt-gray: #99aab5;
+$blue: #7289da;
+$teal: #3dc6aa;
+$purple: #9b84ee;
+$orange: #f47b68;
+
 .App {
   overflow: hidden;
   display: flex;
@@ -15,10 +25,19 @@
   justify-content: center;
   width: 100%;
   margin: 0;
-  border-bottom: 1px solid #202225;
+  border-bottom: 1px solid $blk-gray;
   height: 45px;
-  background-color: #36393f;
-  color: #99aab5;
+  background-color: $md-dk-gray;
+  color: $lt-gray;
+
+  h1 {
+    font-family: 'Kanit', sans-serif;
+    display: flex;
+    justify-content: center;
+    margin: -0.2rem;
+    color: white;
+  }
+
 }
 
 #bubble {
@@ -26,13 +45,6 @@
   font-size: 1.8rem;
 }
 
-.header h1 {
-  font-family: 'Kanit', sans-serif;
-  display: flex;
-  justify-content: center;
-  margin: -0.2rem;
-  color: white;
-}
 
 #onlineUsers {
   margin: 0.8rem;
@@ -69,7 +81,7 @@
   min-width: 400px;
   margin-right: 200;
   height: 100vh;
-  background-color: #36393f;
+  background-color: $md-dk-gray;
   color: white;
   padding: 0.6rem;
   padding-right: 0;
@@ -77,7 +89,7 @@
 }
 
 .roomTitle {
-  color: #99aab5;
+  color: $lt-gray;
 }
 
 .left-sidebar,
@@ -89,27 +101,35 @@
   max-width: 200px;
   height: 100vh;
   min-width: 200px;
-  background-color: #303136;
+  background-color: $dk-gray;
   color: white;
 }
 
 #landing {
   text-align: center;
   margin: 5rem auto;
-  color: #99aab5;
+  color: $lt-gray;
   margin: 0;
   position: absolute;
   top: 43%;
   left: 50%;
-}
 
-#landing h1 {
-  font-family: 'Kanit', sans-serif;
-}
+  h1 {
+    font-family: 'Kanit', sans-serif;
+  }
 
-#landing a {
-  color: red;
-  cursor: pointer;
+  a {
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    transition: .3s ease-in-out;
+  }
+
+  a:hover {
+    color: $lt-gray;
+    text-decoration: underline;
+    transition: .3s ease-in-out;
+  }
 }
 
 .roomchat-container {
@@ -118,11 +138,11 @@
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
+  margin-right: 1rem;
 }
 
 .message-bar {
-  margin-top: 10px;
-  margin-right: 10px;
+  margin: 0 1.8rem 0 1.1rem;
 }
 
 .message-container,
@@ -134,17 +154,18 @@
 
 .myChatMessage {
   padding: 0.5rem 1rem;
+  font-size: 1.3rem;
   /* width: 67%; */
-  background: linear-gradient(135deg, #7289da, #3dc6aa);
+  background: linear-gradient(135deg, $blue, $teal);
   border-radius: 20px 20px 0 20px;
-  margin: 0 6px 15px 33%;
+  margin: 0 1rem 15px 33%;
   /* text-shadow: 1px 1px 3px rgba(0,0,0, 0.4); */
 }
 
 .theirChatMessage {
   padding: 0.5rem 1rem;
   width: 67%;
-  background: linear-gradient(135deg, #9b84ee, #f47b68);
+  background: linear-gradient(135deg, $purple, $orange);
   border-radius: 0px 20px 20px 20px;
   margin: 0 33% 15px 0;
   /* text-shadow: 1px 1px 3px rgba(0,0,0, 0.4); */
@@ -157,18 +178,18 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: $md-dk-gray;
   border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: $blk-gray;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: $gray;
   border-radius: 10px;
 }
