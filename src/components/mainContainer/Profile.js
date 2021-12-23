@@ -1,5 +1,12 @@
 import React from 'react';
-import { Paper, Typography, ToggleButtonGroup, ToggleButton, TextField, Button } from '@mui/material';
+import {
+  Paper,
+  Typography,
+  ToggleButtonGroup,
+  ToggleButton,
+  TextField,
+  Button,
+} from '@mui/material';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
 
@@ -46,9 +53,9 @@ const Profile = () => {
             // backgroundColor: '#474b52'
           }}
         >
-          <Typography>
-            <h2>Profile</h2>
-            <h3>IMAGE GOES HERE</h3>
+          <Typography variant="h5">Profile</Typography>
+          <Typography variant="h6">
+            IMAGE GOES HERE
             <p>Choose Some Interests:</p>
           </Typography>
           <StyledToggleButtonGroup
@@ -59,67 +66,147 @@ const Profile = () => {
             aria-label="text formatting"
             onChange={handleSelected}
           >
-            <ToggleButton className="interestBtn" color="primary" value="music" aria-label="music">
+            <ToggleButton
+              className="interestBtn"
+              color="primary"
+              value="music"
+              aria-label="music"
+            >
               Music
             </ToggleButton>
 
-            <ToggleButton className="interestBtn" color="primary" value="gaming" aria-label="gaming">
+            <ToggleButton
+              className="interestBtn"
+              color="primary"
+              value="gaming"
+              aria-label="gaming"
+            >
               Gaming
             </ToggleButton>
 
-            <ToggleButton className="interestBtn" color="primary" value="sports" aria-label="sports">
+            <ToggleButton
+              className="interestBtn"
+              color="primary"
+              value="sports"
+              aria-label="sports"
+            >
               Sports
             </ToggleButton>
 
-            <ToggleButton className="interestBtn" color="primary" value="artdesign" aria-label="artdesign">
+            <ToggleButton
+              className="interestBtn"
+              color="primary"
+              value="artdesign"
+              aria-label="artdesign"
+            >
               Art&nbsp;&&nbsp;Design
             </ToggleButton>
 
-            <ToggleButton className="interestBtn" color="primary" value="naturetravel" aria-label="naturetravel">
+            <ToggleButton
+              className="interestBtn"
+              color="primary"
+              value="naturetravel"
+              aria-label="naturetravel"
+            >
               Nature&nbsp;&&nbsp;Travel
             </ToggleButton>
 
-            <ToggleButton className="interestBtn" color="primary" value="fitnessrec" aria-label="fitnessrec">
+            <ToggleButton
+              className="interestBtn"
+              color="primary"
+              value="fitnessrec"
+              aria-label="fitnessrec"
+            >
               Fitness&nbsp;&&nbsp;Recreation
             </ToggleButton>
 
-            <ToggleButton className="interestBtn" color="primary" value="technology" aria-label="technology">
+            <ToggleButton
+              className="interestBtn"
+              color="primary"
+              value="technology"
+              aria-label="technology"
+            >
               Technology
             </ToggleButton>
 
-            <ToggleButton className="interestBtn" color="primary" value="finance" aria-label="finance">
+            <ToggleButton
+              className="interestBtn"
+              color="primary"
+              value="finance"
+              aria-label="finance"
+            >
               Finance
             </ToggleButton>
 
-            <ToggleButton className="interestBtn" color="primary" value="craftsdiy" aria-label="craftsdiy">
+            <ToggleButton
+              className="interestBtn"
+              color="primary"
+              value="craftsdiy"
+              aria-label="craftsdiy"
+            >
               Crafts&nbsp;&&nbsp;DIY
             </ToggleButton>
 
-            <ToggleButton className="interestBtn" color="primary" value="cookingfood" aria-label="cookingfood">
+            <ToggleButton
+              className="interestBtn"
+              color="primary"
+              value="cookingfood"
+              aria-label="cookingfood"
+            >
               Cooking&nbsp;&&nbsp;Food
             </ToggleButton>
 
-            <ToggleButton className="interestBtn" color="primary" value="lgbtqia" aria-label="lgbtqia">
+            <ToggleButton
+              className="interestBtn"
+              color="primary"
+              value="lgbtqia"
+              aria-label="lgbtqia"
+            >
               LGBTQIA+
             </ToggleButton>
 
-            <ToggleButton className="interestBtn" color="primary" value="dating" aria-label="dating">
+            <ToggleButton
+              className="interestBtn"
+              color="primary"
+              value="dating"
+              aria-label="dating"
+            >
               Dating
             </ToggleButton>
 
-            <ToggleButton className="interestBtn" color="primary" value="litwriting" aria-label="litwriting">
+            <ToggleButton
+              className="interestBtn"
+              color="primary"
+              value="litwriting"
+              aria-label="litwriting"
+            >
               Literature&nbsp;&&nbsp;Writing
             </ToggleButton>
 
-            <ToggleButton className="interestBtn" color="primary" value="historypolitics" aria-label="historypolitics">
+            <ToggleButton
+              className="interestBtn"
+              color="primary"
+              value="historypolitics"
+              aria-label="historypolitics"
+            >
               History&nbsp;&&nbsp;Politics
             </ToggleButton>
 
-            <ToggleButton className="interestBtn" color="primary" value="commpubsrvc" aria-label="commpubsrvc">
+            <ToggleButton
+              className="interestBtn"
+              color="primary"
+              value="commpubsrvc"
+              aria-label="commpubsrvc"
+            >
               Community&nbsp;&&nbsp;Public&nbsp;Service
             </ToggleButton>
 
-            <ToggleButton className="interestBtn" color="primary" value="healthcare" aria-label="healthcare">
+            <ToggleButton
+              className="interestBtn"
+              color="primary"
+              value="healthcare"
+              aria-label="healthcare"
+            >
               Healthcare
             </ToggleButton>
           </StyledToggleButtonGroup>
@@ -137,13 +224,15 @@ const Profile = () => {
               size="large"
               variant="contained"
               color="primary"
-              endIcon={<CheckIcon />}>Update
+              endIcon={<CheckIcon />}
+            >
+              Update
             </Button>
           </div>
         </Paper>
       </ThemeProvider>
-    </div >
-  )
+    </div>
+  );
 };
 
 export default Profile;
