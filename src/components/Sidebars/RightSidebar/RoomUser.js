@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Box, Tooltip, Button } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -12,7 +13,7 @@ const UserButton = ({ username }) => {
 
   const createDirectMessageRoom = async () => {
     let roomname = `${user.nickname}-${username}`;
-    let body = { roomname, users: [user.nickname, username]};
+    let body = { roomname, users: [user.nickname, username] };
 
     try {
       await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body);
@@ -26,11 +27,11 @@ const UserButton = ({ username }) => {
       } catch (err) {
         console.log(err);
       }
-    } catch(err) {
-      if(err.response.status === 409) {
+    } catch (err) {
+      if (err.response.status === 409) {
         swal({
           title: "Hold up...",
-          text:  err.response.data.err,
+          text: err.response.data.err,
         });
       } else {
         swal({
@@ -42,7 +43,7 @@ const UserButton = ({ username }) => {
   }
 
   const handleClick = async () => {
-    if(username === user.nickname) {
+    if (username === user.nickname) {
       swal({
         title: "Hold up...",
         text: "You are trying to start a 1-1 conversation with yourself. Try someone else!",
@@ -51,22 +52,33 @@ const UserButton = ({ username }) => {
     }
     await createDirectMessageRoom();
   }
-  
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#303136',
+      },
+    },
+  });
+
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Tooltip title={`Chat with ${username}?`}>
-          <Button
-            onClick={handleClick}
-            size="small"
-            id="user-btn"
-            color="primary"
-            sx={{ color: 'white' }}
-          >
-            {username}
-          </Button>
-        </Tooltip>
-      </Box>
+      <ThemeProvider theme={theme}>
+        <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+          <Tooltip title={`Chat with ${username}?`}>
+            <Button
+              className="rightUserBtn"
+              variant="contained"
+              color="primary"
+              onClick={handleClick}
+              size="large"
+              id="user-btn"
+            >
+              {username}
+            </Button>
+          </Tooltip>
+        </Box>
+      </ThemeProvider>
     </>
   );
 }
