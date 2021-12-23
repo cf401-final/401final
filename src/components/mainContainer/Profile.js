@@ -46,9 +46,11 @@ const Profile = () => {
             // backgroundColor: '#474b52'
           }}
         >
-          <Typography>
-            <h2>Profile</h2>
-            <h3>IMAGE GOES HERE</h3>
+          <Typography variant="h5">
+            Profile
+          </Typography>
+          <Typography variant="h6">
+            IMAGE GOES HERE
             <p>Choose Some Interests:</p>
           </Typography>
           <StyledToggleButtonGroup
