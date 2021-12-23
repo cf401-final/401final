@@ -58,6 +58,7 @@ const Rooms = (props) => {
   return (
     <div className="rooms-container">
       <TreeView
+        defaultExpanded={['0', '1', '2']}
         mt={3}
         aria-label="room navigator"
         defaultCollapseIcon={<ExpandMoreIcon />}
