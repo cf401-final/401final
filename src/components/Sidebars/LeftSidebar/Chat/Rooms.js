@@ -11,9 +11,10 @@ import { SocketContext } from '../../../../context/socket';
 import Public from './Public';
 import Private from './Private';
 import DirectMessage from './DirectMessage';
+import CreateRoom from './CreateRoom';
 
 const Rooms = (props) => {
-  const { socket, setCurrentRoom } = useContext(SocketContext);
+  const { socket, setCurrentRoom, currentRoom } = useContext(SocketContext);
   const { isAuthenticated, user } = useAuth0();
 
   let username = isAuthenticated
@@ -39,7 +40,7 @@ const Rooms = (props) => {
         console.log(err);
       }
     })();
-  }, [props]);
+  }, [props, currentRoom]);
 
   const joinRoom = (e) => {
     let room = e.target.innerText;
@@ -57,6 +58,7 @@ const Rooms = (props) => {
 
   return (
     <div className="rooms-container">
+      <CreateRoom />
       <TreeView
         defaultExpanded={['0', '1', '2']}
         mt={3}
