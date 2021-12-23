@@ -48,6 +48,7 @@ const Profile = () => {
   useEffect(() => {
     (async () => {
       try {
+        //auto-populates form fields with existing profile data, if they have a profile
         let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`);
         console.log(res.data[0])
         setSelected(res.data[0].interests);
@@ -62,10 +63,18 @@ const Profile = () => {
     setSelected(newSelection);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let body = { interests: selected, bio: e.target.bio.value, username: user.nickname };
-    console.log(body)
+
+    let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`);
+    if(res.data.length > 0) {
+      //if there is a user profile already, update it
+      axios.put(`${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`, body);
+    } else {
+      // else create a new one
+      axios.post(`${process.env.REACT_APP_API_SERVER}/profiles`, body);
+    }
   };
 
   return (
@@ -77,7 +86,6 @@ const Profile = () => {
           sx={{
             display: 'flex',
             flexWrap: 'wrap',
-            // backgroundColor: '#474b52'
           }}
         >
           <Typography>
@@ -89,7 +97,6 @@ const Profile = () => {
             <StyledToggleButtonGroup
               id="toggleGroup"
               size="small"
-              // color="primary"
               value={selected}
               aria-label="text formatting"
               onChange={handleSelected}
