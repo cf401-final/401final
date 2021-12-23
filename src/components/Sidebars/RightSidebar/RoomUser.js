@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Box, Tooltip, Button } from '@mui/material';
+import { Box, Tooltip, Button, Avatar } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import swal from 'sweetalert';
@@ -74,7 +74,7 @@ const UserButton = ({ username }) => {
               size="large"
               id="user-btn"
             >
-              {username}
+              <Avatar className="rightAvatar" alt={user.nickname} src={user.picture}/>{username}
             </Button>
           </Tooltip>
         </Box>
