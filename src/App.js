@@ -1,3 +1,7 @@
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+
+import { useAuth0 } from '@auth0/auth0-react';
+
 import './App.scss';
 import Profile from './components/mainContainer/Profile';
 import Roomchat from './components/mainContainer/roomchat';
@@ -5,9 +9,14 @@ import Matcher from './components/mainContainer/Matcher';
 import Landing from './components/mainContainer/Landing';
 import Layout from './components/Layout';
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+function App() {
+  let { isAuthenticated } = useAuth0();
 
-const App = () => {
+  function RequireAuth({ children, redirectTo }) {
+    console.log(isAuthenticated);
+    return isAuthenticated ? children : <Navigate to={redirectTo} />;
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
