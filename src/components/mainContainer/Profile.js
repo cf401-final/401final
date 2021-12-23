@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Paper,
   Typography,
@@ -7,11 +7,10 @@ import {
   TextField,
   Button,
 } from '@mui/material';
-
+import { useAuth0 } from '@auth0/auth0-react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
 import axios from 'axios';
-// import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 
 const theme = createTheme({
