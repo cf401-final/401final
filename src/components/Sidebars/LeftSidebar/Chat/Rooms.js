@@ -23,6 +23,7 @@ const Rooms = (props) => {
 
   const [publicRooms, setPublicRooms] = useState([]);
   const [privateRooms, setPrivateRooms] = useState([]);
+  const [directMsgRooms, setDirectMsgRooms] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -31,10 +32,13 @@ const Rooms = (props) => {
         res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`);
         props.setRooms(res.data);
         setPublicRooms(
-          res.data.filter((room) => (!room.password ? room : false))
+          res.data.filter(room => ((!room.password && room.users.length === 0) ? room : false))
         );
         setPrivateRooms(
-          res.data.filter((room) => (room.password ? room : false))
+          res.data.filter(room => ((room.password && room.users.length === 0) ? room : false))
+        );
+        setDirectMsgRooms(
+          res.data.filter(room => (room.users.length > 0 ? room : false))
         );
       } catch (err) {
         console.log(err);
@@ -69,7 +73,7 @@ const Rooms = (props) => {
       >
         <Public joinRoom={joinRoom} publicRooms={publicRooms} />
         <Private joinRoom={joinRoom} privateRooms={privateRooms} />
-        <DirectMessage />
+        {directMsgRooms.length > 0 && <DirectMessage joinRoom={joinRoom} directMsgRooms={directMsgRooms} />}
       </TreeView>
     </div>
   );
