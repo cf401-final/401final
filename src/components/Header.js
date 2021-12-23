@@ -25,7 +25,7 @@ const Header = () => {
       <ThemeProvider theme={theme}>
         {isAuthenticated ? <UserButton /> : <SigninButton />}
 
-        <Link to="/" style={{textDecoration: 'none'}}>
+        <Link to="/" style={{ textDecoration: 'none' }}>
           <h1>
             <ForumOutlinedIcon id="titleBubble" />
             Jangle
@@ -52,7 +52,7 @@ const Header = () => {
           </Tooltip>
         </a>
       </ThemeProvider>
-    </div >
+    </div>
   );
 };
 
