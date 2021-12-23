@@ -9,10 +9,9 @@ const UserButton = ({ username }) => {
   const { user } = useAuth0();
   const { socket, setCurrentRoom } = useContext(SocketContext);
 
-
   const createDirectMessageRoom = async () => {
     let roomname = `${user.nickname}-${username}`;
-    let body = { roomname, users: [user.nickname, username]};
+    let body = { roomname, users: [user.nickname, username] };
 
     try {
       await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body);
@@ -26,11 +25,11 @@ const UserButton = ({ username }) => {
       } catch (err) {
         console.log(err);
       }
-    } catch(err) {
-      if(err.response.status === 409) {
+    } catch (err) {
+      if (err.response.status === 409) {
         swal({
-          title: "Hold up...",
-          text:  err.response.data.err,
+          title: 'Hold up...',
+          text: err.response.data.err,
         });
       } else {
         swal({
@@ -39,19 +38,19 @@ const UserButton = ({ username }) => {
         });
       }
     }
-  }
+  };
 
   const handleClick = async () => {
-    if(username === user.nickname) {
+    if (username === user.nickname) {
       swal({
-        title: "Hold up...",
-        text: "You are trying to start a 1-1 conversation with yourself. Try someone else!",
+        title: 'Hold up...',
+        text: 'You are trying to start a 1-1 conversation with yourself. Try someone else!',
       });
       return;
     }
     await createDirectMessageRoom();
-  }
-  
+  };
+
   return (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -69,5 +68,5 @@ const UserButton = ({ username }) => {
       </Box>
     </>
   );
-}
+};
 export default UserButton;

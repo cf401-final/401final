@@ -33,7 +33,9 @@ const Landing = () => {
                 size="large"
                 variant="contained"
                 color="primary"
-                endIcon={<AccountCircleIcon />}>Update Profile
+                endIcon={<AccountCircleIcon />}
+              >
+                Update Profile
               </Button>
             </Link>
             <Link to="/roomchat">
@@ -42,7 +44,9 @@ const Landing = () => {
                 size="large"
                 variant="contained"
                 color="primary"
-                endIcon={<ChatOutlinedIcon />}>Start Chatting
+                endIcon={<ChatOutlinedIcon />}
+              >
+                Start Chatting
               </Button>
             </Link>
             <Link to="/matcher">
@@ -51,7 +55,9 @@ const Landing = () => {
                 size="large"
                 variant="contained"
                 color="primary"
-                endIcon={<SentimentVerySatisfiedIcon />}>Find Matches
+                endIcon={<SentimentVerySatisfiedIcon />}
+              >
+                Find Matches
               </Button>
             </Link>
           </>

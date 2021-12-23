@@ -5,7 +5,7 @@ import { Typography, Divider, Box } from '@mui/material';
 
 const UserList = () => {
   const { socket, currentRoom } = useContext(SocketContext);
-  const [ loggedInUsers, setLoggedInUsers ] = useState(null);
+  const [loggedInUsers, setLoggedInUsers] = useState(null);
 
   useEffect(() => {
     function listener({ users }) {
@@ -24,11 +24,12 @@ const UserList = () => {
     <Box>
       <Typography>Users talking in {currentRoom}</Typography>
       <Divider />
-      {loggedInUsers && loggedInUsers.map(([username], idx) => {
-        return <RoomUser username={username} key={idx} />
-      })}
+      {loggedInUsers &&
+        loggedInUsers.map(([username], idx) => {
+          return <RoomUser username={username} key={idx} />;
+        })}
     </Box>
-  )
-}
+  );
+};
 
 export default UserList;

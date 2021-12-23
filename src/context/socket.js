@@ -34,8 +34,8 @@ const SocketProvider = (props) => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  addMessageToRoom: (room) => dispatch(addMessageToRoom(room))
+const mapDispatchToProps = (dispatch) => ({
+  addMessageToRoom: (room) => dispatch(addMessageToRoom(room)),
 });
 
 export default connect(null, mapDispatchToProps)(SocketProvider);
