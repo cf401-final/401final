@@ -190,14 +190,28 @@ $orange: #f47b68;
   background-color: $dk-gray;
   color: white;
 
+  .rightUserList {
+    overflow: scroll;
+    margin-bottom: 5rem;
+    background-color: $dk-gray;
+  }
+
   .rightUserBtn {
-    padding: 8px 10px 5px 10px;
-    width: 175px;
-    height: 24px;
-    border-radius: 12px;
-    margin: .1rem 0;
+    padding: 1px;
+    width: 180px;
+    height: 34px;
+    border-radius: 17px;
+    margin: .1rem 0 .1rem 10px;
     box-shadow: none;
     justify-content: left;
+    text-transform: lowercase;
+  }
+
+  .rightAvatar {
+    height: 32px;
+    width: 32px;
+    margin-right: 8px;
+    // border: thin solid $blk-gray;
   }
 
   .footer {
@@ -248,26 +262,26 @@ $orange: #f47b68;
   margin: 0 33% 15px 0;
 }
 
-/* CHAT SCROLL */
-::-webkit-scrollbar {
-  width: 7px;
-  border-radius: 4px;
-}
+// /* CHAT SCROLL */
+// ::-webkit-scrollbar {
+//   width: 7px;
+//   border-radius: 4px;
+// }
 
-/* track */
-::-webkit-scrollbar-track {
-  background: $md-dk-gray;
-  border-radius: 4 px;
-}
+// /* track */
+// ::-webkit-scrollbar-track {
+//   background: $md-dk-gray;
+//   border-radius: 4 px;
+// }
 
-/* handle */
-::-webkit-scrollbar-thumb {
-  background: $blk-gray;
-  border-radius: 4px;
-}
+// /* handle */
+// ::-webkit-scrollbar-thumb {
+//   background: $blk-gray;
+//   border-radius: 4px;
+// }
 
-/* handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: $gray;
-  border-radius: 4px;
-}
+// /* handle on hover */
+// ::-webkit-scrollbar-thumb:hover {
+//   background: $gray;
+//   border-radius: 4px;
+// }

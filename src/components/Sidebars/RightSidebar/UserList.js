@@ -21,9 +21,9 @@ const UserList = () => {
   }, [socket, currentRoom]);
 
   return (
-    <Box>
+    <Box className="rightUserList">
       <Typography>users chatting in {currentRoom}:</Typography>
-      <Divider style={{ backgroundColor: '#99aab5', margin: '5px 0px 15px 0px' }}/>
+      <Divider style={{ backgroundColor: '#99aab5', margin: '5px 0px 15px 0px' }} />
       {loggedInUsers && loggedInUsers.map(([username], idx) => {
         return <RoomUser username={username} key={idx} />
       })}
