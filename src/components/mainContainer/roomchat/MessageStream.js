@@ -7,9 +7,14 @@ const MessageStream = (props) => {
   let [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    socket.on('message', () => {
+    function listener() {
       setMessages(props.rooms.get(currentRoom));
-    })
+    }
+    socket.on('message', listener);
+
+    return function cleanup() {
+      socket.off('message', listener);
+    };
   }, [socket, props.rooms, messages, currentRoom]);
 
   useEffect(() => {
