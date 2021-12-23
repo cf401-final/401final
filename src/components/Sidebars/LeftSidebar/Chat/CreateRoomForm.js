@@ -1,5 +1,11 @@
-import React, { useContext } from 'react'
-import { MenuItem, TextField, Button, Typography, Divider } from '@mui/material';
+import React, { useContext } from 'react';
+import {
+  MenuItem,
+  TextField,
+  Button,
+  Typography,
+  Divider,
+} from '@mui/material';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import swal from 'sweetalert';
@@ -13,7 +19,7 @@ const CreateRoomForm = ({ handleClose }) => {
     e.preventDefault();
     await addRoomToServer(e.target.roomname.value, e.target.password.value);
     handleClose();
-  }
+  };
 
   const addRoomToServer = async (roomname, password) => {
     let body = password ? { roomname, password } : { roomname };
@@ -30,26 +36,38 @@ const CreateRoomForm = ({ handleClose }) => {
       } catch (err) {
         console.log(err);
       }
-    } catch(err) {
+    } catch (err) {
       console.log(err);
       swal({
-        title: "Oh no!",
-        text: "Unable to create a room with that name.",
-        icon: "warning",
+        title: 'Oh no!',
+        text: 'Unable to create a room with that name.',
+        icon: 'warning',
         dangerMode: true,
       });
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
-      <Typography variant="subtitle1" sx={{ marginLeft: '10px'}}>New Room Details</Typography>
+      <Typography variant="subtitle1" sx={{ marginLeft: '10px' }}>
+        New Room Details
+      </Typography>
       <Divider />
       <MenuItem>
-        <TextField name="roomname" label="Room Name" variant="standard" required />
+        <TextField
+          name="roomname"
+          label="Room Name"
+          variant="standard"
+          required
+        />
       </MenuItem>
       <MenuItem>
-        <TextField name="password" label="Password (optional)" type="password" variant="standard" />
+        <TextField
+          name="password"
+          label="Password (optional)"
+          type="password"
+          variant="standard"
+        />
       </MenuItem>
       <Button
         variant="contained"
@@ -62,7 +80,7 @@ const CreateRoomForm = ({ handleClose }) => {
         Create
       </Button>
     </form>
-  )
-}
+  );
+};
 
 export default CreateRoomForm;

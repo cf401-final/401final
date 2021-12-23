@@ -1,6 +1,13 @@
-import React, { useEffect } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
-import { Paper, Typography, ToggleButtonGroup, ToggleButton, TextField, Button } from '@mui/material';
+import React from 'react';
+import {
+  Paper,
+  Typography,
+  ToggleButtonGroup,
+  ToggleButton,
+  TextField,
+  Button,
+} from '@mui/material';
+
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
 import axios from 'axios';
@@ -95,9 +102,9 @@ const Profile = () => {
             flexWrap: 'wrap',
           }}
         >
-          <Typography>
-            <h2>Profile</h2>
-            <h3>IMAGE GOES HERE</h3>
+          <Typography variant="h5">Profile</Typography>
+          <Typography variant="h6">
+            IMAGE GOES HERE
             <p>Choose Some Interests:</p>
           </Typography>
           <form onSubmit={handleSubmit}>
@@ -144,8 +151,8 @@ const Profile = () => {
           </form>
         </Paper>
       </ThemeProvider>
-    </div >
-  )
+    </div>
+  );
 };
 
 export default Profile;

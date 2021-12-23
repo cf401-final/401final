@@ -24,10 +24,8 @@ const Landing = () => {
         <h1>Welcome to Jangle.</h1>
         {isAuthenticated ? (
           <>
-            <Typography>
-              <h3>
-                Let&apos;s get started! What would you like to do?
-              </h3>
+            <Typography variant="h6">
+              <p>Let&apos;s get started! What would you like to do?</p>
             </Typography>
             <Link to="/profile">
               <Button
@@ -35,7 +33,9 @@ const Landing = () => {
                 size="large"
                 variant="contained"
                 color="primary"
-                endIcon={<AccountCircleIcon />}>Update Profile
+                endIcon={<AccountCircleIcon />}
+              >
+                Update Profile
               </Button>
             </Link>
             <Link to="/roomchat">
@@ -44,7 +44,9 @@ const Landing = () => {
                 size="large"
                 variant="contained"
                 color="primary"
-                endIcon={<ChatOutlinedIcon />}>Start Chatting
+                endIcon={<ChatOutlinedIcon />}
+              >
+                Start Chatting
               </Button>
             </Link>
             <Link to="/matcher">
@@ -53,18 +55,22 @@ const Landing = () => {
                 size="large"
                 variant="contained"
                 color="primary"
-                endIcon={<SentimentVerySatisfiedIcon />}>Find Matches
+                endIcon={<SentimentVerySatisfiedIcon />}
+              >
+                Find Matches
               </Button>
             </Link>
           </>
         ) : (
-          <Typography>
-            <h3>
+          <>
+            <Typography variant="h5">
               A place where you can find your community and connect with others.
-            </h3>
-            Please <a onClick={loginWithRedirect}>sign in</a> or{' '}
-            <a onClick={loginWithRedirect}>register</a> to continue.
-          </Typography>
+            </Typography>
+            <Typography>
+              Please <a onClick={loginWithRedirect}>sign in</a> or{' '}
+              <a onClick={loginWithRedirect}>register</a> to continue.
+            </Typography>
+          </>
         )}
       </ThemeProvider>
     </div>

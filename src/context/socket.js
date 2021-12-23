@@ -11,9 +11,14 @@ const SocketProvider = (props) => {
   let [currentRoom, setCurrentRoom] = useState('general');
 
   useEffect(() => {
-    socket.on('message', data => {
-      props.addMessageToRoom({room: data.room, message: data.message});
-    });
+    function listener(data) {
+      props.addMessageToRoom({ room: data.room, message: data.message });
+    }
+    socket.on('message', listener);
+
+    return function cleanup() {
+      socket.off('message', listener);
+    };
   }, [props]);
 
   const values = {
@@ -29,8 +34,8 @@ const SocketProvider = (props) => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  addMessageToRoom: (room) => dispatch(addMessageToRoom(room))
+const mapDispatchToProps = (dispatch) => ({
+  addMessageToRoom: (room) => dispatch(addMessageToRoom(room)),
 });
 
 export default connect(null, mapDispatchToProps)(SocketProvider);

@@ -24,7 +24,7 @@ const CreateRoom = () => {
           sx={{ color: 'white' }}
         >
           + Create a room
-        </Button>  
+        </Button>
       </Box>
       <Menu
         anchorEl={anchorEl}
@@ -62,7 +62,7 @@ const CreateRoom = () => {
         <CreateRoomForm handleClose={handleClose} />
       </Menu>
     </>
-  )
-}
+  );
+};
 
 export default CreateRoom;

@@ -15,7 +15,7 @@ function DirectMessage({ directMsgRooms, joinRoom }) {
         );
       })}
     </TreeItem>
-  )
+  );
 }
 
 export default DirectMessage;
