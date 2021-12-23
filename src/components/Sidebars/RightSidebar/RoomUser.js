@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Box, Tooltip, Button } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -51,21 +52,32 @@ const UserButton = ({ username }) => {
     await createDirectMessageRoom();
   };
 
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#303136',
+      },
+    },
+  });
+
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Tooltip title={`Chat with ${username}?`}>
-          <Button
-            onClick={handleClick}
-            size="small"
-            id="user-btn"
-            color="primary"
-            sx={{ color: 'white' }}
-          >
-            {username}
-          </Button>
-        </Tooltip>
-      </Box>
+      <ThemeProvider theme={theme}>
+        <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+          <Tooltip title={`Chat with ${username}?`}>
+            <Button
+              className="rightUserBtn"
+              variant="contained"
+              color="primary"
+              onClick={handleClick}
+              size="large"
+              id="user-btn"
+            >
+              {username}
+            </Button>
+          </Tooltip>
+        </Box>
+      </ThemeProvider>
     </>
   );
 };

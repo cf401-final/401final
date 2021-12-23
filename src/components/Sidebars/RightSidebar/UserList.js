@@ -22,12 +22,11 @@ const UserList = () => {
 
   return (
     <Box>
-      <Typography>Users talking in {currentRoom}</Typography>
-      <Divider />
-      {loggedInUsers &&
-        loggedInUsers.map(([username], idx) => {
-          return <RoomUser username={username} key={idx} />;
-        })}
+      <Typography>users chatting in {currentRoom}:</Typography>
+      <Divider style={{ backgroundColor: '#99aab5', margin: '5px 0px 15px 0px' }}/>
+      {loggedInUsers && loggedInUsers.map(([username], idx) => {
+        return <RoomUser username={username} key={idx} />
+      })}
     </Box>
   );
 };
