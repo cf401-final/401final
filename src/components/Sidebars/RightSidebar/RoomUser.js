@@ -27,7 +27,17 @@ const UserButton = ({ username }) => {
         console.log(err);
       }
     } catch(err) {
-      console.log(err);
+      if(err.response.status === 409) {
+        swal({
+          title: "Hold up...",
+          text:  err.response.data.err,
+        });
+      } else {
+        swal({
+          title: "That didn't work out.",
+          text: `The request failed to be completed`,
+        });
+      }
     }
   }
 
