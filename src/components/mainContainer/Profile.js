@@ -29,6 +29,16 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
 
 const Profile = () => {
   const [selected, setSelected] = React.useState(false);
+  const interests = [
+    {label: 'Music', value: 'music'}, {label: 'Crafts & DIY', value: 'craftsdiy'},
+    {label: 'Gaming', value: 'gaming'}, {label: 'Cooking & Food', value: 'cookingfood'},
+    {label: 'Sports', value: 'sports'}, {label: 'LGBTQIA+', value: 'lgbtqia'},
+    {label: 'Art & Design', value: 'artdesign'}, {label: 'Literature & Writing', value: 'litwriting'},
+    {label: 'Nature & Travel', value: 'naturetravel'}, {label: 'History & Politics', value: 'historypolitics'},
+    {label: 'Fitness & Recreation', value: 'fitnessrec'}, {label: 'Community & Public Service', value: 'commpubsrvc'},
+    {label: 'Technology', value: 'technology'}, {label: 'Healthcare', value: 'healthcare'},
+    {label: 'Finnance', value: 'finnance'},
+  ]
 
   const handleSelected = (event, newSelection) => {
     setSelected(newSelection);
@@ -59,69 +69,13 @@ const Profile = () => {
             aria-label="text formatting"
             onChange={handleSelected}
           >
-            <ToggleButton className="interestBtn" color="primary" value="music" aria-label="music">
-              Music
-            </ToggleButton>
-
-            <ToggleButton className="interestBtn" color="primary" value="gaming" aria-label="gaming">
-              Gaming
-            </ToggleButton>
-
-            <ToggleButton className="interestBtn" color="primary" value="sports" aria-label="sports">
-              Sports
-            </ToggleButton>
-
-            <ToggleButton className="interestBtn" color="primary" value="artdesign" aria-label="artdesign">
-              Art&nbsp;&&nbsp;Design
-            </ToggleButton>
-
-            <ToggleButton className="interestBtn" color="primary" value="naturetravel" aria-label="naturetravel">
-              Nature&nbsp;&&nbsp;Travel
-            </ToggleButton>
-
-            <ToggleButton className="interestBtn" color="primary" value="fitnessrec" aria-label="fitnessrec">
-              Fitness&nbsp;&&nbsp;Recreation
-            </ToggleButton>
-
-            <ToggleButton className="interestBtn" color="primary" value="technology" aria-label="technology">
-              Technology
-            </ToggleButton>
-
-            <ToggleButton className="interestBtn" color="primary" value="finance" aria-label="finance">
-              Finance
-            </ToggleButton>
-
-            <ToggleButton className="interestBtn" color="primary" value="craftsdiy" aria-label="craftsdiy">
-              Crafts&nbsp;&&nbsp;DIY
-            </ToggleButton>
-
-            <ToggleButton className="interestBtn" color="primary" value="cookingfood" aria-label="cookingfood">
-              Cooking&nbsp;&&nbsp;Food
-            </ToggleButton>
-
-            <ToggleButton className="interestBtn" color="primary" value="lgbtqia" aria-label="lgbtqia">
-              LGBTQIA+
-            </ToggleButton>
-
-            <ToggleButton className="interestBtn" color="primary" value="dating" aria-label="dating">
-              Dating
-            </ToggleButton>
-
-            <ToggleButton className="interestBtn" color="primary" value="litwriting" aria-label="litwriting">
-              Literature&nbsp;&&nbsp;Writing
-            </ToggleButton>
-
-            <ToggleButton className="interestBtn" color="primary" value="historypolitics" aria-label="historypolitics">
-              History&nbsp;&&nbsp;Politics
-            </ToggleButton>
-
-            <ToggleButton className="interestBtn" color="primary" value="commpubsrvc" aria-label="commpubsrvc">
-              Community&nbsp;&&nbsp;Public&nbsp;Service
-            </ToggleButton>
-
-            <ToggleButton className="interestBtn" color="primary" value="healthcare" aria-label="healthcare">
-              Healthcare
-            </ToggleButton>
+            {interests.map(interest => {
+              return (
+                <ToggleButton key={interest.value} className="interestBtn" color="primary" value={interest.value} aria-label={interest.value}>
+                  {interest.label}
+                </ToggleButton>
+              )
+            })}
           </StyledToggleButtonGroup>
           <TextField
             color="primary"
