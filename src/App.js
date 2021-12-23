@@ -13,7 +13,6 @@ function App() {
   let { isAuthenticated } = useAuth0();
 
   function RequireAuth({ children, redirectTo }) {
-    console.log(isAuthenticated);
     return isAuthenticated ? children : <Navigate to={redirectTo} />;
   }
 
