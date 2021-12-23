@@ -8,8 +8,8 @@ const LeftSidebar = () => {
   return (
     <div className="left-sidebar" id="resizable" elevation={10}>
       <Routes>
-        <Route path="/roomchat" element={<ChatSidebar />}></Route>
-        <Route path="/matcher" element={<MatcherSidebar />}></Route>
+        <Route path="/roomchat" element={<ChatSidebar />} />
+        <Route path="/matcher" element={<MatcherSidebar />} />
       </Routes>
       <p className="footer">© Jangle 2021</p>
     </div>
