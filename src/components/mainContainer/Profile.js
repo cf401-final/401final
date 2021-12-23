@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Paper, Typography, ToggleButtonGroup, ToggleButton, TextField, Button } from '@mui/material';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
+import axios from 'axios';
 
 const theme = createTheme({
   palette: {
@@ -31,6 +32,8 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
 const Profile = () => {
   const { user } = useAuth0();
   const [selected, setSelected] = React.useState(false);
+  const [bio, setBio] = React.useState('');
+
   const interests = [
     {label: 'Music', value: 'music'}, {label: 'Crafts & DIY', value: 'craftsdiy'},
     {label: 'Gaming', value: 'gaming'}, {label: 'Cooking & Food', value: 'cookingfood'},
@@ -39,8 +42,21 @@ const Profile = () => {
     {label: 'Nature & Travel', value: 'naturetravel'}, {label: 'History & Politics', value: 'historypolitics'},
     {label: 'Fitness & Recreation', value: 'fitnessrec'}, {label: 'Community & Public Service', value: 'commpubsrvc'},
     {label: 'Technology', value: 'technology'}, {label: 'Healthcare', value: 'healthcare'},
-    {label: 'Finnance', value: 'finnance'},
-  ]
+    {label: 'Finance', value: 'finance'},
+  ];
+
+  useEffect(() => {
+    (async () => {
+      try {
+        let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`);
+        console.log(res.data[0])
+        setSelected(res.data[0].interests);
+        setBio(res.data[0].bio);
+      } catch(err) {
+        console.log(err);
+      }
+    })();
+  }, [user.nickname]);
 
   const handleSelected = (event, newSelection) => {
     setSelected(newSelection);
@@ -48,7 +64,7 @@ const Profile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let body = { interests: selected, bio: e.target.bio.value, user: user.nickname };
+    let body = { interests: selected, bio: e.target.bio.value, username: user.nickname };
     console.log(body)
   };
 
@@ -88,14 +104,16 @@ const Profile = () => {
             </StyledToggleButtonGroup>
             <TextField
               color="primary"
-              required
               id="outlined-multiline-static"
               name="bio"
               label="Enter a Bio:"
-              multiline
+              defaultValue={bio}
               rows={5}
               sx={{ width: '100%'}}
               placeholder="Tell other users about yourself..."
+              multiline
+              autoFocus
+              required
             />
             <div className="profileRow">
               <Button
