@@ -24,9 +24,11 @@ const Landing = () => {
         <h1>Welcome to Jangle.</h1>
         {isAuthenticated ? (
           <>
-            <h3>
-              Let&apos;s get started! What would you like to do?
-            </h3>
+            <Typography>
+              <h3>
+                Let&apos;s get started! What would you like to do?
+              </h3>
+            </Typography>
             <Link to="/profile">
               <Button
                 className="landBtn"

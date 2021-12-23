@@ -19,6 +19,7 @@ $orange: #f47b68;
   flex-wrap: row;
 }
 
+/* HEADER */
 .header {
   display: flex;
   flex-direction: row;
@@ -75,6 +76,7 @@ $orange: #f47b68;
   filter: invert(1);
 }
 
+/* MAIN */
 .main-container {
   // display: flex;
   flex-direction: column;
@@ -92,28 +94,7 @@ $orange: #f47b68;
   color: $lt-gray;
 }
 
-.left-sidebar,
-.right-sidebar {
-  display: flex;
-  flex-direction: column;
-  padding: 1.2rem;
-  flex-grow: 1;
-  max-width: 200px;
-  height: 100vh;
-  min-width: 200px;
-  background-color: $dk-gray;
-  color: white;
-
-  .footer {
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    // margin-top: 95%;
-    bottom: 1rem;
-    left: 3.8rem;
-  }
-}
-
+/* LANDING PAGE */
 #landing {
   text-align: left;
   color: white;
@@ -129,6 +110,11 @@ $orange: #f47b68;
     -webkit-text-stroke: 2px black;
     -webkit-font-smoothing: antialiased;
     margin: 0;
+  }
+
+  h3, p {
+    font-weight: 400;
+    letter-spacing: .7px;
   }
 
   .landBtn {
@@ -151,6 +137,70 @@ $orange: #f47b68;
   }
 }
 
+/* PROFILE */
+#profile {
+  display: flex;
+  justify-content: center;
+
+  #profilePaper {
+    width: 60%;
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 4rem 3rem 4rem;
+  }
+
+  #toggleGroup {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 3rem;
+    margin-bottom: 2rem;
+  }
+
+  .interestBtn {
+    height: 30px;
+    border-radius: 15px;
+    margin: .15rem;
+    padding: 3px 12px 0 12px;
+  }
+
+  .profileRow {
+    display: flex;
+    justify-content: right;
+  }
+
+  .updateBtn {
+    border-radius: 22px;
+    margin-top: 1.5rem;
+    width: 150px;
+  }
+}
+
+/* SIDEBARS */
+.left-sidebar,
+.right-sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem;
+  flex-grow: 1;
+  max-width: 200px;
+  height: 100vh;
+  min-width: 200px;
+  background-color: $dk-gray;
+  color: white;
+
+  .footer {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    // margin-top: 95%;
+    bottom: 1rem;
+    left: 3.8rem;
+  }
+}
+
+/* CHAT */
 .roomchat-container {
   height: 85.5vh;
   display: flex;
@@ -188,24 +238,25 @@ $orange: #f47b68;
   margin: 0 33% 15px 0;
 }
 
+/* CHAT SCROLL */
 ::-webkit-scrollbar {
   width: 7px;
   border-radius: 4px;
 }
 
-/* Track */
+/* track */
 ::-webkit-scrollbar-track {
   background: $md-dk-gray;
   border-radius: 4 px;
 }
 
-/* Handle */
+/* handle */
 ::-webkit-scrollbar-thumb {
   background: $blk-gray;
   border-radius: 4px;
 }
 
-/* Handle on hover */
+/* handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: $gray;
   border-radius: 4px;
