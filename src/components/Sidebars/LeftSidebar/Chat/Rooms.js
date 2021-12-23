@@ -14,7 +14,7 @@ import DirectMessage from './DirectMessage';
 import CreateRoom from './CreateRoom';
 
 const Rooms = (props) => {
-  const { socket, setCurrentRoom } = useContext(SocketContext);
+  const { socket, setCurrentRoom, currentRoom } = useContext(SocketContext);
   const { isAuthenticated, user } = useAuth0();
 
   let username = isAuthenticated
@@ -40,7 +40,7 @@ const Rooms = (props) => {
         console.log(err);
       }
     })();
-  }, [props]);
+  }, [props, currentRoom]);
 
   const joinRoom = (e) => {
     let room = e.target.innerText;

@@ -14,10 +14,6 @@ const UserList = () => {
     });
   }, [socket, currentRoom]);
 
-  useEffect(() =>{
-    console.log(loggedInUsers, '<<<<')
-  }, [loggedInUsers])
-
   return (
     <Box>
       <Typography>Users talking in {currentRoom}</Typography>

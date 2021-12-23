@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { MenuItem, TextField, Button, Typography, Divider } from '@mui/material';
 import axios from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
 import swal from 'sweetalert';
+import { SocketContext } from '../../../../context/socket';
 
 const CreateRoomForm = ({ handleClose }) => {
+  const { user } = useAuth0();
+  const { socket, setCurrentRoom } = useContext(SocketContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,7 +20,16 @@ const CreateRoomForm = ({ handleClose }) => {
     let res = null;
     try {
       res = await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body);
-      console.log(res.data);
+      setCurrentRoom(res.data.roomname);
+      try {
+        socket.emit('join', {
+          room: res.data.roomname,
+          user: user.nickname,
+        });
+        setCurrentRoom(roomname);
+      } catch (err) {
+        console.log(err);
+      }
     } catch(err) {
       console.log(err);
       swal({
