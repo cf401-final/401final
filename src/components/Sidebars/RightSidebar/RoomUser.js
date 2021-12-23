@@ -1,13 +1,19 @@
 import React from 'react';
-import {
-  Box,
-  Tooltip,
-  Button,
-} from '@mui/material';
+import { Box, Tooltip, Button } from '@mui/material';
+import swal from 'sweetalert';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const UserButton = ({ username }) => {
-  const handleClick = () => {
-    console.log('click')
+  const { user } = useAuth0();
+
+  const handleClick = async () => {
+    if(username === user.nickname) {
+      swal({
+        title: "Hold up...",
+        text: "You are trying to start a 1-1 conversation with yourself. Try someone else!",
+      });
+      return;
+    }
   }
 
   return (
