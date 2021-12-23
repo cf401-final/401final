@@ -10,7 +10,6 @@ const UserButton = ({ username }) => {
   const { user } = useAuth0();
   const { socket, setCurrentRoom } = useContext(SocketContext);
 
-
   const createDirectMessageRoom = async () => {
     let roomname = `${user.nickname}-${username}`;
     let body = { roomname, users: [user.nickname, username] };
@@ -30,7 +29,7 @@ const UserButton = ({ username }) => {
     } catch (err) {
       if (err.response.status === 409) {
         swal({
-          title: "Hold up...",
+          title: 'Hold up...',
           text: err.response.data.err,
         });
       } else {
@@ -40,18 +39,18 @@ const UserButton = ({ username }) => {
         });
       }
     }
-  }
+  };
 
   const handleClick = async () => {
     if (username === user.nickname) {
       swal({
-        title: "Hold up...",
-        text: "You are trying to start a 1-1 conversation with yourself. Try someone else!",
+        title: 'Hold up...',
+        text: 'You are trying to start a 1-1 conversation with yourself. Try someone else!',
       });
       return;
     }
     await createDirectMessageRoom();
-  }
+  };
 
   const theme = createTheme({
     palette: {
@@ -81,5 +80,5 @@ const UserButton = ({ username }) => {
       </ThemeProvider>
     </>
   );
-}
+};
 export default UserButton;

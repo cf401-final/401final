@@ -8,10 +8,16 @@ const UserList = () => {
   const [loggedInUsers, setLoggedInUsers] = useState(null);
 
   useEffect(() => {
-    socket.emit('get-users-for-room', { room: currentRoom });
-    socket.on('get-users-for-room', ({ users }) => {
+    function listener({ users }) {
       setLoggedInUsers([...users]);
-    });
+    }
+
+    socket.emit('get-users-for-room', { room: currentRoom });
+    socket.on('get-users-for-room', listener);
+
+    return function cleanup() {
+      socket.off('get-users-for-room', listener);
+    };
   }, [socket, currentRoom]);
 
   return (
@@ -22,7 +28,7 @@ const UserList = () => {
         return <RoomUser username={username} key={idx} />
       })}
     </Box>
-  )
-}
+  );
+};
 
 export default UserList;

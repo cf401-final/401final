@@ -13,8 +13,10 @@ import {
 import { Logout, Settings } from '@mui/icons-material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useNavigate } from 'react-router-dom';
 
 function UserButton() {
+  let navigate = useNavigate();
   const { logout, user } = useAuth0();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -78,7 +80,11 @@ function UserButton() {
       >
         <MenuItem>Signed in as {user.nickname}</MenuItem>
         <Divider />
-        <MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigate('/profile');
+          }}
+        >
           <Avatar alt={user.nickname} src={user.picture} /> Profile
         </MenuItem>
         <Divider />

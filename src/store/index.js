@@ -2,8 +2,7 @@ import { createStore, combineReducers } from 'redux';
 
 import roomsReducer from './rooms';
 
-
-let reducers = combineReducers({ 
+let reducers = combineReducers({
   rooms: roomsReducer,
 });
 

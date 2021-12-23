@@ -1,3 +1,7 @@
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+
+import { useAuth0 } from '@auth0/auth0-react';
+
 import './App.scss';
 import Profile from './components/mainContainer/Profile';
 import Roomchat from './components/mainContainer/roomchat';
@@ -5,23 +9,48 @@ import Matcher from './components/mainContainer/Matcher';
 import Landing from './components/mainContainer/Landing';
 import Layout from './components/Layout';
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+function App() {
+  let { isAuthenticated } = useAuth0();
 
-const App = () => {
+  function RequireAuth({ children, redirectTo }) {
+    return isAuthenticated ? children : <Navigate to={redirectTo} />;
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route exact path="/" element={<Landing />}></Route>
-            <Route exact path="/profile" element={<Profile />}></Route>
-            <Route exact path="/roomchat" element={<Roomchat />}></Route>
-            <Route exact path="/matcher" element={<Matcher />}></Route>
-          </Routes>
-        </Layout>
+        <Routes>
+          <Route path="/*" element={<Layout />}>
+            <Route index element={<Landing />} />
+            <Route
+              path="profile"
+              element={
+                <RequireAuth redirectTo="/">
+                  <Profile />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="roomchat"
+              element={
+                <RequireAuth redirectTo="/">
+                  <Roomchat />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="matcher"
+              element={
+                <RequireAuth redirectTo="/">
+                  <Matcher />
+                </RequireAuth>
+              }
+            />
+          </Route>
+        </Routes>
       </BrowserRouter>
     </div>
   );
-};
+}
 
 export default App;

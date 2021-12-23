@@ -2,9 +2,9 @@ import MainContainer from './mainContainer';
 import Header from './Header';
 import LeftSidebar from './Sidebars/LeftSidebar';
 import RightSidebar from './Sidebars/RightSidebar';
-import { useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
-function Layout({ children }) {
+function Layout() {
   const location = useLocation();
 
   return (
@@ -12,7 +12,9 @@ function Layout({ children }) {
       <Header />
       <div className="container">
         <LeftSidebar />
-        <MainContainer>{children}</MainContainer>
+        <MainContainer>
+          <Outlet />
+        </MainContainer>
         {location.pathname === '/roomchat' && <RightSidebar />}
       </div>
     </>

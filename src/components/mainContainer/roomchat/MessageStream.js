@@ -7,13 +7,18 @@ const MessageStream = (props) => {
   let [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    socket.on('message', () => {
+    function listener() {
       setMessages(props.rooms.get(currentRoom));
-    })
+    }
+    socket.on('message', listener);
+
+    return function cleanup() {
+      socket.off('message', listener);
+    };
   }, [socket, props.rooms, messages, currentRoom]);
 
   useEffect(() => {
-    if(props.rooms.has(currentRoom)) {
+    if (props.rooms.has(currentRoom)) {
       setMessages(props.rooms.get(currentRoom));
     }
   }, [currentRoom, props.rooms]);
@@ -36,10 +41,10 @@ const MessageStream = (props) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    rooms: state.rooms.rooms
-  }
+    rooms: state.rooms.rooms,
+  };
 };
 
 export default connect(mapStateToProps)(MessageStream);
