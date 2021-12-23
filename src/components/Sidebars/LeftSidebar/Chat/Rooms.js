@@ -38,7 +38,7 @@ const Rooms = (props) => {
           res.data.filter(room => ((room.password && room.users.length === 0) ? room : false))
         );
         setDirectMsgRooms(
-          res.data.filter(room => (room.users.length > 0 ? room : false))
+          res.data.filter(room => (room.users.length > 0 && room.roomname.split('-').includes(username)) ? room : false)
         );
       } catch (err) {
         console.log(err);
