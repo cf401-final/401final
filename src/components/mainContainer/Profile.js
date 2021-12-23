@@ -4,6 +4,8 @@ import { Paper, Typography, ToggleButtonGroup, ToggleButton, TextField, Button }
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
 import axios from 'axios';
+// import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
 
 const theme = createTheme({
   palette: {
@@ -74,7 +76,12 @@ const Profile = () => {
     } else {
       // else create a new one
       axios.post(`${process.env.REACT_APP_API_SERVER}/profiles`, body);
-    }
+    }    
+    swal({
+      title: "Success!",
+      text:  "Your profile has been updated. Enjoy socializing!",
+      icon: "success"
+    });
   };
 
   return (
