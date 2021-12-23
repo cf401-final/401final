@@ -11,17 +11,38 @@ const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route exact path="/" element={<Landing />}></Route>
-            <Route exact path="/profile" element={<Profile />}></Route>
-            <Route exact path="/roomchat" element={<Roomchat />}></Route>
-            <Route exact path="/matcher" element={<Matcher />}></Route>
-          </Routes>
-        </Layout>
+        <Routes>
+          <Route path="/*" element={<Layout />}>
+            <Route index element={<Landing />} />
+            <Route
+              path="profile"
+              element={
+                <RequireAuth redirectTo="/">
+                  <Profile />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="roomchat"
+              element={
+                <RequireAuth redirectTo="/">
+                  <Roomchat />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="matcher"
+              element={
+                <RequireAuth redirectTo="/">
+                  <Matcher />
+                </RequireAuth>
+              }
+            />
+          </Route>
+        </Routes>
       </BrowserRouter>
     </div>
   );
-};
+}
 
 export default App;
