@@ -1,12 +1,12 @@
 import React from 'react';
-import { Typography, ToggleButtonGroup, ToggleButton, Paper } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Paper, Typography, ToggleButtonGroup, ToggleButton, TextField, Button } from '@mui/material';
+import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import CheckIcon from '@mui/icons-material/Check';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#f47b68',
+      main: '#7289da',
     },
   },
 });
@@ -48,7 +48,8 @@ const Profile = () => {
         >
           <Typography>
             <h2>Profile</h2>
-            <p>Choose Your Interests:</p>
+            <h3>IMAGE GOES HERE</h3>
+            <p>Choose Some Interests:</p>
           </Typography>
           <StyledToggleButtonGroup
             id="toggleGroup"
@@ -90,16 +91,20 @@ const Profile = () => {
               Finance
             </ToggleButton>
 
-            <ToggleButton className="interestBtn" color="primary" value="craftstrades" aria-label="craftstrades">
-              Crafts&nbsp;&&nbsp;Trades
-            </ToggleButton>
-
-            <ToggleButton className="interestBtn" color="primary" value="homediy" aria-label="homediy">
-              Home&nbsp;&&nbsp;DIY
+            <ToggleButton className="interestBtn" color="primary" value="craftsdiy" aria-label="craftsdiy">
+              Crafts&nbsp;&&nbsp;DIY
             </ToggleButton>
 
             <ToggleButton className="interestBtn" color="primary" value="cookingfood" aria-label="cookingfood">
               Cooking&nbsp;&&nbsp;Food
+            </ToggleButton>
+
+            <ToggleButton className="interestBtn" color="primary" value="lgbtqia" aria-label="lgbtqia">
+              LGBTQIA+
+            </ToggleButton>
+
+            <ToggleButton className="interestBtn" color="primary" value="dating" aria-label="dating">
+              Dating
             </ToggleButton>
 
             <ToggleButton className="interestBtn" color="primary" value="litwriting" aria-label="litwriting">
@@ -110,14 +115,6 @@ const Profile = () => {
               History&nbsp;&&nbsp;Politics
             </ToggleButton>
 
-            <ToggleButton className="interestBtn" color="primary" value="dating" aria-label="dating">
-              Dating
-            </ToggleButton>
-
-            <ToggleButton className="interestBtn" color="primary" value="lgbtqia" aria-label="lgbtqia">
-              LGBTQIA+
-            </ToggleButton>
-
             <ToggleButton className="interestBtn" color="primary" value="commpubsrvc" aria-label="commpubsrvc">
               Community&nbsp;&&nbsp;Public&nbsp;Service
             </ToggleButton>
@@ -126,8 +123,23 @@ const Profile = () => {
               Healthcare
             </ToggleButton>
           </StyledToggleButtonGroup>
-
-          <p>Bio</p>
+          <TextField
+            color="primary"
+            id="outlined-multiline-static"
+            label="Enter a Bio:"
+            multiline
+            rows={5}
+            placeholder="Tell other users about yourself..."
+          />
+          <div className="profileRow">
+            <Button
+              className="updateBtn"
+              size="large"
+              variant="contained"
+              color="primary"
+              endIcon={<CheckIcon />}>Update
+            </Button>
+          </div>
         </Paper>
       </ThemeProvider>
     </div >

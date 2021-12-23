@@ -137,6 +137,7 @@ $orange: #f47b68;
   }
 }
 
+/* PROFILE */
 #profile {
   display: flex;
   justify-content: center;
@@ -146,16 +147,33 @@ $orange: #f47b68;
     margin-top: 10%;
     display: flex;
     flex-direction: column;
-    padding: 2rem 4rem;
+    padding: 2rem 4rem 3rem 4rem;
   }
+
   #toggleGroup {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 3rem;
+    margin-bottom: 2rem;
   }
+
   .interestBtn {
-    border-radius: 19px;
-    margin: .1rem;
-    // width: 200px;
+    height: 30px;
+    border-radius: 15px;
+    margin: .15rem;
+    padding: 3px 12px 0 12px;
+  }
+
+  .profileRow {
+    display: flex;
+    justify-content: right;
+  }
+
+  .updateBtn {
+    border-radius: 22px;
+    margin-top: 1.5rem;
+    width: 150px;
   }
 }
 
