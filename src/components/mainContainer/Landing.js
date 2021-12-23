@@ -58,13 +58,15 @@ const Landing = () => {
             </Link>
           </>
         ) : (
-          <Typography>
-            <h3>
+          <>
+            <Typography variant="h5">
               A place where you can find your community and connect with others.
-            </h3>
-            Please <a onClick={loginWithRedirect}>sign in</a> or{' '}
-            <a onClick={loginWithRedirect}>register</a> to continue.
-          </Typography>
+            </Typography>
+            <Typography>
+              Please <a onClick={loginWithRedirect}>sign in</a> or{' '}
+              <a onClick={loginWithRedirect}>register</a> to continue.
+            </Typography>
+          </>
         )}
       </ThemeProvider>
     </div>
