@@ -52,7 +52,7 @@ const Rooms = (props) => {
         console.log(err);
       }
     })();
-  }, [props, currentRoom]);
+  }, [props, currentRoom, username]);
 
   const joinRoom = (e) => {
     let room = e.target.innerText;
@@ -82,7 +82,7 @@ const Rooms = (props) => {
         <Public joinRoom={joinRoom} publicRooms={publicRooms} />
         <Private joinRoom={joinRoom} privateRooms={privateRooms} />
         {directMsgRooms.length > 0 && (
-          <DirectMessage joinRoom={joinRoom} directMsgRooms={directMsgRooms} />
+          <DirectMessage startNodeId='2' joinRoom={joinRoom} directMsgRooms={directMsgRooms} />
         )}
       </TreeView>
     </div>
