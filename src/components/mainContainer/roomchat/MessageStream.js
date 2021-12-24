@@ -1,27 +1,42 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { SocketContext } from '../../../context/socket';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import { setRoomMessages } from '../../../store/rooms';
 
-const MessageStream = (props) => {
+const MessageStream = ({ setRoomMessages, rooms }) => {
   const { socket, currentRoom } = useContext(SocketContext);
   let [messages, setMessages] = useState([]);
 
   useEffect(() => {
     function listener() {
-      setMessages(props.rooms.get(currentRoom));
+      setMessages(rooms.get(currentRoom));
     }
     socket.on('message', listener);
 
     return function cleanup() {
       socket.off('message', listener);
     };
-  }, [socket, props.rooms, messages, currentRoom]);
+  }, [socket, rooms, messages, currentRoom]);
 
   useEffect(() => {
-    if (props.rooms.has(currentRoom)) {
-      setMessages(props.rooms.get(currentRoom));
+    (async () => {
+      try {
+        let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/messages/${currentRoom}`);
+        if(res.data.length > 0)
+          setRoomMessages({ messages: res.data, roomname: currentRoom });
+      } catch(err) {
+        console.log(err);
+      }
+    })()
+
+  }, [currentRoom, setRoomMessages])
+
+  useEffect(() => {
+    if (rooms.has(currentRoom)) {
+      setMessages(rooms.get(currentRoom));
     }
-  }, [currentRoom, props.rooms]);
+  }, [currentRoom, rooms]);
 
   return (
     <>
@@ -47,4 +62,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(MessageStream);
+const mapDispatchToProps = (dispatch) => ({
+  setRoomMessages: (data) => dispatch(setRoomMessages(data)),
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MessageStream);
