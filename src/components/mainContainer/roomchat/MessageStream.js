@@ -25,12 +25,13 @@ const MessageStream = ({ setRoomMessages, rooms }) => {
         let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/messages/${currentRoom}`);
         if(res.data.length > 0)
           setRoomMessages({ messages: res.data, roomname: currentRoom });
+          setMessages(rooms.get(currentRoom));
       } catch(err) {
         console.log(err);
       }
     })()
 
-  }, [currentRoom, setRoomMessages])
+  }, [currentRoom, rooms, setRoomMessages])
 
   useEffect(() => {
     if (rooms.has(currentRoom)) {

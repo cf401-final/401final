@@ -12,7 +12,6 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_ROOM_MESSAGES:
       state.rooms.set(action.payload.roomname, action.payload.messages);
-      console.log(state.rooms.get(action.payload.roomname), 'new room messages');
       return state;
     case ADD_MESSAGE_TO_ROOM:
       if (state.rooms.has(action.payload.roomname)) {
