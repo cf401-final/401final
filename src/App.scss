@@ -249,13 +249,13 @@ $orange: #EE8585;
 }
 
 
-#myChatTimeStamp {
+.myChatTimeStamp {
   color: $lt-gray;
   text-align: right;
   margin: 4px 0 0 0;
 }
 
-#theirChatTimeStamp {
+.theirChatTimeStamp {
   color: $lt-gray;
   text-align: left;
   margin: 4px 0 0 66px;

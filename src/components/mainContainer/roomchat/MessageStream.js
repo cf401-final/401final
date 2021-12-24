@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { setRoomMessages } from '../../../store/rooms';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Avatar, Tooltip, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 
 const MessageStream = ({ setRoomMessages, rooms, username }) => {
   const { user } = useAuth0();
@@ -50,42 +50,21 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
           {messages.map((msg, idx) => {
             return (
               <>
-                <div className="myMessageRow">
-                  <p className="myChatMessage" key={idx}>
+                <div className={msg.username === username ? "myMessageRow" : "theirMessageRow"}>
+                  <p className={msg.username === username ? "myChatMessage" : "theirChatMessage"} key={idx}>
                     {`${msg.content}`}
                   </p>
                   {/* <Tooltip title={`${username}`}>
                     <Avatar className="chatAvatar" alt={user.nickname} src={user.picture} />
                   </Tooltip> */}
                 </div>
-                <Typography id="myChatTimeStamp" variant="caption" key={idx}>
+                <Typography className={msg.username === username ? "myChatTimeStamp" : "theirChatTimeStamp"} variant="caption" key={idx}>
                   {`${msg.timeSentFormatted}`}
                 </Typography>
               </>
             );
           })}
-          <div className="theirMessageRow">
-            <Tooltip title={`${username}`}>
-              <Avatar className="chatAvatar" alt={user.nickname} src={user.picture} />
-            </Tooltip>
-            <p className="theirChatMessage">SAMPLE TEXT</p>
-          </div>
-          <Typography id="theirChatTimeStamp" variant="caption">
-            12/23/2021 at 23:17 PST
-          </Typography>
-
-          <div className="theirMessageRow">
-            <Tooltip title={`${username}`}>
-              <Avatar className="chatAvatar" alt={user.nickname} src={user.picture} />
-            </Tooltip>
-            <p className="theirChatMessage">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta nesciunt voluptatibus aperiam asperiores quisquam dolores non.
-            </p>
-          </div>
-          <Typography id="theirChatTimeStamp" variant="caption">
-            12/23/2021 at 23:17 PST
-          </Typography>
-        </div>
+        </div> 
       )}
     </>
   );
