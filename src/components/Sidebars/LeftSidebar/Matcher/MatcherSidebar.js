@@ -53,9 +53,8 @@ const MatcherSidebar = (props) => {
     } catch (err) {
       console.log(err);
     }
-    
-    if(location.pathname !== '/roomchat')
-      navigate('/roomchat');
+
+    if (location.pathname !== '/roomchat') navigate('/roomchat');
   };
 
   return (
@@ -69,11 +68,15 @@ const MatcherSidebar = (props) => {
         sx={{ height: 240, flexGrow: 1, maxWidth: 400 }}
       >
         {directMsgRooms.length > 0 && (
-          <DirectMessage startNodeId='0' joinRoom={joinRoom} directMsgRooms={directMsgRooms} />
+          <DirectMessage
+            startNodeId="0"
+            joinRoom={joinRoom}
+            directMsgRooms={directMsgRooms}
+          />
         )}
       </TreeView>
     </div>
-  )
+  );
 };
 
 const mapDispatchToProps = (dispatch) => ({

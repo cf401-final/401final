@@ -26,16 +26,17 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
   useEffect(() => {
     (async () => {
       try {
-        let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/messages/${currentRoom}`);
+        let res = await axios.get(
+          `${process.env.REACT_APP_API_SERVER}/messages/${currentRoom}`
+        );
         if (res.data.length > 0)
           setRoomMessages({ messages: res.data, roomname: currentRoom });
         setMessages(rooms.get(currentRoom));
       } catch (err) {
         console.log(err);
       }
-    })()
-
-  }, [currentRoom, rooms, setRoomMessages])
+    })();
+  }, [currentRoom, rooms, setRoomMessages]);
 
   useEffect(() => {
     if (rooms.has(currentRoom)) {
@@ -50,21 +51,42 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
           {messages.map((msg, idx) => {
             return (
               <>
-                <div className={msg.username === username ? "myMessageRow" : "theirMessageRow"}>
-                  <p className={msg.username === username ? "myChatMessage" : "theirChatMessage"} key={idx}>
+                <div
+                  className={
+                    msg.username === username
+                      ? 'myMessageRow'
+                      : 'theirMessageRow'
+                  }
+                >
+                  <p
+                    className={
+                      msg.username === username
+                        ? 'myChatMessage'
+                        : 'theirChatMessage'
+                    }
+                    key={idx}
+                  >
                     {`${msg.content}`}
                   </p>
                   {/* <Tooltip title={`${username}`}>
                     <Avatar className="chatAvatar" alt={user.nickname} src={user.picture} />
                   </Tooltip> */}
                 </div>
-                <Typography className={msg.username === username ? "myChatTimeStamp" : "theirChatTimeStamp"} variant="caption" key={idx}>
+                <Typography
+                  className={
+                    msg.username === username
+                      ? 'myChatTimeStamp'
+                      : 'theirChatTimeStamp'
+                  }
+                  variant="caption"
+                  key={idx}
+                >
                   {`${msg.timeSentFormatted}`}
                 </Typography>
               </>
             );
           })}
-        </div> 
+        </div>
       )}
     </>
   );
@@ -79,6 +101,5 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   setRoomMessages: (data) => dispatch(setRoomMessages(data)),
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageStream);

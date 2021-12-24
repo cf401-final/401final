@@ -43,25 +43,34 @@ const Profile = () => {
   const [bio, setBio] = React.useState('');
 
   const interests = [
-    {label: 'Music', value: 'music'}, {label: 'Crafts & DIY', value: 'craftsdiy'},
-    {label: 'Gaming', value: 'gaming'}, {label: 'Cooking & Food', value: 'cookingfood'},
-    {label: 'Sports', value: 'sports'}, {label: 'LGBTQIA+', value: 'lgbtqia'},
-    {label: 'Art & Design', value: 'artdesign'}, {label: 'Literature & Writing', value: 'litwriting'},
-    {label: 'Nature & Travel', value: 'naturetravel'}, {label: 'History & Politics', value: 'historypolitics'},
-    {label: 'Fitness & Recreation', value: 'fitnessrec'}, {label: 'Community & Public Service', value: 'commpubsrvc'},
-    {label: 'Technology', value: 'technology'}, {label: 'Healthcare', value: 'healthcare'},
-    {label: 'Finance', value: 'finance'},
+    { label: 'Music', value: 'music' },
+    { label: 'Crafts & DIY', value: 'craftsdiy' },
+    { label: 'Gaming', value: 'gaming' },
+    { label: 'Cooking & Food', value: 'cookingfood' },
+    { label: 'Sports', value: 'sports' },
+    { label: 'LGBTQIA+', value: 'lgbtqia' },
+    { label: 'Art & Design', value: 'artdesign' },
+    { label: 'Literature & Writing', value: 'litwriting' },
+    { label: 'Nature & Travel', value: 'naturetravel' },
+    { label: 'History & Politics', value: 'historypolitics' },
+    { label: 'Fitness & Recreation', value: 'fitnessrec' },
+    { label: 'Community & Public Service', value: 'commpubsrvc' },
+    { label: 'Technology', value: 'technology' },
+    { label: 'Healthcare', value: 'healthcare' },
+    { label: 'Finance', value: 'finance' },
   ];
 
   useEffect(() => {
     (async () => {
       try {
         //auto-populates form fields with existing profile data, if they have a profile
-        let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`);
-        console.log(res.data[0])
+        let res = await axios.get(
+          `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`
+        );
+        console.log(res.data[0]);
         setSelected(res.data[0].interests);
         setBio(res.data[0].bio);
-      } catch(err) {
+      } catch (err) {
         console.log(err);
       }
     })();
@@ -73,20 +82,29 @@ const Profile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let body = { interests: selected, bio: e.target.bio.value, username: user.nickname };
+    let body = {
+      interests: selected,
+      bio: e.target.bio.value,
+      username: user.nickname,
+    };
 
-    let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`);
-    if(res.data.length > 0) {
+    let res = await axios.get(
+      `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`
+    );
+    if (res.data.length > 0) {
       //if there is a user profile already, update it
-      axios.put(`${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`, body);
+      axios.put(
+        `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`,
+        body
+      );
     } else {
       // else create a new one
       axios.post(`${process.env.REACT_APP_API_SERVER}/profiles`, body);
-    }    
+    }
     swal({
-      title: "Success!",
-      text:  "Your profile has been updated. Enjoy socializing!",
-      icon: "success"
+      title: 'Success!',
+      text: 'Your profile has been updated. Enjoy socializing!',
+      icon: 'success',
     });
   };
 
@@ -114,12 +132,18 @@ const Profile = () => {
               aria-label="text formatting"
               onChange={handleSelected}
             >
-              {interests.map(interest => {
+              {interests.map((interest) => {
                 return (
-                  <ToggleButton key={interest.value} className="interestBtn" color="primary" value={interest.value} aria-label={interest.value}>
+                  <ToggleButton
+                    key={interest.value}
+                    className="interestBtn"
+                    color="primary"
+                    value={interest.value}
+                    aria-label={interest.value}
+                  >
                     {interest.label}
                   </ToggleButton>
-                )
+                );
               })}
             </StyledToggleButtonGroup>
             <TextField
@@ -129,7 +153,7 @@ const Profile = () => {
               label="Enter a Bio:"
               defaultValue={bio}
               rows={5}
-              sx={{ width: '100%'}}
+              sx={{ width: '100%' }}
               placeholder="Tell other users about yourself..."
               multiline
               autoFocus

@@ -63,7 +63,9 @@ const UserButton = ({ username }) => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+        <Box
+          sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}
+        >
           <Tooltip title={`Chat with ${username}?`}>
             <Button
               className="rightUserBtn"
@@ -73,7 +75,12 @@ const UserButton = ({ username }) => {
               size="large"
               id="user-btn"
             >
-              <Avatar className="rightAvatar" alt={user.nickname} src={user.picture}/>{username}
+              <Avatar
+                className="rightAvatar"
+                alt={user.nickname}
+                src={user.picture}
+              />
+              {username}
             </Button>
           </Tooltip>
         </Box>

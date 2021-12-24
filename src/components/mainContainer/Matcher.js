@@ -1,7 +1,15 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
-import { Paper, Chip, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
+import {
+  Paper,
+  Chip,
+  Card,
+  CardContent,
+  CardMedia,
+  IconButton,
+  Typography,
+} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ThumbUpAltRoundedIcon from '@mui/icons-material/ThumbUpAltRounded';
 import ThumbDownAltRoundedIcon from '@mui/icons-material/ThumbDownAltRounded';
@@ -12,7 +20,7 @@ const theme = createTheme({
       main: '#7db1b1',
     },
     secondary: {
-      main: '#EE8585'
+      main: '#EE8585',
     },
   },
 });
@@ -25,7 +33,9 @@ const Matcher = () => {
 
   const getRandomUser = async () => {
     try {
-      let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}/random`);
+      let res = await axios.get(
+        `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}/random`
+      );
       if (res.data) {
         setSelected(res.data.interests);
         setBio(res.data.bio);
@@ -34,7 +44,7 @@ const Matcher = () => {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   return (
     <div id="matcher">
@@ -51,42 +61,60 @@ const Matcher = () => {
             <CardMedia
               id="matcherImg"
               component="img"
-              image='https://source.unsplash.com/random' //temp
+              image="https://source.unsplash.com/random" //temp
               alt="user image"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 {username}
               </Typography>
-              <Typography variant="h6" style={{ textAlign: 'left' }}>Interests:</Typography>
+              <Typography variant="h6" style={{ textAlign: 'left' }}>
+                Interests:
+              </Typography>
               <div style={{ textAlign: 'left', marginBottom: '1rem' }}>
-              {selected.map(interest => {
-                return <Chip className="matchChip" variant="outlined" label={interest} color="default" key={interest}>{interest}
-                </Chip>
-              })}
+                {selected.map((interest) => {
+                  return (
+                    <Chip
+                      className="matchChip"
+                      variant="outlined"
+                      label={interest}
+                      color="default"
+                      key={interest}
+                    >
+                      {interest}
+                    </Chip>
+                  );
+                })}
               </div>
-              <Typography variant="h6" style={{ textAlign: 'left' }}>Bio:</Typography>
+              <Typography variant="h6" style={{ textAlign: 'left' }}>
+                Bio:
+              </Typography>
               <Typography style={{ textAlign: 'left' }}>{bio}</Typography>
             </CardContent>
           </Card>
-          <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'center' }}>
-            <IconButton
-              className="matchBtn"
-              size="large"
-              color="secondary">
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'nowrap',
+              justifyContent: 'center',
+            }}
+          >
+            <IconButton className="matchBtn" size="large" color="secondary">
               <ThumbDownAltRoundedIcon fontSize="inherit" />
             </IconButton>
             <IconButton
               className="matchBtn"
               size="large"
               color="primary"
-              onClick={getRandomUser}>
+              onClick={getRandomUser}
+            >
               <ThumbUpAltRoundedIcon fontSize="inherit" />
             </IconButton>
           </div>
         </ThemeProvider>
       </Paper>
-    </div >
+    </div>
   );
 };
 

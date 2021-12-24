@@ -55,4 +55,4 @@ export const setRoomMessages = (payload) => {
     type: SET_ROOM_MESSAGES,
     payload,
   };
-}
+};

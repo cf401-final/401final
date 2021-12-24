@@ -6,7 +6,7 @@ $lt-gray: #99aab5;
 $blue: #7289da;
 $teal: #7db1b1;
 $purple: #9b84ee;
-$orange: #EE8585;
+$orange: #ee8585;
 
 .App {
   // overflow: hidden;
@@ -35,7 +35,7 @@ $orange: #EE8585;
     font-family: 'Kanit', sans-serif;
     display: flex;
     justify-content: center;
-    margin: -.2rem;
+    margin: -0.2rem;
     color: white;
   }
 }
@@ -46,7 +46,7 @@ $orange: #EE8585;
 }
 
 #onlineUsers {
-  margin: .8rem;
+  margin: 0.8rem;
   position: absolute;
   right: 3.3rem;
 }
@@ -82,7 +82,7 @@ $orange: #EE8585;
   min-width: 400px;
   background-color: $md-dk-gray;
   color: white;
-  padding: .6rem;
+  padding: 0.6rem;
   // padding-right: 0;
   padding-bottom: 2rem;
   height: 100vh;
@@ -123,12 +123,12 @@ $orange: #EE8585;
   .letterSpacing {
     font-weight: 400;
     letter-spacing: 0.7px;
-    margin: .1rem 0;
+    margin: 0.1rem 0;
   }
 
   .landBtn {
     border-radius: 22px;
-    margin: .3rem .7rem .7rem 0;
+    margin: 0.3rem 0.7rem 0.7rem 0;
     width: 170px;
   }
 
@@ -170,7 +170,7 @@ $orange: #EE8585;
   .interestBtn {
     height: 30px;
     border-radius: 15px;
-    margin: .15rem;
+    margin: 0.15rem;
     padding: 3px 12px 0 12px;
   }
 
@@ -198,9 +198,9 @@ $orange: #EE8585;
 
 .message-bar {
   display: flex;
-    flex-direction: column;
-    margin: 0 1rem 5rem 1rem;
-    flex-basis: 5%;
+  flex-direction: column;
+  margin: 0 1rem 5rem 1rem;
+  flex-basis: 5%;
 }
 
 .message-container,
@@ -209,7 +209,8 @@ $orange: #EE8585;
   flex-direction: column;
 }
 
-.myMessageRow, .theirMessageRow {
+.myMessageRow,
+.theirMessageRow {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -227,14 +228,15 @@ $orange: #EE8585;
   bottom: 0;
 }
 
-.myChatMessage, .theirChatMessage {
+.myChatMessage,
+.theirChatMessage {
   display: flex;
   flex-direction: column;
   align-self: flex-end;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   font-size: 1.3rem;
   margin: 15px 0 0 0;
-	word-wrap: break-word;
+  word-wrap: break-word;
   max-width: 67%;
 }
 
@@ -247,7 +249,6 @@ $orange: #EE8585;
   background: linear-gradient(135deg, $purple, $orange);
   border-radius: 0px 25px 25px 25px;
 }
-
 
 .myChatTimeStamp {
   color: $lt-gray;
@@ -323,13 +324,13 @@ $orange: #EE8585;
   }
 
   .matchChip {
-    margin: .2rem;
+    margin: 0.2rem;
     text-align: left;
   }
 
   .matchBtn {
     // border-radius: 50;
-    margin: 1.5rem .5rem -2rem .5rem;
+    margin: 1.5rem 0.5rem -2rem 0.5rem;
     font-size: 2.5rem;
   }
 }

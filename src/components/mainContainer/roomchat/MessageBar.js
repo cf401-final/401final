@@ -11,11 +11,15 @@ const MessageBar = () => {
     e.preventDefault();
     let content = e.target.message.value;
     try {
-      socket.emit('message', { content, roomname: currentRoom, username: user.nickname });
-    } catch(err) {
-      console.log(err)
+      socket.emit('message', {
+        content,
+        roomname: currentRoom,
+        username: user.nickname,
+      });
+    } catch (err) {
+      console.log(err);
     }
-    
+
     e.target.message.value = '';
   };
 
