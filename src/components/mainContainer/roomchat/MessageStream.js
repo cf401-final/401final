@@ -50,7 +50,7 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
         <div className="message-container">
           {messages.map((msg, idx) => {
             return (
-              <>
+              <React.Fragment key={idx}>
                 <div
                   className={
                     msg.username === username
@@ -83,7 +83,7 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
                 >
                   {`${msg.timeSentFormatted}`}
                 </Typography>
-              </>
+              </React.Fragment>
             );
           })}
         </div>
