@@ -16,7 +16,7 @@ const MainContainer = (props) => {
 
   return (
     <>
-      <div className="main-container">
+      <div className={location.pathname !== '/matcher' ?  "main-container" : "main-container-matcher"}>
         <Typography
           variant="button"
           display="block"
