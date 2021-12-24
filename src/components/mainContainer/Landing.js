@@ -24,13 +24,13 @@ const Landing = () => {
         <h1>Welcome to Jangle.</h1>
         {isAuthenticated ? (
           <>
-            <Typography variant="h6">
-              <p>Let&apos;s get started! What would you like to do?</p>
+            <Typography className="letterSpacing" variant="h5">
+              Let&apos;s get started! What would you like to do?
             </Typography>
             <Link to="/profile">
               <Button
                 className="landBtn"
-                size="large"
+                size="small"
                 variant="contained"
                 color="primary"
                 endIcon={<AccountCircleIcon />}
@@ -41,7 +41,7 @@ const Landing = () => {
             <Link to="/roomchat">
               <Button
                 className="landBtn"
-                size="large"
+                size="small"
                 variant="contained"
                 color="primary"
                 endIcon={<ChatOutlinedIcon />}
@@ -52,7 +52,7 @@ const Landing = () => {
             <Link to="/matcher">
               <Button
                 className="landBtn"
-                size="large"
+                size="small"
                 variant="contained"
                 color="primary"
                 endIcon={<SentimentVerySatisfiedIcon />}
@@ -63,10 +63,10 @@ const Landing = () => {
           </>
         ) : (
           <>
-            <Typography variant="h5">
+            <Typography className="letterSpacing" variant="h5">
               A place where you can find your community and connect with others.
             </Typography>
-            <Typography>
+            <Typography className="letterSpacing">
               Please <a onClick={loginWithRedirect}>sign in</a> or{' '}
               <a onClick={loginWithRedirect}>register</a> to continue.
             </Typography>
