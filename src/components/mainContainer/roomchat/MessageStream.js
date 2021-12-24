@@ -46,9 +46,14 @@ const MessageStream = ({ setRoomMessages, rooms }) => {
           {/* <p className="theirChatMessage">TEXT</p> */}
           {messages.map((msg, idx) => {
             return (
-              <p className="myChatMessage" key={idx}>
-                {`${msg.content}`}
-              </p>
+              <>
+                <p key={idx}>
+                  {`${msg.timeSentFormatted}`}
+                </p>
+                <p className="myChatMessage" key={idx}>
+                  {`${msg.content}`}
+                </p>
+              </>
             );
           })}
         </div>
