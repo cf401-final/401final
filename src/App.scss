@@ -6,7 +6,7 @@ $lt-gray: #99aab5;
 $blue: #7289da;
 $teal: #7db1b1;
 $purple: #9b84ee;
-$orange: #f47b68;
+$orange: #EE8585;
 
 .App {
   // overflow: hidden;
@@ -85,7 +85,7 @@ $orange: #f47b68;
   background-color: $md-dk-gray;
   color: white;
   padding: .6rem;
-  padding-right: 0;
+  // padding-right: 0;
   padding-bottom: 2rem;
   overflow: auto;
 }
@@ -185,38 +185,72 @@ $orange: #f47b68;
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-right: 1rem;
-  // margin-right: .5rem;
+  padding: 0 1rem;
 }
 
 .message-bar {
   display: flex;
     flex-direction: column;
-    margin: 0 1.8rem 10% 1.1rem;
-    flex-basis: 10%;
+    margin: 0 1rem 5rem 1rem;
+    flex-basis: 5%;
 }
 
 .message-container,
 .rooms-container {
   display: flex;
   flex-direction: column;
-  margin: 20px 1rem 0 0;
+}
+
+.myMessageRow, .theirMessageRow {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+  margin: 0;
+}
+
+.theirMessageRow {
+  justify-content: flex-start;
+}
+
+.chatAvatar {
+  margin: 15px 5px 0 5px;
+  bottom: 0;
+}
+
+.myChatMessage, .theirChatMessage {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  padding: .5rem 1rem;
+  font-size: 1.3rem;
+  margin: 15px 0 0 0;
+	word-wrap: break-word;
+  max-width: 67%;
 }
 
 .myChatMessage {
-  padding: .4rem .7rem;
-  font-size: 1.3rem;
   background: linear-gradient(135deg, $blue, $teal);
   border-radius: 25px 25px 0 25px;
-  margin: 0 0 15px 0;
 }
 
 .theirChatMessage {
-  padding: 0.8rem 1.3rem;
-  width: 67%;
   background: linear-gradient(135deg, $purple, $orange);
   border-radius: 0px 25px 25px 25px;
-  margin: 0 33% 15px 0;
+}
+
+
+#myChatTimeStamp {
+  color: $lt-gray;
+  text-align: right;
+  margin: 4px 0 0 0;
+}
+
+#theirChatTimeStamp {
+  color: $lt-gray;
+  text-align: left;
+  margin: 4px 0 0 66px;
 }
 
 // /* CHAT SCROLL */
