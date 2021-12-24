@@ -177,6 +177,38 @@ $orange: #f47b68;
   }
 }
 
+/* MATCHER */
+#matcher {
+  display: flex;
+  justify-content: center;
+
+  #matcherPaper {
+    width: 40%;
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 4rem 3rem 4rem;
+  }
+
+  .matcherRow {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    text-align: left;
+    // justify-content: right;
+  }
+
+  .matchChip {
+    margin: .2rem;
+  }
+
+  .matchBtn {
+    // border-radius: 50;
+    margin: 1.5rem .5rem -1rem .5rem;
+    font-size: 2.5rem;
+  }
+}
 /* SIDEBARS */
 .left-sidebar,
 .right-sidebar {
