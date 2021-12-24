@@ -1,10 +1,11 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
-import { Paper, Chip, IconButton, Typography } from '@mui/material';
+import { Paper, Chip, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ThumbUpAltRoundedIcon from '@mui/icons-material/ThumbUpAltRounded';
 import ThumbDownAltRoundedIcon from '@mui/icons-material/ThumbDownAltRounded';
+import alex from '../../img/alex.jpeg';
 
 const theme = createTheme({
   palette: {
@@ -47,8 +48,10 @@ const Matcher = () => {
         }}
       >
         <ThemeProvider theme={theme}>
-          <Typography variant="h4">{username}</Typography>
-          <Typography variant="h6">IMAGE GOES HERE</Typography>
+          {/* <Typography variant="h4">{username}</Typography>
+          <div className="matchImg">
+            <img src={alex} alt="User Image" />
+          </div>
           <Typography variant="h6" style={{ textAlign: 'left' }}>Interests:</Typography>
           <div className="matcherRow">
             {selected.map(interest => {
@@ -57,22 +60,60 @@ const Matcher = () => {
             })}
           </div>
           <div style={{ height: '1rem' }} />
-            <Typography variant="h6" style={{ textAlign: 'left' }}>Bio:</Typography>
-            <Typography style={{ textAlign: 'left' }}>{bio}</Typography>
+          <Typography variant="h6" style={{ textAlign: 'left' }}>Bio:</Typography>
+          <Typography style={{ textAlign: 'left' }}>{bio}</Typography>
           <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'center' }}>
-          <IconButton
-            className="matchBtn"
-            size="large"
-            color="secondary">
-            <ThumbDownAltRoundedIcon fontSize="inherit" />
-          </IconButton>
-          <IconButton
-            className="matchBtn"
-            size="large"
-            color="primary"
-            onClick={getRandomUser}>
-            <ThumbUpAltRoundedIcon fontSize="inherit" />
-          </IconButton>
+            <IconButton
+              className="matchBtn"
+              size="large"
+              color="secondary">
+              <ThumbDownAltRoundedIcon fontSize="inherit" />
+            </IconButton>
+            <IconButton
+              className="matchBtn"
+              size="large"
+              color="primary"
+              onClick={getRandomUser}>
+              <ThumbUpAltRoundedIcon fontSize="inherit" />
+            </IconButton>
+          </div> */}
+          <Card height="100%">
+            <CardMedia
+              component="img"
+              maxheight="300"
+              minheight="150"
+              image={alex}
+              alt="user image"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {username}
+              </Typography>
+              <Typography variant="h6" style={{ textAlign: 'left' }}>Interests:</Typography>
+              <div style={{ textAlign: 'left', marginBottom: '1rem' }}>
+              {selected.map(interest => {
+                return <Chip className="matchChip" variant="outlined" label={interest} color="default" key={interest}>{interest}
+                </Chip>
+              })}
+              </div>
+              <Typography variant="h6" style={{ textAlign: 'left' }}>Bio:</Typography>
+              <Typography style={{ textAlign: 'left' }}>{bio}</Typography>
+            </CardContent>
+          </Card>
+          <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap', justifyContent: 'center' }}>
+            <IconButton
+              className="matchBtn"
+              size="large"
+              color="secondary">
+              <ThumbDownAltRoundedIcon fontSize="inherit" />
+            </IconButton>
+            <IconButton
+              className="matchBtn"
+              size="large"
+              color="primary"
+              onClick={getRandomUser}>
+              <ThumbUpAltRoundedIcon fontSize="inherit" />
+            </IconButton>
           </div>
         </ThemeProvider>
       </Paper>

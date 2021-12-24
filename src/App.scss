@@ -144,7 +144,7 @@ $orange: #f47b68;
 
   #profilePaper {
     width: 60%;
-    margin-top: 10%;
+    margin-top: 5%;
     display: flex;
     flex-direction: column;
     padding: 2rem 4rem 3rem 4rem;
@@ -184,11 +184,16 @@ $orange: #f47b68;
 
   #matcherPaper {
     width: 40%;
-    margin-top: 10%;
+    margin-top: 5%;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     text-align: center;
-    padding: 2rem 4rem 3rem 4rem;
+    padding: 4rem;
+  }
+
+  .matchImgContainer {
+    display: flex;
   }
 
   .matcherRow {
@@ -196,16 +201,16 @@ $orange: #f47b68;
     justify-content: left;
     flex-wrap: wrap;
     text-align: left;
-    // justify-content: right;
   }
 
   .matchChip {
     margin: .2rem;
+    text-align: left;
   }
 
   .matchBtn {
     // border-radius: 50;
-    margin: 1.5rem .5rem -1rem .5rem;
+    margin: 1.5rem .5rem -2rem .5rem;
     font-size: 2.5rem;
   }
 }
