@@ -31,7 +31,7 @@ const MessageStream = (props) => {
           {messages.map((msg, idx) => {
             return (
               <p className="myChatMessage" key={idx}>
-                {`${msg}`}
+                {`${msg.content}`}
               </p>
             );
           })}

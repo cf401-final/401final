@@ -1,15 +1,21 @@
 import React, { useContext } from 'react';
 import { Paper, InputBase } from '@mui/material';
 import { SocketContext } from '../../../context/socket';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const MessageBar = () => {
   const { socket, currentRoom } = useContext(SocketContext);
+  const { user } = useAuth0();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    let message = e.target.message.value;
-    socket.emit('message', { message, room: currentRoom });
-
+    let content = e.target.message.value;
+    try {
+      socket.emit('message', { content, roomname: currentRoom, username: user.nickname });
+    } catch(err) {
+      console.log(err)
+    }
+    
     e.target.message.value = '';
   };
 

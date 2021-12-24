@@ -10,13 +10,14 @@ let initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case ADD_MESSAGE_TO_ROOM:
-      if (state.rooms.has(action.payload.room)) {
-        state.rooms.set(action.payload.room, [
-          ...state.rooms.get(action.payload.room),
-          action.payload.message,
+      console.log(action.payload)
+      if (state.rooms.has(action.payload.roomname)) {
+        state.rooms.set(action.payload.roomname, [
+          ...state.rooms.get(action.payload.roomname),
+          action.payload,
         ]);
       } else {
-        state.rooms.set(action.payload.room, [action.payload.message]);
+        state.rooms.set(action.payload.roomname, [action.payload]);
       }
       return state;
     case SET_ROOMS:

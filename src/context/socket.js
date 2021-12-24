@@ -12,7 +12,7 @@ const SocketProvider = (props) => {
 
   useEffect(() => {
     function listener(data) {
-      props.addMessageToRoom({ room: data.room, message: data.message });
+      props.addMessageToRoom(data);
     }
     socket.on('message', listener);
 
