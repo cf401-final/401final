@@ -24,7 +24,7 @@ const Landing = () => {
         <h1>Welcome to Jangle.</h1>
         {isAuthenticated ? (
           <>
-            <Typography className="letterSpacing" variant="h5">
+            <Typography className="letterSpacing" variant="h6">
               Let&apos;s get started! What would you like to do?
             </Typography>
             <Link to="/profile">
@@ -63,7 +63,7 @@ const Landing = () => {
           </>
         ) : (
           <>
-            <Typography className="letterSpacing" variant="h5">
+            <Typography className="letterSpacing" variant="h6">
               A place where you can find your community and connect with others.
             </Typography>
             <Typography className="letterSpacing">
