@@ -75,19 +75,27 @@ $orange: #EE8585;
   filter: invert(1);
 }
 
-/* MAIN */
-.main-container {
+.primary-container {
   display: flex;
   flex-direction: column;
   flex-grow: 12;
   min-width: 400px;
-  height: 100vh;
   background-color: $md-dk-gray;
   color: white;
   padding: .6rem;
   // padding-right: 0;
   padding-bottom: 2rem;
+  height: 100vh;
+}
+
+/* MAIN */
+.main-container {
+  @extend .primary-container;
   overflow: auto;
+}
+
+.main-container-matcher {
+  @extend .primary-container;
 }
 
 .roomTitle {
@@ -281,10 +289,12 @@ $orange: #EE8585;
 #matcher {
   display: flex;
   justify-content: center;
+  max-height: 140vh;
 
   #matcherPaper {
     width: 50%;
-    margin: 5% 0 15% 0;
+    max-height: 50%;
+    margin: 2% 0 15% 0;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -294,7 +304,11 @@ $orange: #EE8585;
 
   #matchCard {
     overflow: auto;
-    height: 100%;
+    height: inherit;
+  }
+
+  #matcherImg {
+    max-height: 60%;
   }
 
   .matchImgContainer {
