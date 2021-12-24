@@ -77,11 +77,11 @@ const Matcher = () => {
               <ThumbUpAltRoundedIcon fontSize="inherit" />
             </IconButton>
           </div> */}
-          <Card height="100%">
+          <Card id="matchCard">
             <CardMedia
               component="img"
-              maxheight="300"
-              minheight="150"
+              maxheight="200"
+              minheight="100"
               image={alex}
               alt="user image"
             />
