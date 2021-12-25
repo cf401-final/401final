@@ -68,7 +68,6 @@ const CreateRoomForm = ({ handleClose }) => {
           <InputBase
             name="roomname"
             placeholder="Room Name"
-            // variant="standard"
             sx={{ color: 'white' }}
             required
           />
@@ -78,7 +77,6 @@ const CreateRoomForm = ({ handleClose }) => {
             name="password"
             placeholder="Password (optional)"
             type="password"
-            // variant="standard"
             sx={{ color: 'white'}}
           />
         </MenuItem>

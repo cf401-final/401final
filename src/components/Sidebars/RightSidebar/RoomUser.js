@@ -31,11 +31,13 @@ const UserButton = ({ username }) => {
         swal({
           title: 'Hold up...',
           text: err.response.data.err,
+          dangerMode: true,
         });
       } else {
         swal({
           title: "That didn't work out.",
           text: `The request failed to be completed`,
+          dangerMode: true,
         });
       }
     }
@@ -46,6 +48,7 @@ const UserButton = ({ username }) => {
       swal({
         title: 'Hold up...',
         text: 'You are trying to start a 1-1 conversation with yourself. Try someone else!',
+        dangerMode: true,
       });
       return;
     }

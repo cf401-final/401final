@@ -32,9 +32,7 @@ const CreateRoom = () => {
             <IconButton
               onClick={handleClick}
               size="small"
-              id="createRoomBtn"
-              // sx={{ color: 'white' }}
-            >
+              id="createRoomBtn"            >
               <AddCircleOutlineIcon />
             </IconButton>
           </Tooltip>
