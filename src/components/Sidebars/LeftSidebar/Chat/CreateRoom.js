@@ -28,14 +28,11 @@ const CreateRoom = () => {
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <ThemeProvider theme={theme}>
-          <Tooltip title="Create a Room">
+          <Tooltip title="Create Room">
             <IconButton
               onClick={handleClick}
               size="small"
-              className="createRoomBtn"
-              color="primary"
-              sx={{ color: 'white' }}
-            >
+              id="createRoomBtn"            >
               <AddCircleOutlineIcon />
             </IconButton>
           </Tooltip>
@@ -48,6 +45,7 @@ const CreateRoom = () => {
         PaperProps={{
           elevation: 0,
           sx: {
+            backgroundColor: '#474b52',
             overflow: 'visible',
             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
             mt: 1.5,
@@ -62,10 +60,10 @@ const CreateRoom = () => {
               display: 'block',
               position: 'absolute',
               top: 0,
-              left: 10,
+              right: 12,
               width: 10,
               height: 10,
-              bgcolor: 'background.paper',
+              bgcolor: '#474b52',
               transform: 'translateY(-50%) rotate(45deg)',
               zIndex: 0,
             },

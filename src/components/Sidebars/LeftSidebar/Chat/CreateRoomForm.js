@@ -1,15 +1,25 @@
 import React, { useContext } from 'react';
 import {
   MenuItem,
-  TextField,
+  InputBase,
   Button,
   Typography,
   Divider,
 } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CheckIcon from '@mui/icons-material/Check';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import swal from 'sweetalert';
 import { SocketContext } from '../../../../context/socket';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#7db1b1',
+    },
+  },
+});
 
 const CreateRoomForm = ({ handleClose }) => {
   const { user } = useAuth0();
@@ -48,38 +58,42 @@ const CreateRoomForm = ({ handleClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Typography variant="subtitle1" sx={{ marginLeft: '10px' }}>
-        New Room Details
-      </Typography>
-      <Divider />
-      <MenuItem>
-        <TextField
-          name="roomname"
-          label="Room Name"
-          variant="standard"
-          required
-        />
-      </MenuItem>
-      <MenuItem>
-        <TextField
-          name="password"
-          label="Password (optional)"
-          type="password"
-          variant="standard"
-        />
-      </MenuItem>
-      <Button
-        variant="contained"
-        size="small"
-        id="room-submit-btn"
-        color="primary"
-        type="submit"
-        sx={{ marginLeft: '20px' }}
-      >
-        Create
-      </Button>
-    </form>
+    <ThemeProvider theme={theme}>
+      <form id="createRoomForm" onSubmit={handleSubmit}>
+        <Typography variant="subtitle1" sx={{ marginLeft: '10px' }}>
+          New Room Details
+        </Typography>
+        <Divider style={{ backgroundColor: '#99aab5' }} />
+        <MenuItem>
+          <InputBase
+            name="roomname"
+            placeholder="Room Name"
+            sx={{ color: 'white' }}
+            required
+          />
+        </MenuItem>
+        <MenuItem>
+          <InputBase
+            name="password"
+            placeholder="Password (optional)"
+            type="password"
+            sx={{ color: 'white'}}
+          />
+        </MenuItem>
+        <div style={{display: 'flex', justifyContent: 'center' }}>
+        <Button
+          variant="contained"
+          size="small"
+          id="room-submit-btn"
+          color="primary"
+          endIcon={<CheckIcon />}
+          type="submit"
+        >
+          Create
+        </Button>
+        </div>
+      </form>
+    </ThemeProvider>
   );
 };
 

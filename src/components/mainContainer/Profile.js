@@ -18,6 +18,9 @@ const theme = createTheme({
     primary: {
       main: '#7289da',
     },
+    secondary: {
+      main: '#7db1b1',
+    },
   },
 });
 
@@ -105,6 +108,7 @@ const Profile = () => {
       title: 'Success!',
       text: 'Your profile has been updated. Enjoy socializing!',
       icon: 'success',
+      // className: 'swal-button--confirm',
     });
   };
 
@@ -164,7 +168,7 @@ const Profile = () => {
                 className="updateBtn"
                 size="large"
                 variant="contained"
-                color="primary"
+                color="secondary"
                 endIcon={<CheckIcon />}
                 type="submit"
               >
