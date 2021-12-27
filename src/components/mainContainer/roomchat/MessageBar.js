@@ -22,30 +22,32 @@ const MessageBar = () => {
 
     e.target.message.value = '';
   };
-
-  return (
-    <div className="message-bar">
-      <Paper
-        className="msgPaper"
-        onSubmit={handleSubmit}
-        component="form"
-        sx={{
-          p: '2px 4px',
-          display: 'flex',
-          alignItems: 'center',
-          backgroundColor: '#474b52',
-        }}
-      >
-        <InputBase
-          className="msgInput"
-          name="message"
-          sx={{ ml: 1, flex: 1, color: 'white' }}
-          placeholder="Message"
-          inputProps={{ 'aria-label': 'send message' }}
-        />
-      </Paper>
-    </div>
-  );
+  if(currentRoom) {
+    return (
+      <div className="message-bar">
+        <Paper
+          className="msgPaper"
+          onSubmit={handleSubmit}
+          component="form"
+          sx={{
+            p: '2px 4px',
+            display: 'flex',
+            alignItems: 'center',
+            backgroundColor: '#474b52',
+          }}
+        >
+          <InputBase
+            className="msgInput"
+            name="message"
+            sx={{ ml: 1, flex: 1, color: 'white' }}
+            placeholder="Message"
+            inputProps={{ 'aria-label': 'send message' }}
+          />
+        </Paper>
+      </div>
+    );
+  }
+  return null;
 };
 
 export default MessageBar;

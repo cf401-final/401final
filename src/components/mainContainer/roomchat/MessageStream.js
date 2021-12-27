@@ -46,7 +46,7 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
 
   return (
     <>
-      {messages.length >= 1 && (
+      {messages && messages.length >= 1 && (
         <div className="message-container">
           {messages.map((msg, idx) => {
             return (
@@ -57,7 +57,10 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
                       ? 'myMessageRow'
                       : 'theirMessageRow'
                   }
-                >
+                  >
+                  {/* <Tooltip title={`${username}`}>
+                    <Avatar className="chatAvatar" alt={user.nickname} src={user.picture} />
+                  </Tooltip> */}
                   <p
                     className={
                       msg.username === username
@@ -68,9 +71,6 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
                   >
                     {`${msg.content}`}
                   </p>
-                  {/* <Tooltip title={`${username}`}>
-                    <Avatar className="chatAvatar" alt={user.nickname} src={user.picture} />
-                  </Tooltip> */}
                 </div>
                 <Typography
                   className={
