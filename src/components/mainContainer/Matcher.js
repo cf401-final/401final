@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import swal from 'sweetalert';
@@ -15,6 +15,7 @@ import {
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ThumbUpAltRoundedIcon from '@mui/icons-material/ThumbUpAltRounded';
 import ThumbDownAltRoundedIcon from '@mui/icons-material/ThumbDownAltRounded';
+import { SocketContext } from '../../context/socket';
 
 const theme = createTheme({
   palette: {
@@ -29,6 +30,7 @@ const theme = createTheme({
 
 const Matcher = () => {
   const { user } = useAuth0();
+  const { setCurrentRoom } = useContext(SocketContext);
 
   const [selected, setSelected] = useState([]);
   const [bio, setBio] = useState('');
@@ -48,6 +50,11 @@ const Matcher = () => {
 
     try {
       await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body);
+      swal({
+        title: "User Liked!",
+        text: `This user has been added to your 1-1 room list.`
+      });
+      setCurrentRoom(body.roomname);
     } catch (err) {
       if (err.response.status === 409) {
         swal({
