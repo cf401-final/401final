@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Paper,
   Typography,
@@ -42,9 +42,11 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
 
 const Profile = () => {
   const { user } = useAuth0();
-  const [selected, setSelected] = React.useState(false);
-  const [bio, setBio] = React.useState('');
-
+  const [selected, setSelected] = useState(false);
+  const [bio, setBio] = useState('');
+  const [currentFile, setCurrentFile] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
+  
   const interests = [
     { label: 'Music', value: 'music' },
     { label: 'Crafts & DIY', value: 'craftsdiy' },
@@ -84,6 +86,7 @@ const Profile = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log(e.target.profileImg);
     e.preventDefault();
     let body = {
       interests: selected,
@@ -112,6 +115,11 @@ const Profile = () => {
     });
   };
 
+  const selectFile = (e) => {
+    setCurrentFile(e.target.files[0]);
+    setPreviewImage(URL.createObjectURL(e.target.files[0]));
+  }
+
   return (
     <div id="profile">
       <ThemeProvider theme={theme}>
@@ -123,32 +131,62 @@ const Profile = () => {
             flexWrap: 'wrap',
           }}
         >
-          <Typography variant="h5">Profile</Typography>
-          <Typography variant="h6">
-            IMAGE GOES HERE
-            <p>Choose Some Interests:</p>
-          </Typography>
-          <form onSubmit={handleSubmit}>
-            <StyledToggleButtonGroup
-              id="toggleGroup"
-              size="small"
-              value={selected}
-              aria-label="text formatting"
-              onChange={handleSelected}
-            >
-              {interests.map((interest) => {
-                return (
-                  <ToggleButton
-                    key={interest.value}
-                    className="interestBtn"
-                    color="primary"
-                    value={interest.value}
-                    aria-label={interest.value}
-                  >
-                    {interest.label}
-                  </ToggleButton>
-                );
-              })}
+          <Typography variant="h5" mb={2}>Profile</Typography>     
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="profileImg">
+                <input
+                  id="profileImg"
+                  name="profileImg"
+                  style={{ display: 'none' }}
+                  type="file"
+                  accept="image/*"
+                  onChange={selectFile} />
+                <Button
+                  className="btn-choose"
+                  variant="outlined"
+                  component="span" >
+                  Choose a Profile Image
+                </Button>
+              </label>
+              <Button
+                className="btn-upload"
+                color="primary"
+                variant="contained"
+                component="span"
+                disabled={!currentFile}
+              >
+                Upload
+              </Button>
+              <div className="file-name">
+                {currentFile ? currentFile.name : null}
+              </div>
+
+              {previewImage && (
+                <div style={{ alignSelf: 'center', }}>
+                  <img style={{ width: '400px', height: '250px' }} src={previewImage} alt="uploaded profile image" />
+                </div>
+              )}
+              <p>Choose Some Interests:</p>
+              <StyledToggleButtonGroup
+                id="toggleGroup"
+                size="small"
+                value={selected}
+                aria-label="text formatting"
+                onChange={handleSelected}
+              >
+                {interests.map((interest) => {
+                  return (
+                    <ToggleButton
+                      key={interest.value}
+                      className="interestBtn"
+                      color="primary"
+                      value={interest.value}
+                      aria-label={interest.value}
+                    >
+                      {interest.label}
+                    </ToggleButton>
+                  );
+                })}
             </StyledToggleButtonGroup>
             <TextField
               color="primary"
