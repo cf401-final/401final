@@ -8,13 +8,18 @@ export const socket = io.connect(process.env.REACT_APP_SOCKET_SERVER);
 export const SocketContext = createContext();
 
 const SocketProvider = (props) => {
-  let [currentRoom, setCurrentRoom] = useState('general');
+  let [currentRoom, setCurrentRoom] = useState(null);
 
   useEffect(() => {
-    socket.on('message', data => {
-      props.addMessageToRoom({room: data.room, message: data.message});
-    });
-  }, [socket]);
+    function listener(data) {
+      props.addMessageToRoom(data);
+    }
+    socket.on('message', listener);
+
+    return function cleanup() {
+      socket.off('message', listener);
+    };
+  }, [props]);
 
   const values = {
     currentRoom,
@@ -29,8 +34,8 @@ const SocketProvider = (props) => {
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  addMessageToRoom: (room) => dispatch(addMessageToRoom(room))
+const mapDispatchToProps = (dispatch) => ({
+  addMessageToRoom: (room) => dispatch(addMessageToRoom(room)),
 });
 
 export default connect(null, mapDispatchToProps)(SocketProvider);

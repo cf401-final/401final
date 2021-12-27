@@ -1,46 +1,105 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { SocketContext } from '../../../context/socket';
 import { connect } from 'react-redux';
+import axios from 'axios';
+import { setRoomMessages } from '../../../store/rooms';
+import { useAuth0 } from '@auth0/auth0-react';
+import { Typography } from '@mui/material';
 
-const MessageStream = (props) => {
+const MessageStream = ({ setRoomMessages, rooms, username }) => {
+  const { user } = useAuth0();
+  username = user.nickname;
   const { socket, currentRoom } = useContext(SocketContext);
   let [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    socket.on('message', () => {
-      setMessages(props.rooms.get(currentRoom));
-    })
-  }, [socket, props.rooms, messages]);
+    function listener() {
+      setMessages(rooms.get(currentRoom));
+    }
+    socket.on('message', listener);
+
+    return function cleanup() {
+      socket.off('message', listener);
+    };
+  }, [socket, rooms, messages, currentRoom]);
 
   useEffect(() => {
-    if(props.rooms.has(currentRoom)) {
-      setMessages(props.rooms.get(currentRoom));
+    (async () => {
+      try {
+        let res = await axios.get(
+          `${process.env.REACT_APP_API_SERVER}/messages/${currentRoom}`
+        );
+        if (res.data.length > 0)
+          setRoomMessages({ messages: res.data, roomname: currentRoom });
+        setMessages(rooms.get(currentRoom));
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, [currentRoom, rooms, setRoomMessages]);
+
+  useEffect(() => {
+    if (rooms.has(currentRoom)) {
+      setMessages(rooms.get(currentRoom));
     }
-  }, [currentRoom]);
+  }, [currentRoom, rooms]);
 
   return (
     <>
-      {messages.length >= 1 && (
+      {messages && messages.length >= 1 && (
         <div className="message-container">
-          {/* <p className="theirChatMessage">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum!</p> */}
           {messages.map((msg, idx) => {
             return (
-              <p className="myChatMessage" key={idx}>
-                {`${msg}`}
-              </p>
+              <React.Fragment key={idx}>
+                <div
+                  className={
+                    msg.username === username
+                      ? 'myMessageRow'
+                      : 'theirMessageRow'
+                  }
+                  >
+                  {/* <Tooltip title={`${username}`}>
+                    <Avatar className="chatAvatar" alt={user.nickname} src={user.picture} />
+                  </Tooltip> */}
+                  <p
+                    className={
+                      msg.username === username
+                        ? 'myChatMessage'
+                        : 'theirChatMessage'
+                    }
+                    key={idx}
+                  >
+                    {`${msg.content}`}
+                  </p>
+                </div>
+                <Typography
+                  className={
+                    msg.username === username
+                      ? 'myChatTimeStamp'
+                      : 'theirChatTimeStamp'
+                  }
+                  variant="caption"
+                  key={idx}
+                >
+                  {`${msg.timeSentFormatted}`}
+                </Typography>
+              </React.Fragment>
             );
           })}
-          {/* <p className="theirChatMessage">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum!</p> */}
         </div>
       )}
     </>
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    rooms: state.rooms.rooms
-  }
+    rooms: state.rooms.rooms,
+  };
 };
 
-export default connect(mapStateToProps)(MessageStream);
+const mapDispatchToProps = (dispatch) => ({
+  setRoomMessages: (data) => dispatch(setRoomMessages(data)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MessageStream);

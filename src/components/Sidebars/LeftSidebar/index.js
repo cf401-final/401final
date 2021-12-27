@@ -1,6 +1,6 @@
 import React from 'react';
-import RoomChatLeftSidebar from './roomChatLeftSidebar';
-import MatcherLeftSidebar from './roomChatLeftSidebar/MatcherSidebar';
+import ChatSidebar from './Chat';
+import MatcherSidebar from './Matcher/MatcherSidebar';
 
 import { Route, Routes } from 'react-router-dom';
 
@@ -8,9 +8,10 @@ const LeftSidebar = () => {
   return (
     <div className="left-sidebar" id="resizable" elevation={10}>
       <Routes>
-        <Route path="/roomchat" element={<RoomChatLeftSidebar />}></Route>
-        <Route path="/matcher" element={<MatcherLeftSidebar />}></Route>
+        <Route path="/roomchat" element={<ChatSidebar />} />
+        <Route path="/matcher" element={<MatcherSidebar />} />
       </Routes>
+      <p className="footer">© Jangle 2021</p>
     </div>
   );
 };

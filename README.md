@@ -10,9 +10,9 @@
 - Ryan Emmans
 - Stefanie Riehle
 
-<!-- ## Usage -->
+## Usage
 
-<!-- - This project is deployed on Heroku [here](). -->
+- This project is deployed on Heroku [here](https://jangle-app.herokuapp.com/).
 
 ## Project Management
 
