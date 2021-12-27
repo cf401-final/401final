@@ -13,9 +13,7 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
   let [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    console.log("in use effect for deps [socket, rooms, messages, currentRoom]", socket, currentRoom)
     function listener() {
-      console.log("message")
       setMessages(rooms.get(currentRoom));
     }
     socket.on('message', listener);
@@ -59,7 +57,10 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
                       ? 'myMessageRow'
                       : 'theirMessageRow'
                   }
-                >
+                  >
+                  {/* <Tooltip title={`${username}`}>
+                    <Avatar className="chatAvatar" alt={user.nickname} src={user.picture} />
+                  </Tooltip> */}
                   <p
                     className={
                       msg.username === username
@@ -70,9 +71,6 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
                   >
                     {`${msg.content}`}
                   </p>
-                  {/* <Tooltip title={`${username}`}>
-                    <Avatar className="chatAvatar" alt={user.nickname} src={user.picture} />
-                  </Tooltip> */}
                 </div>
                 <Typography
                   className={

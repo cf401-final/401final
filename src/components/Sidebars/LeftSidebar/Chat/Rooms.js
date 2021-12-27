@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { TreeView } from '@mui/lab';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -12,6 +13,14 @@ import Public from './Public';
 import Private from './Private';
 import DirectMessage from './DirectMessage';
 import CreateRoom from './CreateRoom';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#000',
+    },
+  },
+});
 
 const Rooms = (props) => {
   const { socket, setCurrentRoom, currentRoom } = useContext(SocketContext);
@@ -70,25 +79,28 @@ const Rooms = (props) => {
 
   return (
     <div className="rooms-container">
-      <CreateRoom />
-      <TreeView
-        defaultExpanded={['0', '1', '2']}
-        mt={3}
-        aria-label="room navigator"
-        defaultCollapseIcon={<ExpandMoreIcon />}
-        defaultExpandIcon={<ChevronRightIcon />}
-        sx={{ height: 240, flexGrow: 1, maxWidth: 400 }}
-      >
-        <Public joinRoom={joinRoom} publicRooms={publicRooms} />
-        <Private joinRoom={joinRoom} privateRooms={privateRooms} />
-        {directMsgRooms.length > 0 && (
-          <DirectMessage
-            startNodeId="2"
-            joinRoom={joinRoom}
-            directMsgRooms={directMsgRooms}
-          />
-        )}
-      </TreeView>
+      <ThemeProvider theme={theme}>
+        <CreateRoom />
+        <TreeView
+          color="primary"
+          defaultExpanded={['0', '1', '2']}
+          mt={3}
+          aria-label="room navigator"
+          defaultCollapseIcon={<ExpandMoreIcon />}
+          defaultExpandIcon={<ChevronRightIcon />}
+          sx={{ height: 240, flexGrow: 1, maxWidth: 400 }}
+        >
+          <Public joinRoom={joinRoom} publicRooms={publicRooms} />
+          <Private joinRoom={joinRoom} privateRooms={privateRooms} />
+          {directMsgRooms.length > 0 && (
+            <DirectMessage
+              startNodeId="2"
+              joinRoom={joinRoom}
+              directMsgRooms={directMsgRooms}
+            />
+          )}
+        </TreeView>
+      </ThemeProvider>
     </div>
   );
 };
