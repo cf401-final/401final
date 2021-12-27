@@ -91,7 +91,9 @@ const Profile = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("image", currentFile);
+    if(currentFile) 
+      formData.append("image", currentFile);
+      
     formData.append("interests", selected);
     formData.append("bio", bio);
     formData.append("username", user.nickname);
@@ -108,7 +110,6 @@ const Profile = () => {
       `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}` :  
       `${process.env.REACT_APP_API_SERVER}/profiles`;
 
-    console.log(method, url)
     await axios({
       method,
       url,
