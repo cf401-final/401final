@@ -75,7 +75,7 @@ const Profile = () => {
         if(res.data[0]) {
           setSelected(res.data[0].interests);
           setBio(res.data[0].bio);
-          setPreviewImage(res.data[0].image.url);
+          res.data[0].image?.url && setPreviewImage(res.data[0].image.url);
         }
       } catch (err) {
         console.log(err);
