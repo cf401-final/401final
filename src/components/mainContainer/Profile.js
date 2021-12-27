@@ -75,7 +75,7 @@ const Profile = () => {
         if(res.data[0]) {
           setSelected(res.data[0].interests);
           setBio(res.data[0].bio);
-          setPreviewImage(res.data[0].image);
+          setPreviewImage(res.data[0].image.url);
         }
       } catch (err) {
         console.log(err);
@@ -173,7 +173,7 @@ const Profile = () => {
 
               {previewImage && (
                 <div style={{ alignSelf: 'center', }}>
-                  <img style={{ width: '400px', height: '250px' }} src={previewImage} alt="uploaded profile image" />
+                  <img style={{ objectFit: 'contain', width: '250px', height: '250px', alignSelf: 'center' }} src={previewImage} alt="uploaded profile image" />
                 </div>
               )}
               <p>Choose Some Interests:</p>
