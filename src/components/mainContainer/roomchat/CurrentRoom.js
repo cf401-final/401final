@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Typography } from '@mui/material';
+import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { SocketContext } from '../../../context/socket';
 
 const CurrentRoom = () => {
@@ -16,8 +17,8 @@ const CurrentRoom = () => {
   } 
   return (
     <div>
-      <Typography variant="h4">
-        Please select a Room from the menu on the left
+      <Typography className="letterSpacing" variant="h6">
+        <ArrowBackRoundedIcon id="leftArrow" />Please select a Room.
       </Typography>
     </div>
   );
