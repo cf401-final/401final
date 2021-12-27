@@ -80,9 +80,7 @@ const Matcher = () => {
                       label={interest}
                       color="default"
                       key={interest}
-                    >
-                      {interest}
-                    </Chip>
+                    />
                   );
                 })}
               </div>
