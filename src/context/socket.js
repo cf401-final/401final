@@ -8,7 +8,7 @@ export const socket = io.connect(process.env.REACT_APP_SOCKET_SERVER);
 export const SocketContext = createContext();
 
 const SocketProvider = (props) => {
-  let [currentRoom, setCurrentRoom] = useState('general');
+  let [currentRoom, setCurrentRoom] = useState(null);
 
   useEffect(() => {
     function listener(data) {

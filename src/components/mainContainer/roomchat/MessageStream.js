@@ -13,7 +13,9 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
   let [messages, setMessages] = useState([]);
 
   useEffect(() => {
+    console.log("in use effect for deps [socket, rooms, messages, currentRoom]", socket, currentRoom)
     function listener() {
+      console.log("message")
       setMessages(rooms.get(currentRoom));
     }
     socket.on('message', listener);
@@ -46,7 +48,7 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
 
   return (
     <>
-      {messages.length >= 1 && (
+      {messages && messages.length >= 1 && (
         <div className="message-container">
           {messages.map((msg, idx) => {
             return (
