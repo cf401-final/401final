@@ -42,7 +42,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
 
 const Profile = () => {
   const { user } = useAuth0();
-  const [selected, setSelected] = useState(false);
+  const [selected, setSelected] = useState();
   const [bio, setBio] = useState('');
   const [currentFile, setCurrentFile] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
@@ -72,9 +72,11 @@ const Profile = () => {
         let res = await axios.get(
           `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`
         );
-        console.log(res.data[0]);
-        setSelected(res.data[0].interests);
-        setBio(res.data[0].bio);
+        if(res.data[0]) {
+          setSelected(res.data[0].interests);
+          setBio(res.data[0].bio);
+          setPreviewImage(res.data[0].image);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -86,27 +88,34 @@ const Profile = () => {
   };
 
   const handleSubmit = async (e) => {
-    console.log(e.target.profileImg);
     e.preventDefault();
-    let body = {
-      interests: selected,
-      bio: e.target.bio.value,
-      username: user.nickname,
-    };
 
+    const formData = new FormData();
+    formData.append("image", currentFile);
+    formData.append("interests", selected);
+    formData.append("bio", bio);
+    formData.append("username", user.nickname);
+
+    let method;
+    let url;
     let res = await axios.get(
       `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`
     );
-    if (res.data.length > 0) {
-      //if there is a user profile already, update it
-      axios.put(
-        `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`,
-        body
-      );
-    } else {
-      // else create a new one
-      axios.post(`${process.env.REACT_APP_API_SERVER}/profiles`, body);
-    }
+
+    //if there is a user profile already update it, else create a new one
+    method = res.data.length > 0 ? 'put' : 'post';
+    url = res.data.length > 0 ?  
+      `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}` :  
+      `${process.env.REACT_APP_API_SERVER}/profiles`;
+
+    console.log(method, url)
+    await axios({
+      method,
+      url,
+      data: formData,
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
     swal({
       title: 'Success!',
       text: 'Your profile has been updated. Enjoy socializing!',
@@ -140,7 +149,8 @@ const Profile = () => {
                   style={{ display: 'none' }}
                   type="file"
                   accept="image/*"
-                  onChange={selectFile} />
+                  onChange={selectFile} 
+                />
                 <Button
                   className="btn-choose"
                   variant="outlined"
@@ -194,6 +204,7 @@ const Profile = () => {
               name="bio"
               label="Enter a Bio:"
               defaultValue={bio}
+              onChange={(e) => setBio(e.target.value)}
               rows={5}
               sx={{ width: '100%' }}
               placeholder="Tell other users about yourself..."
