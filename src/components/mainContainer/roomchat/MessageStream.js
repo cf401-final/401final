@@ -61,11 +61,12 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
                   {/* <Tooltip title={`${username}`}>
                     <Avatar className="chatAvatar" alt={user.nickname} src={user.picture} />
                   </Tooltip> */}
-                  <p
-                    style={{ fontWeight: 700, marginRight: '20px', justifyContent: msg.username !== username ? 'flexStart' : 'flexEnd'}}
+                  <Typography
+                    variant="body2"
+                    style={{ fontWeight: 700, width: '300px', margin: '-5px -300px 0 0', justifyContent: msg.username !== username ? 'flexStart' : 'flexEnd', color: msg.username !== username ? 'white' : '#36393f', fontSize: msg.username !== username ? '.9rem' : '0.01rem' }}
                   >
                     {msg.username}
-                  </p>
+                  </Typography>
                   <p
                     className={
                       msg.username === username
@@ -83,6 +84,7 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
                       ? 'myChatTimeStamp'
                       : 'theirChatTimeStamp'
                   }
+                  style={{marginBottom: msg.username !== username ? '22px' : '-18px', }}
                   variant="caption"
                   key={idx}
                 >
