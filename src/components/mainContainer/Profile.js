@@ -46,7 +46,7 @@ const Profile = () => {
   const [bio, setBio] = useState('');
   const [currentFile, setCurrentFile] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
-  
+
   const interests = [
     { label: 'Music', value: 'music' },
     { label: 'Crafts & DIY', value: 'craftsdiy' },
@@ -72,7 +72,7 @@ const Profile = () => {
         let res = await axios.get(
           `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`
         );
-        if(res.data[0]) {
+        if (res.data[0]) {
           setSelected(res.data[0].interests);
           setBio(res.data[0].bio);
           res.data[0].image?.url && setPreviewImage(res.data[0].image.url);
@@ -91,9 +91,9 @@ const Profile = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    if(currentFile) 
+    if (currentFile)
       formData.append("image", currentFile);
-      
+
     formData.append("interests", selected);
     formData.append("bio", bio);
     formData.append("username", user.nickname);
@@ -106,8 +106,8 @@ const Profile = () => {
 
     //if there is a user profile already update it, else create a new one
     method = res.data.length > 0 ? 'put' : 'post';
-    url = res.data.length > 0 ?  
-      `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}` :  
+    url = res.data.length > 0 ?
+      `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}` :
       `${process.env.REACT_APP_API_SERVER}/profiles`;
 
     await axios({
@@ -141,63 +141,65 @@ const Profile = () => {
             flexWrap: 'wrap',
           }}
         >
-          <Typography variant="h5" mb={2}>Profile</Typography>     
-            <form onSubmit={handleSubmit}>
-              <label htmlFor="profileImg">
-                <input
-                  id="profileImg"
-                  name="profileImg"
-                  style={{ display: 'none' }}
-                  type="file"
-                  accept="image/*"
-                  onChange={selectFile} 
-                />
-                <Button
-                  className="btn-choose"
-                  variant="outlined"
-                  component="span" >
-                  Choose a Profile Image
-                </Button>
-              </label>
+          <Typography variant="button" mb={2} style={{textAlign: 'center'}}>Profile</Typography>
+          <Typography variant="h6">Name: {user.nickname}</Typography>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="profileImg">
+              <input
+                id="profileImg"
+                name="profileImg"
+                style={{ display: 'none' }}
+                type="file"
+                accept="image/*"
+                onChange={selectFile}
+              />
               <Button
-                className="btn-upload"
-                color="primary"
-                variant="contained"
-                component="span"
-                disabled={!currentFile}
-              >
-                Upload
+                color="secondary"
+                className="btn-choose"
+                variant="outlined"
+                component="span" >
+                Choose a Profile Image
               </Button>
-              <div className="file-name">
-                {currentFile ? currentFile.name : null}
-              </div>
+            </label>
+            <Button
+              className="btn-upload"
+              color="secondary"
+              variant="contained"
+              component="span"
+              disabled={!currentFile}
+            >
+              Upload
+            </Button>
+            <div className="file-name">
+              {currentFile ? currentFile.name : null}
+            </div>
 
-              {previewImage && (
-                <div style={{ alignSelf: 'center', }}>
-                  <img style={{ objectFit: 'contain', width: '250px', height: '250px', alignSelf: 'center' }} src={previewImage} alt="uploaded profile image" />
-                </div>
-              )}
-              <p>Choose Some Interests:</p>
-              <StyledToggleButtonGroup
-                id="toggleGroup"
-                size="small"
-                value={selected}
-                aria-label="text formatting"
-                onChange={handleSelected}
-              >
-                {interests.map((interest) => {
-                  return (
-                    <ToggleButton
-                      key={interest.value}
-                      className="interestBtn"
-                      color="primary"
-                      value={interest.value}
-                      aria-label={interest.value}
-                    >
-                      {interest.label}
-                    </ToggleButton>
-                  );
-                })}
+            {previewImage && (
+              <div className="profileRow">
+                <img id="profileImg" src={previewImage} alt="uploaded profile image" />
+              </div>
+            )}
+            <p>Choose Some Interests:</p>
+            <StyledToggleButtonGroup
+              id="toggleGroup"
+              size="small"
+              value={selected}
+              aria-label="text formatting"
+              onChange={handleSelected}
+            >
+              {interests.map((interest) => {
+                return (
+                  <ToggleButton
+                    key={interest.value}
+                    className="interestBtn"
+                    color="primary"
+                    value={interest.value}
+                    aria-label={interest.value}
+                  >
+                    {interest.label}
+                  </ToggleButton>
+                );
+              })}
             </StyledToggleButtonGroup>
             <TextField
               color="primary"
@@ -213,7 +215,7 @@ const Profile = () => {
               autoFocus
               required
             />
-            <div className="profileRow">
+            <div className="profileRowRight">
               <Button
                 className="updateBtn"
                 size="large"

@@ -7,11 +7,11 @@ const MainContainer = (props) => {
 
   let feature;
   if (location.pathname === '/profile') {
-    feature = 'Profile';
+    feature = '';
   } else if (location.pathname === '/roomchat') {
     feature = 'Room Chat';
   } else if (location.pathname === '/matcher') {
-    feature = 'Social Matcher';
+    feature = '';
   }
 
   return (
