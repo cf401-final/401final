@@ -126,6 +126,7 @@ $orange: #ee8585;
     border-radius: 22px;
     margin: 0.3rem 0.7rem 0.7rem 0;
     width: 170px;
+    padding-top: 6px;
   }
 
   a {
@@ -170,9 +171,20 @@ $orange: #ee8585;
     padding: 3px 12px 0 12px;
   }
 
-  .profileRow {
+  .profileRowRight {
     display: flex;
     justify-content: right;
+  }
+
+  .btn-choose, .btn-upload {
+    border-radius: 20px;
+    margin: 0 .5rem .5rem 0;
+  }
+
+  #profileImg {
+    width: 20vw;
+    border-radius: 5px;
+    box-shadow: 0px 3px 1px -2px rgb(0, 0, 0, 0.2), 0px 2px 2px 0px rgb(0, 0, 0, 0.14), 0px 1px 5px 0px rgb(0, 0, 0, 0.12);
   }
 
   .updateBtn {
@@ -204,6 +216,11 @@ $orange: #ee8585;
 .rooms-container {
   display: flex;
   flex-direction: column;
+}
+
+#leftArrow {
+  font-size: 2.5rem;
+  margin: 0 .5rem -.8rem 0;
 }
 
 .myMessageRow,
@@ -285,19 +302,34 @@ $orange: #ee8585;
 
 /* MATCHER */
 #matcher {
-  display: flex;
+  // display: flex;
   justify-content: center;
-  max-height: 140vh;
+  // max-height: 140vh;
+  overflow: auto;
 
   #matcherPaper {
     width: 50%;
-    max-height: 50%;
-    margin: 2% 0 15% 0;
+    // height: 50%;
+    margin: 2% auto 15% auto;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     text-align: center;
     padding: 4rem;
+  }
+
+  #matchLanding {
+    // width: 100%;
+    // height: 70%;
+    // object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0px 3px 1px -2px rgb(0, 0, 0, 0.2), 0px 2px 2px 0px rgb(0, 0, 0, 0.14), 0px 1px 5px 0px rgb(0, 0, 0, 0.12);
+  }
+
+  #findMatchesBtn {
+    border-radius: 32px;
+    color: white;
+    margin: 2rem 0 -1.5rem 0;
   }
 
   #matchCard {
@@ -306,7 +338,10 @@ $orange: #ee8585;
   }
 
   #matcherImg {
-    max-height: 60%;
+    height: 100%;
+    max-height: 40vh;
+    // object-position: top;
+    object-fit: contain;
   }
 
   .matchImgContainer {
@@ -344,13 +379,25 @@ $orange: #ee8585;
   color: white;
   overflow: auto;
 
-  .matcherBtn {
-    font-family: 'Biryani', sans-serif;
+  .navRow {
+    display: flex;
+    justify-content: center;
+  }
+
+  .navBtn {
+    // font-family: 'Biryani', sans-serif;
+    display: flex;
     border-radius: 22px;
-    margin: 0 0.7rem 0.7rem 0;
-    width: 205px;
-    font-size: 16px;
-    padding: 5px 0px 0px 0px;
+    margin: 2.5px 0;
+    width: 90%;
+    align-content: center;
+    // font-size: 16px;
+    padding: 6px 6px 3px 6px;
+  }
+
+  .navIcon {
+    font-size: 1.2rem;
+    margin: -2px 0 0 4px;
   }
 
   #createRoomBtn {
@@ -383,10 +430,12 @@ $orange: #ee8585;
 
   .footer {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 190px;
     position: fixed;
     bottom: 1rem;
-    left: 3.8rem;
+    left: 1.5rem;
   }
 }
 

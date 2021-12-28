@@ -10,7 +10,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { setRooms } from '../../../../store/rooms';
 import { SocketContext } from '../../../../context/socket';
 import Public from './Public';
-import Private from './Private';
 import DirectMessage from './DirectMessage';
 import CreateRoom from './CreateRoom';
 
@@ -31,7 +30,6 @@ const Rooms = (props) => {
     : `Test-User#${Math.round(Math.random() * 1000)}`;
 
   const [publicRooms, setPublicRooms] = useState([]);
-  const [privateRooms, setPrivateRooms] = useState([]);
   const [directMsgRooms, setDirectMsgRooms] = useState([]);
 
   useEffect(() => {
@@ -43,11 +41,6 @@ const Rooms = (props) => {
         setPublicRooms(
           res.data.filter((room) =>
             !room.password && room.users.length === 0 ? room : false
-          )
-        );
-        setPrivateRooms(
-          res.data.filter((room) =>
-            room.password && room.users.length === 0 ? room : false
           )
         );
         setDirectMsgRooms(
@@ -91,10 +84,9 @@ const Rooms = (props) => {
           sx={{ height: 240, flexGrow: 1, maxWidth: 400 }}
         >
           <Public joinRoom={joinRoom} publicRooms={publicRooms} />
-          <Private joinRoom={joinRoom} privateRooms={privateRooms} />
           {directMsgRooms.length > 0 && (
             <DirectMessage
-              startNodeId="2"
+              startNodeId="1"
               joinRoom={joinRoom}
               directMsgRooms={directMsgRooms}
             />

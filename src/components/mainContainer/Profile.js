@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Paper,
   Typography,
@@ -42,8 +42,10 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
 
 const Profile = () => {
   const { user } = useAuth0();
-  const [selected, setSelected] = React.useState(false);
-  const [bio, setBio] = React.useState('');
+  const [selected, setSelected] = useState();
+  const [bio, setBio] = useState('');
+  const [currentFile, setCurrentFile] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
 
   const interests = [
     { label: 'Music', value: 'music' },
@@ -70,9 +72,11 @@ const Profile = () => {
         let res = await axios.get(
           `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`
         );
-        console.log(res.data[0]);
-        setSelected(res.data[0].interests);
-        setBio(res.data[0].bio);
+        if (res.data[0]) {
+          setSelected(res.data[0].interests);
+          setBio(res.data[0].bio);
+          res.data[0].image?.url && setPreviewImage(res.data[0].image.url);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -85,25 +89,34 @@ const Profile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let body = {
-      interests: selected,
-      bio: e.target.bio.value,
-      username: user.nickname,
-    };
 
+    const formData = new FormData();
+    if (currentFile)
+      formData.append("image", currentFile);
+
+    formData.append("interests", selected);
+    formData.append("bio", bio);
+    formData.append("username", user.nickname);
+
+    let method;
+    let url;
     let res = await axios.get(
       `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`
     );
-    if (res.data.length > 0) {
-      //if there is a user profile already, update it
-      axios.put(
-        `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`,
-        body
-      );
-    } else {
-      // else create a new one
-      axios.post(`${process.env.REACT_APP_API_SERVER}/profiles`, body);
-    }
+
+    //if there is a user profile already update it, else create a new one
+    method = res.data.length > 0 ? 'put' : 'post';
+    url = res.data.length > 0 ?
+      `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}` :
+      `${process.env.REACT_APP_API_SERVER}/profiles`;
+
+    await axios({
+      method,
+      url,
+      data: formData,
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
     swal({
       title: 'Success!',
       text: 'Your profile has been updated. Enjoy socializing!',
@@ -111,6 +124,11 @@ const Profile = () => {
       // className: 'swal-button--confirm',
     });
   };
+
+  const selectFile = (e) => {
+    setCurrentFile(e.target.files[0]);
+    setPreviewImage(URL.createObjectURL(e.target.files[0]));
+  }
 
   return (
     <div id="profile">
@@ -123,12 +141,45 @@ const Profile = () => {
             flexWrap: 'wrap',
           }}
         >
-          <Typography variant="h5">Profile</Typography>
-          <Typography variant="h6">
-            IMAGE GOES HERE
-            <p>Choose Some Interests:</p>
-          </Typography>
+          <Typography variant="button" mb={2} style={{textAlign: 'center'}}>Profile</Typography>
+          <Typography variant="h6">Name: {user.nickname}</Typography>
           <form onSubmit={handleSubmit}>
+            <label htmlFor="profileImg">
+              <input
+                id="profileImg"
+                name="profileImg"
+                style={{ display: 'none' }}
+                type="file"
+                accept="image/*"
+                onChange={selectFile}
+              />
+              <Button
+                color="secondary"
+                className="btn-choose"
+                variant="outlined"
+                component="span" >
+                Choose a Profile Image
+              </Button>
+            </label>
+            <Button
+              className="btn-upload"
+              color="secondary"
+              variant="contained"
+              component="span"
+              disabled={!currentFile}
+            >
+              Upload
+            </Button>
+            <div className="file-name">
+              {currentFile ? currentFile.name : null}
+            </div>
+
+            {previewImage && (
+              <div className="profileRow">
+                <img id="profileImg" src={previewImage} alt="uploaded profile image" />
+              </div>
+            )}
+            <p>Choose Some Interests:</p>
             <StyledToggleButtonGroup
               id="toggleGroup"
               size="small"
@@ -156,6 +207,7 @@ const Profile = () => {
               name="bio"
               label="Enter a Bio:"
               defaultValue={bio}
+              onChange={(e) => setBio(e.target.value)}
               rows={5}
               sx={{ width: '100%' }}
               placeholder="Tell other users about yourself..."
@@ -163,7 +215,7 @@ const Profile = () => {
               autoFocus
               required
             />
-            <div className="profileRow">
+            <div className="profileRowRight">
               <Button
                 className="updateBtn"
                 size="large"

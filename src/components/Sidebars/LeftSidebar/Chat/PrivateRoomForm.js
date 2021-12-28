@@ -21,21 +21,25 @@ const theme = createTheme({
   },
 });
 
-const CreateRoomForm = ({ handleClose }) => {
+const PrivateRoomForm = ({ handleClose, roomname }) => {
   const { user } = useAuth0();
   const { socket, setCurrentRoom } = useContext(SocketContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addRoomToServer(e.target.roomname.value);
+    await validationCheck(e.target.password.value);
     handleClose();
   };
 
-  const addRoomToServer = async (roomname) => {
-    let body = { roomname };
+  const validationCheck = async (password) => {
     let res = null;
     try {
-      res = await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body);
+      res = await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms/${roomname}`, {}, {
+        auth: {
+          username: roomname,
+          password
+        }
+      });
       setCurrentRoom(res.data.roomname);
       try {
         socket.emit('join', {
@@ -55,7 +59,7 @@ const CreateRoomForm = ({ handleClose }) => {
         dangerMode: true,
       });
     }
-  };
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -66,10 +70,10 @@ const CreateRoomForm = ({ handleClose }) => {
         <Divider style={{ backgroundColor: '#99aab5' }} />
         <MenuItem>
           <InputBase
-            name="roomname"
-            placeholder="Room Name"
-            sx={{ color: 'white' }}
-            required
+            name="password"
+            placeholder="Password"
+            type="password"
+            sx={{ color: 'white'}}
           />
         </MenuItem>
         <div style={{display: 'flex', justifyContent: 'center' }}>
@@ -81,7 +85,7 @@ const CreateRoomForm = ({ handleClose }) => {
           endIcon={<CheckIcon />}
           type="submit"
         >
-          Create
+          Join
         </Button>
         </div>
       </form>
@@ -89,4 +93,4 @@ const CreateRoomForm = ({ handleClose }) => {
   );
 };
 
-export default CreateRoomForm;
+export default PrivateRoomForm;
