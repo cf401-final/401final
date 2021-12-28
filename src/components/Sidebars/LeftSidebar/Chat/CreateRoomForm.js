@@ -27,12 +27,12 @@ const CreateRoomForm = ({ handleClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addRoomToServer(e.target.roomname.value, e.target.password.value);
+    await addRoomToServer(e.target.roomname.value);
     handleClose();
   };
 
-  const addRoomToServer = async (roomname, password) => {
-    let body = password ? { roomname, password } : { roomname };
+  const addRoomToServer = async (roomname) => {
+    let body = { roomname };
     let res = null;
     try {
       res = await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body);
@@ -70,14 +70,6 @@ const CreateRoomForm = ({ handleClose }) => {
             placeholder="Room Name"
             sx={{ color: 'white' }}
             required
-          />
-        </MenuItem>
-        <MenuItem>
-          <InputBase
-            name="password"
-            placeholder="Password (optional)"
-            type="password"
-            sx={{ color: 'white'}}
           />
         </MenuItem>
         <div style={{display: 'flex', justifyContent: 'center' }}>
