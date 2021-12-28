@@ -6,8 +6,8 @@ import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
-import friends1 from '../../img/friends1.jpg';
-import friends2 from '../../img/friends2.jpg';
+import friends4 from '../../img/friends4.jpg';
+import friends5 from '../../img/friends5.png';
 
 const theme = createTheme({
   palette: {
@@ -64,7 +64,7 @@ const Landing = () => {
             </Link>
             <CardMedia
               className="friendsImg"
-              src={friends2}
+              src={friends4}
               component="img"
               alt="social image"
             />
@@ -76,7 +76,7 @@ const Landing = () => {
             </Typography>
             <CardMedia
               className="friendsImg"
-              src={friends1}
+              src={friends5}
               component="img"
               alt="social image"
             />
