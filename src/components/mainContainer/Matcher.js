@@ -53,7 +53,7 @@ const Matcher = () => {
       await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body);
       swal({
         title: "User Liked!",
-        text: `This user has been added to your 1-1 room list.`
+        text: `This user has been added to your Direct Messages.`
       });
       setCurrentRoom(body.roomname);
     } catch (err) {

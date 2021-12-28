@@ -47,7 +47,7 @@ const UserButton = ({ username }) => {
     if (username === user.nickname) {
       swal({
         title: 'Hold up...',
-        text: 'You are trying to start a 1-1 conversation with yourself. Try someone else!',
+        text: 'You are trying to send a Direct Message to yourself. Try someone else!',
         dangerMode: true,
       });
       return;
