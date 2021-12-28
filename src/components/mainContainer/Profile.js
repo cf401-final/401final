@@ -121,7 +121,6 @@ const Profile = () => {
       title: 'Success!',
       text: 'Your profile has been updated. Enjoy socializing!',
       icon: 'success',
-      // className: 'swal-button--confirm',
     });
   };
 
@@ -142,7 +141,7 @@ const Profile = () => {
             flexWrap: 'wrap',
           }}
         >
-          <Typography variant="button" mb={2} style={{textAlign: 'center'}}>Profile</Typography>
+          <Typography variant="h6" className="letterSpacing" mb={2} style={{textAlign: 'center'}}>Profile</Typography>
           <Typography variant="h6">Name: {user.nickname}</Typography>
           <form onSubmit={handleSubmit}>
             <label htmlFor="profileImg">

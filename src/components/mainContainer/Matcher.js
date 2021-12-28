@@ -16,7 +16,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ThumbUpAltRoundedIcon from '@mui/icons-material/ThumbUpAltRounded';
 import ThumbDownAltRoundedIcon from '@mui/icons-material/ThumbDownAltRounded';
 import { SocketContext } from '../../context/socket';
-import friends3 from '../../img/friends3.jpg';
+import friends6 from '../../img/friends6.jpeg';
 
 const theme = createTheme({
   palette: {
@@ -53,7 +53,7 @@ const Matcher = () => {
       await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body);
       swal({
         title: "User Liked!",
-        text: `This user has been added to your 1-1 room list.`
+        text: `This user has been added to your Direct Messages.`
       });
       setCurrentRoom(body.roomname);
     } catch (err) {
@@ -102,7 +102,7 @@ const Matcher = () => {
         }}
       >
         <ThemeProvider theme={theme}>
-        <Typography variant="button" mb={2} mt={-3}>Match with other users</Typography>
+        <Typography variant="h6" className="letterSpacing" mb={3} mt={-4}>Match with Other Users!</Typography>
         {username ? (
           <>
             <Card id="matchCard" data-testid="matcher-card">
@@ -173,7 +173,7 @@ const Matcher = () => {
             <CardMedia
               data-testid="matcher-landing"
               id="matchLanding"
-              src={friends3}
+              src={friends6}
               component="img"
               image={image}
               alt="social image"
@@ -185,7 +185,7 @@ const Matcher = () => {
               color="primary"
               onClick={getRandomUser}
             >
-              Find someone to chat with !
+              Find someone to chat with!
             </Button>
           </div>
         )}
