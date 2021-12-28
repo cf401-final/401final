@@ -31,6 +31,7 @@ const Landing = () => {
             </Typography>
             <Link to="/profile">
               <Button
+                data-testid="profile-btn"
                 className="landBtn"
                 size="small"
                 variant="contained"
@@ -42,6 +43,7 @@ const Landing = () => {
             </Link>
             <Link to="/roomchat">
               <Button
+                data-testid="roomchat-btn"
                 className="landBtn"
                 size="small"
                 variant="contained"
@@ -53,6 +55,7 @@ const Landing = () => {
             </Link>
             <Link to="/matcher">
               <Button
+                data-testid="matcher-btn"
                 className="landBtn"
                 size="small"
                 variant="contained"

@@ -4,7 +4,6 @@ import MessageBar from './MessageBar';
 import CurrentRoom from './CurrentRoom';
 
 const Roomchat = () => {
-
   const messageEl = useRef(null);
 
   useEffect(() => {
@@ -18,7 +17,7 @@ const Roomchat = () => {
 
   return (
     <>
-      <div className="roomchat-container" ref={messageEl}>
+      <div className="roomchat-container" ref={messageEl} data-testid="roomchat-container">
         <CurrentRoom />
         <MessageStream />
       </div>

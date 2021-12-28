@@ -24,7 +24,7 @@ const MessageBar = () => {
   };
   if(currentRoom) {
     return (
-      <div className="message-bar">
+      <div className="message-bar" data-testid="message-bar">
         <Paper
           className="msgPaper"
           onSubmit={handleSubmit}

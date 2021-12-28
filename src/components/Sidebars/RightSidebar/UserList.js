@@ -21,7 +21,7 @@ const UserList = () => {
   }, [socket, currentRoom]);
 
   return (
-    <Box className="rightUserList">
+    <Box className="rightUserList" data-testid="userlist">
       <Typography>users in {currentRoom}:</Typography>
       <Divider
         style={{ backgroundColor: '#99aab5', margin: '5px 0px 15px 0px' }}

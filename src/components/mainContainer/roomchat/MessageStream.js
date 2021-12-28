@@ -47,7 +47,7 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
   return (
     <>
       {messages && messages.length >= 1 && (
-        <div className="message-container">
+        <div className="message-container" data-testid="message-stream">
           {messages.map((msg, idx) => {
             return (
               <React.Fragment key={idx}>
@@ -58,6 +58,9 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
                       : 'theirMessageRow'
                   }
                   >
+
+                  <p
+                    style={{ fontWeight: 700, marginRight: '20px', justifyContent: msg.username !== username ? 'flexStart' : 'flexEnd'}}
                   <Typography
                     variant="body2"
                     style={{ fontWeight: 700, width: '300px', margin: '-5px -300px 0 0', justifyContent: msg.username !== username ? 'flexStart' : 'flexEnd', color: msg.username !== username ? 'white' : '#36393f', fontSize: msg.username !== username ? '.9rem' : '0.01rem' }}

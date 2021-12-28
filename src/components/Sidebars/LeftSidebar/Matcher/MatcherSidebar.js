@@ -58,7 +58,7 @@ const MatcherSidebar = (props) => {
   };
 
   return (
-    <div className="rooms-container">
+    <div className="rooms-container" data-testid="matcher-rooms">
       <TreeView
         defaultExpanded={['0']}
         mt={3}

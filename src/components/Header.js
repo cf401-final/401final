@@ -21,7 +21,7 @@ const Header = () => {
   const { isAuthenticated } = useAuth0();
 
   return (
-    <div className="header">
+    <div className="header" data-testid="header">
       <ThemeProvider theme={theme}>
         {isAuthenticated ? <UserButton /> : <SigninButton />}
 

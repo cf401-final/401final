@@ -20,6 +20,7 @@ const Nav = () => {
       <ThemeProvider theme={theme}>
         <div className="navRow">
         <Button
+          data-testid="roomchat-left-btn"
           size="small"
           component={Link}
           to={`/roomchat`}
@@ -32,6 +33,7 @@ const Nav = () => {
         </div>
         <div className="navRow">
         <Button
+          data-testid="matcher-left-btn"
           size="small"
           component={Link}
           to={`/matcher`}
@@ -44,6 +46,7 @@ const Nav = () => {
         </div>
         <div className="navRow">
         <Button
+          data-testid="profile-left-btn"
           size="small"
           component={Link}
           to={`/profile`}

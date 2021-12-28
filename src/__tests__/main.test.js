@@ -1,0 +1,119 @@
+import { render, screen, fireEvent, waitFor  } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import { Provider } from 'react-redux';
+import store from '../store';
+import App from '../App';
+import SocketProvider from '../context/socket';
+import { server } from '../mocks/server';
+import { useAuth0 } from "@auth0/auth0-react";
+
+//beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+const user = {
+  email: "foo@test.com",
+  nickname: "testymctesterson",
+  email_verified: true,
+  sub: "google-oauth2|12345678901234",
+  isAuthenticated: true,
+};
+
+jest.mock("@auth0/auth0-react");
+
+beforeEach(() => {
+  useAuth0.mockReturnValue({
+    isAuthenticated: true,
+    user,
+  });
+
+  render (
+    <Provider store={store()}>
+      <SocketProvider>
+        <App />
+      </SocketProvider>
+    </Provider>
+  );
+});
+
+describe('Testing core behaviors of app', () => {
+  it('Should properly render the application\'s landing page components', async () => {
+    let header = screen.getByTestId('header');
+    let mainContainer = screen.getByTestId('main-container');
+    let leftSidebar = screen.getByTestId('left-sidebar');
+    let footer = screen.getByTestId('footer');
+
+    expect(header).toBeInTheDocument();
+    expect(mainContainer).toBeInTheDocument();
+    expect(leftSidebar).toBeInTheDocument();
+    expect(footer).toBeInTheDocument();
+  });
+
+  it('Should have the roomchat page render the proper components when first visited', () => {
+    let roomchatBtn = screen.getByTestId('roomchat-btn');
+    fireEvent.click(roomchatBtn);
+
+    let roomchat = screen.getByTestId('roomchat-container');
+    let createRoomBtn = screen.getByTestId('create-room-btn');
+    let userlist = screen.getByTestId('userlist');
+    expect(roomchat).toBeInTheDocument();
+    expect(createRoomBtn).toBeInTheDocument();
+    expect(userlist).toBeInTheDocument();
+  });
+
+  it('Should have the matcher page render the proper components when first visited', () => {
+    let matcherBtn = screen.getByTestId('matcher-left-btn');
+    fireEvent.click(matcherBtn);
+
+    let matcherLanding = screen.getByTestId('matcher-landing');
+    let matcherLandingBtn = screen.getByTestId('matcher-landing-btn');
+    let matcherRooms = screen.getByTestId('matcher-rooms');
+
+    expect(matcherLanding).toBeInTheDocument();
+    expect(matcherLandingBtn).toBeInTheDocument();
+    expect(matcherRooms).toBeInTheDocument();
+  });
+
+  it('Should have the profile page render the proper components when first visited', () => {
+    let profileBtn = screen.getByTestId('profile-left-btn');
+    fireEvent.click(profileBtn);
+
+    let profileContainer = screen.getByTestId('profile-container');
+    let uploadProfileimageBtn = screen.getByTestId('upload-profileimage-btn');
+    let toggleBtn = screen.getByTestId('toggle-btn-music'); //just seeing if one of many interests renders
+    let profileBioField = screen.getByTestId('profile-bio-field');
+    let profileSubmitBtn = screen.getByTestId('profile-submit-btn');
+
+    expect(profileContainer).toBeInTheDocument();
+    expect(uploadProfileimageBtn).toBeInTheDocument();
+    expect(toggleBtn).toBeInTheDocument();
+    expect(profileBioField).toBeInTheDocument();
+    expect(profileSubmitBtn).toBeInTheDocument();
+  });
+
+  it('Should render a "random" user\'s card when the matcher feature is used', async () => {
+    server.listen()
+    await waitFor(() => {
+      let matcherBtn = screen.getByTestId('matcher-left-btn');
+      fireEvent.click(matcherBtn);
+    });
+    let matcherLanding = screen.getByTestId('matcher-landing'); expect(matcherLanding).toBeInTheDocument();
+
+    let matcherLandingBtn = screen.getByTestId('matcher-landing-btn');
+
+    await waitFor(() => {
+      fireEvent.click(matcherLandingBtn);
+    });
+    
+    let matcherCard = screen.getByTestId('matcher-card');
+    expect(matcherCard).toBeInTheDocument();
+
+    let matcherUsername = screen.getByTestId('matcher-username');
+    let matcherInterests = screen.getByTestId('matcher-interests-music');
+    let matcherBio = screen.getByTestId('matcher-bio');
+    
+    expect(matcherUsername).toHaveTextContent('nottestymctesterson');
+    expect(matcherInterests).toHaveTextContent('music');
+    expect(matcherBio).toHaveTextContent('Hello there.');
+  });
+});

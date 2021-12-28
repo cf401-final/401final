@@ -79,10 +79,12 @@ const Matcher = () => {
         `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}/random`
       );
       if (res.data) {
+        
         setSelected(res.data.interests);
         setBio(res.data.bio);
         setUsername(res.data.username);
         res.data.image?.url ? setImage(res.data.image.url) : setImage(null);
+        console.log("&&TEST&&", res.data.bio);
       }
     } catch (err) {
       console.log(err);
@@ -103,7 +105,7 @@ const Matcher = () => {
         <Typography variant="h6" className="letterSpacing" mb={3} mt={-4}>Match with Other Users!</Typography>
         {username ? (
           <>
-            <Card id="matchCard">
+            <Card id="matchCard" data-testid="matcher-card">
               {image && (
                 <CardMedia
                   id="matcherImg"
@@ -114,7 +116,7 @@ const Matcher = () => {
               )}
 
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h5" component="div" data-testid="matcher-username">
                   {username}
                 </Typography>
                 <Typography variant="h6" style={{ textAlign: 'left' }}>
@@ -124,6 +126,7 @@ const Matcher = () => {
                   {selected.map((interest) => {
                     return (
                       <Chip
+                        data-testid={`matcher-interests-${interest}`}
                         className="matchChip"
                         variant="outlined"
                         label={interest}
@@ -136,7 +139,7 @@ const Matcher = () => {
                 <Typography variant="h6" style={{ textAlign: 'left' }}>
                   Bio:
                 </Typography>
-                <Typography style={{ textAlign: 'left' }}>{bio}</Typography>
+                <Typography style={{ textAlign: 'left' }} data-testid="matcher-bio">{bio}</Typography>
               </CardContent>
               </Card>
               <div
@@ -168,6 +171,7 @@ const Matcher = () => {
         ) : (
           <div>
             <CardMedia
+              data-testid="matcher-landing"
               id="matchLanding"
               src={friends6}
               component="img"
@@ -175,6 +179,7 @@ const Matcher = () => {
               alt="social image"
             />
             <Button
+              data-testid="matcher-landing-btn"
               id="findMatchesBtn"
               variant="contained"
               color="primary"
