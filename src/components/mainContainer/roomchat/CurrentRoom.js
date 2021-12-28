@@ -17,7 +17,7 @@ const CurrentRoom = () => {
   } 
   return (
     <div>
-      <Typography className="letterSpacing" variant="h6">
+      <Typography className="letterSpacing" variant="h6" data-testid="current-room">
         <ArrowBackRoundedIcon id="leftArrow" className="bounce" />Please select a Room.
       </Typography>
     </div>

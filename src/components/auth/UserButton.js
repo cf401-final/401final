@@ -33,6 +33,7 @@ function UserButton() {
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <Tooltip title="Account settings">
           <Button
+            data-testid="profile-btn"
             onClick={handleClick}
             size="small"
             sx={{ ml: 2 }}

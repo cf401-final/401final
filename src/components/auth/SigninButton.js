@@ -7,7 +7,6 @@ function SigninButton() {
 
   return (
     <Button
-      data-testid="signin-btn"
       id="profileBtn"
       variant="contained"
       color="primary"
