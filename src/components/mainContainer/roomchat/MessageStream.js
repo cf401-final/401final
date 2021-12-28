@@ -62,6 +62,11 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
                     <Avatar className="chatAvatar" alt={user.nickname} src={user.picture} />
                   </Tooltip> */}
                   <p
+                    style={{ fontWeight: 700, marginRight: '20px', justifyContent: msg.username !== username ? 'flexStart' : 'flexEnd'}}
+                  >
+                    {msg.username}
+                  </p>
+                  <p
                     className={
                       msg.username === username
                         ? 'myChatMessage'
