@@ -23,7 +23,7 @@ const LeftSidebar = () => {
         </div>
       </div>
     ) : (
-      <div className="left-sidebar" id="resizable" elevation={10}>
+      <div className="left-sidebar" id="resizable" elevation={10}  data-testid="left-sidebar">
         <Typography variant="overline" gutterBottom className="footer" style={{ textAlign: 'center', marginTop: '1.4rem' }}>© Jangle 2021</Typography>
       </div>
     )

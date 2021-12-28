@@ -21,7 +21,7 @@ const Header = () => {
   const { isAuthenticated } = useAuth0();
 
   return (
-    <div className="header">
+    <div className="header" data-testid="header">
       <ThemeProvider theme={theme}>
         {isAuthenticated ? <UserButton /> : <SigninButton />}
 
@@ -31,15 +31,6 @@ const Header = () => {
             Jangle
           </h1>
         </Link>
-
-        {/* <Typography
-          id="onlineUsers"
-          variant="subtitle2"
-          gutterBottom
-          component="div"
-        >
-          12,345 users currently online.
-        </Typography> */}
         <a
           href="https://github.com/jangle401/jangle-front"
           target="_blank"

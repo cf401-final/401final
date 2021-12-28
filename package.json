@@ -52,7 +52,7 @@
     "start": "serve -s build",
     "heroku-postbuild": "npm run build",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom --verbose --coverage",
     "eject": "react-scripts eject",
     "lint": "./node_modules/.bin/eslint . --ext .js",
     "fmt": "prettier --write .",
