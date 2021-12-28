@@ -141,7 +141,7 @@ const Profile = () => {
             flexWrap: 'wrap',
           }}
         >
-          <Typography variant="button" mb={2} style={{textAlign: 'center'}}>Profile</Typography>
+          <Typography variant="h6" className="letterSpacing" mb={2} style={{textAlign: 'center'}}>Profile</Typography>
           <Typography variant="h6">Name: {user.nickname}</Typography>
           <form onSubmit={handleSubmit}>
             <label htmlFor="profileImg">
