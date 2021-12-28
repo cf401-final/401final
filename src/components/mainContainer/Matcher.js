@@ -168,6 +168,7 @@ const Matcher = () => {
         ) : (
           <div>
             <CardMedia
+              data-testid="matcher-landing"
               id="matchLanding"
               src={friends3}
               component="img"
@@ -175,6 +176,7 @@ const Matcher = () => {
               alt="social image"
             />
             <Button
+              data-testid="matcher-landing-btn"
               id="findMatchesBtn"
               variant="contained"
               color="primary"

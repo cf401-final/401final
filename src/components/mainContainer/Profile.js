@@ -134,6 +134,7 @@ const Profile = () => {
     <div id="profile">
       <ThemeProvider theme={theme}>
         <Paper
+          data-testid="profile-container"
           id="profilePaper"
           elevation={0}
           sx={{
@@ -154,6 +155,7 @@ const Profile = () => {
                 onChange={selectFile}
               />
               <Button
+                data-testid="upload-profileimage-btn"
                 color="secondary"
                 className="btn-choose"
                 variant="outlined"
@@ -190,6 +192,7 @@ const Profile = () => {
               {interests.map((interest) => {
                 return (
                   <ToggleButton
+                    data-testid={`toggle-btn-${interest.value}`}
                     key={interest.value}
                     className="interestBtn"
                     color="primary"
@@ -202,6 +205,7 @@ const Profile = () => {
               })}
             </StyledToggleButtonGroup>
             <TextField
+              data-testid="profile-bio-field"
               color="primary"
               id="outlined-multiline-static"
               name="bio"
@@ -217,6 +221,7 @@ const Profile = () => {
             />
             <div className="profileRowRight">
               <Button
+                data-testid="profile-submit-btn"
                 className="updateBtn"
                 size="large"
                 variant="contained"

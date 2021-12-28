@@ -32,7 +32,6 @@ beforeEach(() => {
   );
 });
 
-
 describe('Testing core behaviors of app', () => {
   it('Should properly render the application\'s initial components', async () => {
     let header = screen.getByTestId('header');
@@ -46,7 +45,7 @@ describe('Testing core behaviors of app', () => {
     expect(footer).toBeInTheDocument();
   });
 
-  it('It should render the proper roomchat components', () => {
+  it('Should render the proper roomchat components', () => {
     let roomchatBtn = screen.getByTestId('roomchat-btn');
     fireEvent.click(roomchatBtn);
 
@@ -56,5 +55,35 @@ describe('Testing core behaviors of app', () => {
     expect(roomchat).toBeInTheDocument();
     expect(createRoomBtn).toBeInTheDocument();
     expect(userlist).toBeInTheDocument();
+  });
+
+  it('Should render the proper matcher components', () => {
+    let matcherBtn = screen.getByTestId('matcher-left-btn');
+    fireEvent.click(matcherBtn);
+
+    let matcherLanding = screen.getByTestId('matcher-landing');
+    let matcherLandingBtn = screen.getByTestId('matcher-landing-btn');
+    let matcherRooms = screen.getByTestId('matcher-rooms');
+
+    expect(matcherLanding).toBeInTheDocument();
+    expect(matcherLandingBtn).toBeInTheDocument();
+    expect(matcherRooms).toBeInTheDocument();
+  });
+
+  it('Should render the proper profile components', () => {
+    let profileBtn = screen.getByTestId('profile-left-btn');
+    fireEvent.click(profileBtn);
+
+    let profileContainer = screen.getByTestId('profile-container');
+    let uploadProfileimageBtn = screen.getByTestId('upload-profileimage-btn');
+    let toggleBtn = screen.getByTestId('toggle-btn-music'); //just seeing if one of many interests renders
+    let profileBioField = screen.getByTestId('profile-bio-field');
+    let profileSubmitBtn = screen.getByTestId('profile-submit-btn');
+
+    expect(profileContainer).toBeInTheDocument();
+    expect(uploadProfileimageBtn).toBeInTheDocument();
+    expect(toggleBtn).toBeInTheDocument();
+    expect(profileBioField).toBeInTheDocument();
+    expect(profileSubmitBtn).toBeInTheDocument();
   });
 });
