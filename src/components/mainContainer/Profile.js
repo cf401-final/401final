@@ -121,7 +121,6 @@ const Profile = () => {
       title: 'Success!',
       text: 'Your profile has been updated. Enjoy socializing!',
       icon: 'success',
-      // className: 'swal-button--confirm',
     });
   };
 

@@ -31,15 +31,6 @@ const Header = () => {
             Jangle
           </h1>
         </Link>
-
-        {/* <Typography
-          id="onlineUsers"
-          variant="subtitle2"
-          gutterBottom
-          component="div"
-        >
-          12,345 users currently online.
-        </Typography> */}
         <a
           href="https://github.com/jangle401/jangle-front"
           target="_blank"
