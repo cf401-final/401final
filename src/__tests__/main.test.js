@@ -8,8 +8,8 @@ import { server } from '../mocks/server';
 import { useAuth0 } from "@auth0/auth0-react";
 
 //beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+// afterEach(() => server.resetHandlers());
+// afterAll(() => server.close());
 
 const user = {
   email: "foo@test.com",
@@ -91,7 +91,7 @@ describe('Testing core behaviors of app', () => {
     expect(profileSubmitBtn).toBeInTheDocument();
   });
 
-  it('Should render a "random" user\'s card when the matcher feature is used', async () => {
+  it.skip('Should render a "random" user\'s card when the matcher feature is used', async () => {
     server.listen()
     await waitFor(() => {
       let matcherBtn = screen.getByTestId('matcher-left-btn');
