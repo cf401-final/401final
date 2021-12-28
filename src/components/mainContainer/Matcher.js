@@ -16,6 +16,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ThumbUpAltRoundedIcon from '@mui/icons-material/ThumbUpAltRounded';
 import ThumbDownAltRoundedIcon from '@mui/icons-material/ThumbDownAltRounded';
 import { SocketContext } from '../../context/socket';
+import friends3 from '../../img/friends3.jpg';
 
 const theme = createTheme({
   palette: {
@@ -168,7 +169,7 @@ const Matcher = () => {
           <div>
             <CardMedia
               id="matchLanding"
-              src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80"
+              src={friends3}
               component="img"
               image={image}
               alt="social image"

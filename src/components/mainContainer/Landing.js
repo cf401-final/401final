@@ -1,11 +1,13 @@
 import React from 'react';
-import { Button, Typography } from '@mui/material';
+import { Button, Typography, CardMedia } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link } from 'react-router-dom';
+import friends1 from '../../img/friends1.jpg';
+import friends2 from '../../img/friends2.jpg';
 
 const theme = createTheme({
   palette: {
@@ -60,12 +62,24 @@ const Landing = () => {
                 Find Matches
               </Button>
             </Link>
+            <CardMedia
+              className="friendsImg"
+              src={friends2}
+              component="img"
+              alt="social image"
+            />
           </>
         ) : (
           <>
             <Typography className="letterSpacing" variant="h6">
               A place where you can find your community and connect with others.
             </Typography>
+            <CardMedia
+              className="friendsImg"
+              src={friends1}
+              component="img"
+              alt="social image"
+            />
             <Typography className="letterSpacing">
               Please <a onClick={loginWithRedirect}>sign in</a> or{' '}
               <a onClick={loginWithRedirect}>register</a> to continue.
