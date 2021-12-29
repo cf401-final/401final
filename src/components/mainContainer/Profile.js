@@ -158,19 +158,11 @@ const Profile = () => {
                 color="secondary"
                 className="btn-choose"
                 variant="outlined"
-                component="span" >
+                component="span"
+                >
                 Choose a Profile Image
               </Button>
             </label>
-            <Button
-              className="btn-upload"
-              color="secondary"
-              variant="contained"
-              component="span"
-              disabled={!currentFile}
-            >
-              Upload
-            </Button>
             <div className="file-name">
               {currentFile ? currentFile.name : null}
             </div>
