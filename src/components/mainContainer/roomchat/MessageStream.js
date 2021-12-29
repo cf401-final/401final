@@ -13,6 +13,9 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
   const { socket, currentRoom } = useContext(SocketContext);
   let [messages, setMessages] = useStateIfMounted([]);
 
+    let timeElapsed = Date.now()
+    let date = new Date(timeElapsed)
+
   useEffect(() => {
     function listener() {
       setMessages(rooms.get(currentRoom));
@@ -86,7 +89,7 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
                   variant="caption"
                   key={idx}
                 >
-                  {`${msg.timeSentFormatted}`}
+                  {date.toDateString()} {" at "}{date.toLocaleTimeString()}
                 </Typography>
               </React.Fragment>
             );
