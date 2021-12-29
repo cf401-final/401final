@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
+import { useStateIfMounted } from 'use-state-if-mounted';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { TreeView } from '@mui/lab';
@@ -29,23 +30,24 @@ const Rooms = (props) => {
     ? user.nickname
     : `Test-User#${Math.round(Math.random() * 1000)}`;
 
-  const [publicRooms, setPublicRooms] = useState([]);
-  const [directMsgRooms, setDirectMsgRooms] = useState([]);
+  const [publicRooms, setPublicRooms] = useStateIfMounted([]);
+  const [directMsgRooms, setDirectMsgRooms] = useStateIfMounted([]);
 
   useEffect(() => {
     (async () => {
       let res = null;
       try {
         res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`);
+
         props.setRooms(res.data);
         setPublicRooms(
           res.data.filter((room) =>
-            !room.password && room.users.length === 0 ? room : false
+            !room.password && room.users?.length === 0 ? room : false
           )
         );
         setDirectMsgRooms(
           res.data.filter((room) =>
-            room.users.length > 0 && room.roomname.split('-').includes(username)
+            room.users?.length > 0 && room.roomname.split('-').includes(username)
               ? room
               : false
           )

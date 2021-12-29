@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
+import { useStateIfMounted } from 'use-state-if-mounted';
 import { SocketContext } from '../../../context/socket';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -10,7 +11,7 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
   const { user } = useAuth0();
   username = user.nickname;
   const { socket, currentRoom } = useContext(SocketContext);
-  let [messages, setMessages] = useState([]);
+  let [messages, setMessages] = useStateIfMounted([]);
 
   useEffect(() => {
     function listener() {

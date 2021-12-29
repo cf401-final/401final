@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
+import { useStateIfMounted } from 'use-state-if-mounted';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { setRooms } from '../../../../store/rooms';
@@ -16,7 +17,7 @@ const MatcherSidebar = (props) => {
   let navigate = useNavigate();
   const { user, isAuthenticated } = useAuth0();
   const { socket, setCurrentRoom, currentRoom } = useContext(SocketContext);
-  const [directMsgRooms, setDirectMsgRooms] = useState([]);
+  const [directMsgRooms, setDirectMsgRooms] = useStateIfMounted([]);
 
   let username = isAuthenticated
     ? user.nickname
@@ -30,7 +31,7 @@ const MatcherSidebar = (props) => {
         props.setRooms(res.data);
         setDirectMsgRooms(
           res.data.filter((room) =>
-            room.users.length > 0 && room.roomname.split('-').includes(username)
+            room.users?.length > 0 && room.roomname.split('-').includes(username)
               ? room
               : false
           )
@@ -67,7 +68,7 @@ const MatcherSidebar = (props) => {
         defaultExpandIcon={<ChevronRightIcon />}
         sx={{ height: 240, flexGrow: 1, maxWidth: 400 }}
       >
-        {directMsgRooms.length > 0 && (
+        {directMsgRooms?.length > 0 && (
           <DirectMessage
             startNodeId="0"
             joinRoom={joinRoom}

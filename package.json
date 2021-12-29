@@ -46,14 +46,15 @@
     "serve": "^13.0.2",
     "socket.io-client": "^4.4.0",
     "styled-components": "^5.3.3",
-    "sweetalert": "^2.1.2"
+    "sweetalert": "^2.1.2",
+    "use-state-if-mounted": "^1.0.4"
   },
   "scripts": {
     "dev": "react-scripts start",
     "start": "serve -s build",
     "heroku-postbuild": "npm run build",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom --verbose --coverage",
+    "test": "react-scripts test --verbose --coverage",
     "eject": "react-scripts eject",
     "lint": "./node_modules/.bin/eslint . --ext .js",
     "fmt": "prettier --write .",
