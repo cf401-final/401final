@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
+import { useStateIfMounted } from 'use-state-if-mounted';
 import { SocketContext } from '../../../context/socket';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -10,7 +11,7 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
   const { user } = useAuth0();
   username = user.nickname;
   const { socket, currentRoom } = useContext(SocketContext);
-  let [messages, setMessages] = useState([]);
+  let [messages, setMessages] = useStateIfMounted([]);
 
   useEffect(() => {
     function listener() {
@@ -47,7 +48,7 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
   return (
     <>
       {messages && messages.length >= 1 && (
-        <div className="message-container">
+        <div className="message-container" data-testid="message-stream">
           {messages.map((msg, idx) => {
             return (
               <React.Fragment key={idx}>
@@ -58,14 +59,12 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
                       : 'theirMessageRow'
                   }
                   >
-                  {/* <Tooltip title={`${username}`}>
-                    <Avatar className="chatAvatar" alt={user.nickname} src={user.picture} />
-                  </Tooltip> */}
-                  <p
-                    style={{ fontWeight: 700, marginRight: '20px', justifyContent: msg.username !== username ? 'flexStart' : 'flexEnd'}}
+                  <Typography
+                    variant="body2"
+                    style={{ fontWeight: 700, width: '300px', margin: '-5px -300px 0 0', justifyContent: msg.username !== username ? 'flexStart' : 'flexEnd', color: msg.username !== username ? 'white' : '#36393f', fontSize: msg.username !== username ? '.9rem' : '0.01rem' }}
                   >
                     {msg.username}
-                  </p>
+                  </Typography>
                   <p
                     className={
                       msg.username === username
@@ -83,6 +82,7 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
                       ? 'myChatTimeStamp'
                       : 'theirChatTimeStamp'
                   }
+                  style={{marginBottom: msg.username !== username ? '22px' : '-18px', }}
                   variant="caption"
                   key={idx}
                 >

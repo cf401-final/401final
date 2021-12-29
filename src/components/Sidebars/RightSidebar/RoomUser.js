@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Box, Tooltip, Button, Avatar } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
@@ -7,6 +7,19 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { SocketContext } from '../../../context/socket';
 
 const UserButton = ({ username }) => {
+  const [userProfile, setUserProfile] = useState(null)
+  useEffect(() => {
+    (async () => {
+      try {
+        let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/profiles/${username}`);
+        setUserProfile(res.data[0]);
+      } catch(err) {
+        console.log(err)
+      }
+    })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const { user } = useAuth0();
   const { socket, setCurrentRoom } = useContext(SocketContext);
 
@@ -47,7 +60,7 @@ const UserButton = ({ username }) => {
     if (username === user.nickname) {
       swal({
         title: 'Hold up...',
-        text: 'You are trying to start a 1-1 conversation with yourself. Try someone else!',
+        text: 'You are trying to send a Direct Message to yourself. Try someone else!',
         dangerMode: true,
       });
       return;
@@ -81,7 +94,7 @@ const UserButton = ({ username }) => {
               <Avatar
                 className="rightAvatar"
                 alt={user.nickname}
-                src={user.picture}
+                src={userProfile?.image?.url ? userProfile.image.url : null}
               />
               {username}
             </Button>

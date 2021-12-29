@@ -30,6 +30,7 @@ const CreateRoom = () => {
         <ThemeProvider theme={theme}>
           <Tooltip title="Create Room">
             <IconButton
+              data-testid="create-room-btn"
               onClick={handleClick}
               size="small"
               id="createRoomBtn"            >

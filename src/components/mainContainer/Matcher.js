@@ -16,6 +16,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ThumbUpAltRoundedIcon from '@mui/icons-material/ThumbUpAltRounded';
 import ThumbDownAltRoundedIcon from '@mui/icons-material/ThumbDownAltRounded';
 import { SocketContext } from '../../context/socket';
+import friends6 from '../../img/friends6.jpeg';
 
 const theme = createTheme({
   palette: {
@@ -52,7 +53,7 @@ const Matcher = () => {
       await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body);
       swal({
         title: "User Liked!",
-        text: `This user has been added to your 1-1 room list.`
+        text: `This user has been added to your Direct Messages.`
       });
       setCurrentRoom(body.roomname);
     } catch (err) {
@@ -78,6 +79,7 @@ const Matcher = () => {
         `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}/random`
       );
       if (res.data) {
+        
         setSelected(res.data.interests);
         setBio(res.data.bio);
         setUsername(res.data.username);
@@ -99,10 +101,10 @@ const Matcher = () => {
         }}
       >
         <ThemeProvider theme={theme}>
-        <Typography variant="button" mb={2} mt={-3}>Match with other users</Typography>
+        <Typography variant="h6" className="letterSpacing" mb={3} mt={-4}>Match with Other Users!</Typography>
         {username ? (
           <>
-            <Card id="matchCard">
+            <Card id="matchCard" data-testid="matcher-card">
               {image && (
                 <CardMedia
                   id="matcherImg"
@@ -113,7 +115,7 @@ const Matcher = () => {
               )}
 
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h5" component="div" data-testid="matcher-username">
                   {username}
                 </Typography>
                 <Typography variant="h6" style={{ textAlign: 'left' }}>
@@ -123,6 +125,7 @@ const Matcher = () => {
                   {selected.map((interest) => {
                     return (
                       <Chip
+                        data-testid={`matcher-interests-${interest}`}
                         className="matchChip"
                         variant="outlined"
                         label={interest}
@@ -135,7 +138,7 @@ const Matcher = () => {
                 <Typography variant="h6" style={{ textAlign: 'left' }}>
                   Bio:
                 </Typography>
-                <Typography style={{ textAlign: 'left' }}>{bio}</Typography>
+                <Typography style={{ textAlign: 'left' }} data-testid="matcher-bio">{bio}</Typography>
               </CardContent>
               </Card>
               <div
@@ -167,19 +170,21 @@ const Matcher = () => {
         ) : (
           <div>
             <CardMedia
+              data-testid="matcher-landing"
               id="matchLanding"
-              src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80"
+              src={friends6}
               component="img"
               image={image}
               alt="social image"
             />
             <Button
+              data-testid="matcher-landing-btn"
               id="findMatchesBtn"
               variant="contained"
               color="primary"
               onClick={getRandomUser}
             >
-              Find someone to chat with !
+              Find someone to chat with!
             </Button>
           </div>
         )}

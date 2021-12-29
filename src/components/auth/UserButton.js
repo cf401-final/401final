@@ -10,7 +10,7 @@ import {
   ListItemIcon,
 } from '@mui/material';
 
-import { Logout, Settings } from '@mui/icons-material';
+import { Logout } from '@mui/icons-material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
@@ -33,6 +33,7 @@ function UserButton() {
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         <Tooltip title="Account settings">
           <Button
+            data-testid="profile-btn"
             onClick={handleClick}
             size="small"
             sx={{ ml: 2 }}
@@ -88,12 +89,6 @@ function UserButton() {
           <Avatar alt={user.nickname} src={user.picture} /> Profile
         </MenuItem>
         <Divider />
-        <MenuItem>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
         <MenuItem
           onClick={() => {
             logout({ returnTo: window.location.origin });

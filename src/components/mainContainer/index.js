@@ -17,6 +17,7 @@ const MainContainer = (props) => {
   return (
     <>
       <div
+       data-testid="main-container"
         className={
           location.pathname !== '/matcher'
             ? 'main-container'
