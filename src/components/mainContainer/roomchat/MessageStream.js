@@ -50,6 +50,7 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
       {messages && messages.length >= 1 && (
         <div className="message-container" data-testid="message-stream">
           {messages.map((msg, idx) => {
+              let date = new Date(msg.timestamp)
             return (
               <React.Fragment key={idx}>
                 <div
@@ -85,8 +86,8 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
                   style={{marginBottom: msg.username !== username ? '22px' : '-18px', }}
                   variant="caption"
                   key={idx}
-                >
-                  {`${msg.timeSentFormatted}`}
+                >                  
+                {date.toDateString()} {" at "}{date.toLocaleTimeString()}
                 </Typography>
               </React.Fragment>
             );
