@@ -84,7 +84,6 @@ const Matcher = () => {
         setBio(res.data.bio);
         setUsername(res.data.username);
         res.data.image?.url ? setImage(res.data.image.url) : setImage(null);
-        console.log("&&TEST&&", res.data.bio);
       }
     } catch (err) {
       console.log(err);

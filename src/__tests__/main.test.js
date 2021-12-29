@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor  } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { Provider } from 'react-redux';
 import store from '../store';
@@ -7,9 +7,9 @@ import SocketProvider from '../context/socket';
 import { server } from '../mocks/server';
 import { useAuth0 } from "@auth0/auth0-react";
 
-//beforeAll(() => server.listen());
-// afterEach(() => server.resetHandlers());
-// afterAll(() => server.close());
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
 const user = {
   email: "foo@test.com",
@@ -49,9 +49,12 @@ describe('Testing core behaviors of app', () => {
     expect(footer).toBeInTheDocument();
   });
 
-  it('Should have the roomchat page render the proper components when first visited', () => {
+  it('Should have the roomchat page render the proper components when first visited', async () => {
     let roomchatBtn = screen.getByTestId('roomchat-btn');
-    fireEvent.click(roomchatBtn);
+    
+    await waitFor(() => {
+      fireEvent.click(roomchatBtn);
+    });
 
     let roomchat = screen.getByTestId('roomchat-container');
     let createRoomBtn = screen.getByTestId('create-room-btn');
@@ -61,9 +64,12 @@ describe('Testing core behaviors of app', () => {
     expect(userlist).toBeInTheDocument();
   });
 
-  it('Should have the matcher page render the proper components when first visited', () => {
+  it('Should have the matcher page render the proper components when first visited', async () => {
     let matcherBtn = screen.getByTestId('matcher-left-btn');
-    fireEvent.click(matcherBtn);
+    
+    await waitFor(() => {
+      fireEvent.click(matcherBtn);
+    });
 
     let matcherLanding = screen.getByTestId('matcher-landing');
     let matcherLandingBtn = screen.getByTestId('matcher-landing-btn');
@@ -74,9 +80,12 @@ describe('Testing core behaviors of app', () => {
     expect(matcherRooms).toBeInTheDocument();
   });
 
-  it('Should have the profile page render the proper components when first visited', () => {
+  it('Should have the profile page render the proper components when first visited', async () => {
     let profileBtn = screen.getByTestId('profile-left-btn');
-    fireEvent.click(profileBtn);
+
+    await waitFor(() => {
+      fireEvent.click(profileBtn);
+    });
 
     let profileContainer = screen.getByTestId('profile-container');
     let uploadProfileimageBtn = screen.getByTestId('upload-profileimage-btn');
@@ -91,21 +100,28 @@ describe('Testing core behaviors of app', () => {
     expect(profileSubmitBtn).toBeInTheDocument();
   });
 
-  it.skip('Should render a "random" user\'s card when the matcher feature is used', async () => {
+  it('Should render a "random" user\'s card when the matcher feature is used', async () => {
     server.listen()
+    
+    let matcherBtn = screen.getByTestId('matcher-left-btn');
+
+    let matcherLanding;
     await waitFor(() => {
-      let matcherBtn = screen.getByTestId('matcher-left-btn');
       fireEvent.click(matcherBtn);
+      matcherLanding = screen.getByTestId('matcher-landing'); 
     });
-    let matcherLanding = screen.getByTestId('matcher-landing'); expect(matcherLanding).toBeInTheDocument();
+
+    expect(matcherLanding).toBeInTheDocument();
 
     let matcherLandingBtn = screen.getByTestId('matcher-landing-btn');
 
+    let matcherCard;
     await waitFor(() => {
       fireEvent.click(matcherLandingBtn);
+      matcherCard = screen.getByTestId('matcher-card');
     });
     
-    let matcherCard = screen.getByTestId('matcher-card');
+    
     expect(matcherCard).toBeInTheDocument();
 
     let matcherUsername = screen.getByTestId('matcher-username');
