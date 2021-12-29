@@ -17,7 +17,7 @@ const MessageBar = () => {
         content,
         roomname: currentRoom,
         username: user.nickname,
-        timestamp: `${date.toDateString()} at ${date.toLocaleTimeString()}`
+        timestamp: date
       });
     } catch (err) {
       console.log(err);
