@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { useStateIfMounted } from 'use-state-if-mounted';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { setRooms } from '../../../../store/rooms';
+import { setRooms } from '../../../../store/actions';
 import { SocketContext } from '../../../../context/socket';
 import { useAuth0 } from '@auth0/auth0-react';
 import DirectMessage from '../Chat/DirectMessage';
