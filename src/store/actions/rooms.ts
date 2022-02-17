@@ -1,3 +1,4 @@
+/* eslint no-undef: 0 */
 import { ActionTypes } from './types';
 
 export type Message = {
