@@ -1,12 +1,12 @@
 import { ActionTypes } from './types';
 
-type Message = {
+export type Message = {
   roomname: string;
   username: string;
   content: string;
   timestamp: string;
-  _id: string;
-  __v: number;
+  _id?: string;
+  __v?: number;
 };
 
 export type Room = {
