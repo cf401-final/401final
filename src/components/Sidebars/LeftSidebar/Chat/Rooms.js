@@ -7,8 +7,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useAuth0 } from '@auth0/auth0-react';
-
-import { setRooms } from '../../../../store/rooms';
+import { setRooms } from '../../../../store/actions';
 import { SocketContext } from '../../../../context/socket';
 import Public from './Public';
 import DirectMessage from './DirectMessage';

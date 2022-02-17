@@ -3,7 +3,7 @@ import { useStateIfMounted } from 'use-state-if-mounted';
 import { SocketContext } from '../../../context/socket';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { setRoomMessages } from '../../../store/rooms';
+import { setRoomMessages } from '../../../store/actions';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Typography } from '@mui/material';
 
