@@ -1,4 +1,4 @@
-/* eslint no-undef: 0 */
+/* eslint no-undef: 0, no-unused-vars: 0 */
 import { ActionTypes, Action } from '../actions';
 
 let initialState = {
