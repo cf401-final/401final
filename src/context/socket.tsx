@@ -1,4 +1,3 @@
-/* eslint no-unused-vars: 0, no-undef: 0 */
 import React, { useEffect, createContext, useState } from 'react';
 import { Dispatch } from 'redux';
 import { io, Socket } from 'socket.io-client';
@@ -21,7 +20,7 @@ interface SocketProviderProps {
   addMessageToRoom: Function;
 }
 
-const SocketProvider = ({ children, addMessageToRoom }: SocketProviderProps) => {
+const SocketProvider = ({ children, addMessageToRoom }: SocketProviderProps): JSX.Element => {
   let [currentRoom, setCurrentRoom] = useState<string>();
 
   useEffect(() => {

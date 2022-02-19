@@ -1,11 +1,9 @@
-/* eslint no-undef: 0, no-unused-vars: 0 */
 import { ActionTypes, Action } from '../actions';
 
 let initialState = {
   rooms: new Map().set('general', []),
 };
 
-// Reducer
 export default function reducer(state = initialState, action: Action) {
   switch (action.type) {
     case ActionTypes.setRooms:

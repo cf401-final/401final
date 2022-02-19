@@ -1,4 +1,3 @@
-/* eslint no-undef: 0 */
 import {
   SetRoomsAction,
   AddMessageToRoomAction,

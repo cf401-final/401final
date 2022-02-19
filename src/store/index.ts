@@ -1,4 +1,3 @@
-/* eslint no-undef: 0 */
 import { createStore, combineReducers } from 'redux';
 import { Rooms } from './actions';
 
