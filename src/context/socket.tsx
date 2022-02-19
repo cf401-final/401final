@@ -7,7 +7,7 @@ import { Message } from '../store/actions';
 
 export const socket = io(`${process.env.REACT_APP_SOCKET_SERVER}`);
 
-interface SocketValuesInterface {
+export interface SocketValuesInterface {
   currentRoom: string | undefined | null;
   setCurrentRoom: React.Dispatch<React.SetStateAction<string | undefined>> | null;
   socket: Socket | null;
@@ -20,7 +20,7 @@ interface SocketProviderProps {
   addMessageToRoom: Function;
 }
 
-const SocketProvider = ({ children, addMessageToRoom }: SocketProviderProps): JSX.Element => {
+export const SocketProvider = ({ children, addMessageToRoom }: SocketProviderProps): JSX.Element => {
   let [currentRoom, setCurrentRoom] = useState<string>();
 
   useEffect(() => {

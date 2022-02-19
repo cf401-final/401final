@@ -3,7 +3,7 @@ import { Paper, InputBase } from '@mui/material';
 import { SocketContext } from '../../../context/socket';
 import { useAuth0 } from '@auth0/auth0-react';
 
-const MessageBar = () => {
+const MessageBar = ({ scrollOnNewMessage }) => {
   const { socket, currentRoom } = useContext(SocketContext);
   const { user } = useAuth0();
 
@@ -19,6 +19,7 @@ const MessageBar = () => {
         username: user.nickname,
         timestamp: date
       });
+      scrollOnNewMessage();
     } catch (err) {
       console.log(err);
     }
