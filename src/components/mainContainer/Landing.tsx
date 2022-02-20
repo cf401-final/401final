@@ -1,6 +1,5 @@
-import React from 'react';
 import { Button, Typography, CardMedia } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider, Theme } from '@mui/material/styles';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
@@ -9,7 +8,7 @@ import { Link } from 'react-router-dom';
 import friends4 from '../../img/friends4.jpg';
 import friends5 from '../../img/friends5.png';
 
-const theme = createTheme({
+const theme: Theme = createTheme({
   palette: {
     primary: {
       main: '#7289da',
@@ -17,7 +16,7 @@ const theme = createTheme({
   },
 });
 
-const Landing = () => {
+const Landing = (): JSX.Element => {
   const { isAuthenticated, loginWithRedirect } = useAuth0();
 
   return (

@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import swal from 'sweetalert';
 import {
   Paper,
@@ -12,13 +12,13 @@ import {
   Typography,
   Button
 } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider, Theme } from '@mui/material/styles';
 import ThumbUpAltRoundedIcon from '@mui/icons-material/ThumbUpAltRounded';
 import ThumbDownAltRoundedIcon from '@mui/icons-material/ThumbDownAltRounded';
 import { SocketContext } from '../../context/socket';
 import friends6 from '../../img/friends6.jpeg';
 
-const theme = createTheme({
+const theme: Theme = createTheme({
   palette: {
     primary: {
       main: '#7db1b1',
@@ -31,14 +31,22 @@ const theme = createTheme({
 
 const Matcher = () => {
   const { user } = useAuth0();
-  const { setCurrentRoom } = useContext(SocketContext);
+  const { setCurrentRoom } = useContext(SocketContext) || {};
 
-  const [selected, setSelected] = useState([]);
-  const [bio, setBio] = useState('');
-  const [username, setUsername] = useState('');
-  const [image, setImage] = useState(null);
+  const [selected, setSelected] = useState<string[]>([]);
+  const [bio, setBio] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
+  const [image, setImage] = useState<string | undefined>();
 
-  const handleUserChoice = async (userWasLiked) => {
+  type NewRoom = {
+    roomname: string;
+    users: [
+      nickname: string,
+      username: string
+    ];
+  }
+
+  const handleUserChoice = async (userWasLiked: boolean) => {
     if(userWasLiked) {
       await createDirectMessageRoom();
     }
@@ -46,47 +54,71 @@ const Matcher = () => {
   }
 
   const createDirectMessageRoom = async () => {
-    let roomname = `${user.nickname}-${username}`;
-    let body = { roomname, users: [user.nickname, username] };
+    let nickname: string = (user && user.nickname) ? user.nickname : 'user';
+    let roomname = `${nickname}-${username}`;
+    let body: NewRoom = { roomname, users: [nickname, username] };
 
     try {
-      await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body);
+      await axios.post<NewRoom>(`${process.env.REACT_APP_API_SERVER}/rooms`, body);
       swal({
         title: "User Liked!",
         text: `This user has been added to your Direct Messages.`
       });
-      setCurrentRoom(body.roomname);
-    } catch (err) {
-      if (err.response.status === 409) {
-        swal({
-          title: 'Hold up...',
-          text: err.response.data.err,
-          dangerMode: true,
-        });
-      } else {
-        swal({
-          title: "That didn't work out.",
-          text: `The request failed to be completed`,
-          dangerMode: true,
-        });
+      if(setCurrentRoom) {
+        setCurrentRoom(roomname);
       }
+    } catch (err: unknown) {
+      const error = err as AxiosError;
+      let errorText = `The request failed to be completed`;
+
+      if(error.response) {
+        if (error.response.status === 409) {
+          errorText = error.response.data.err;
+        } else {
+          errorText = `The request failed with status code ${error.response.status}`;
+        } 
+      }
+
+      swal({
+        title: "That didn't work out.",
+        text: errorText,
+        dangerMode: true,
+      });
     }
   };
 
   const getRandomUser = async () => {
+    let nickname: string = (user && user.nickname) ? user.nickname : 'user';
+
     try {
       let res = await axios.get(
-        `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}/random`
+        `${process.env.REACT_APP_API_SERVER}/profiles/${nickname}/random`
       );
+
       if (res.data) {
-        
         setSelected(res.data.interests);
         setBio(res.data.bio);
         setUsername(res.data.username);
-        res.data.image?.url ? setImage(res.data.image.url) : setImage(null);
+        if(res.data.image?.url) {
+          setImage(res.data.image.url);
+        }
+      } else {
+        //Temp feedback, /random route needs to be altered to handle randomly obtaining current user
+        swal({
+          title: 'Oh dear...',
+          text: 'We didn\'t find any users that time. Please try again!',
+          dangerMode: true,
+        });
       }
-    } catch (err) {
-      console.log(err);
+    } catch (err: unknown) {
+      const error = err as AxiosError;
+      const errorText = (error.response?.data.error) ? error.response.data.err : 'Something went wrong while obtaining a random user...';
+
+      swal({
+        title: 'Hold up...',
+        text: errorText,
+        dangerMode: true,
+      });
     }
   };
 
@@ -122,7 +154,7 @@ const Matcher = () => {
                   Interests:
                 </Typography>
                 <div style={{ textAlign: 'left', marginBottom: '1rem' }}>
-                  {selected.map((interest) => {
+                  {selected.map((interest: string) => {
                     return (
                       <Chip
                         data-testid={`matcher-interests-${interest}`}

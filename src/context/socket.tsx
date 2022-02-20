@@ -21,7 +21,7 @@ interface SocketProviderProps {
 }
 
 export const SocketProvider = ({ children, addMessageToRoom }: SocketProviderProps): JSX.Element => {
-  let [currentRoom, setCurrentRoom] = useState<string>();
+  let [currentRoom, setCurrentRoom] = useState<string | undefined>();
 
   useEffect(() => {
     function listener(data: Message) {

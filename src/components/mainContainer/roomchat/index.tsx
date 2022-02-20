@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import MessageStream from './MessageStream';
 import MessageBar from './MessageBar';
 import CurrentRoom from './CurrentRoom';
@@ -12,7 +12,7 @@ const Roomchat = (): JSX.Element => {
     if(container) {
       window.setTimeout(() => {
         container.scrollTop = container.scrollHeight;
-      }, 100);
+      }, 200);
       container.scroll({ top: container.scrollTop });
     }
   }
