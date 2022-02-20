@@ -4,7 +4,7 @@ import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { SocketContext } from '../../../context/socket';
 
 const CurrentRoom = (): JSX.Element => {
-  const { currentRoom } = useContext(SocketContext) || { currentRoom: null };
+  const { currentRoom } = useContext(SocketContext) || {};
 
   if(currentRoom) {
     return (

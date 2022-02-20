@@ -1,27 +1,41 @@
 import React, { useEffect, useContext } from 'react';
 import { useStateIfMounted } from 'use-state-if-mounted';
+import { StoreState } from '../../../store';
 import { SocketContext } from '../../../context/socket';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import axios from 'axios';
-import { setRoomMessages } from '../../../store/actions';
+import { setRoomMessages, Room, Rooms, Message, SetRoomMessagesAction } from '../../../store/actions';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Typography } from '@mui/material';
 
-const MessageStream = ({ setRoomMessages, rooms, username }) => {
+interface MessageStreamProps {
+  setRoomMessages: (room: Room) => SetRoomMessagesAction;
+  rooms: Rooms["rooms"];
+}
+
+const MessageStream = ({ setRoomMessages, rooms }: MessageStreamProps) => {
   const { user } = useAuth0();
-  username = user.nickname;
-  const { socket, currentRoom } = useContext(SocketContext);
-  let [messages, setMessages] = useStateIfMounted([]);
+  let username = (user && user.nickname) ? user.nickname: null;
+
+  const { socket, currentRoom } = useContext(SocketContext) || {} ;
+  let [messages, setMessages] = useStateIfMounted([] as Message[]);
 
   useEffect(() => {
     function listener() {
-      setMessages(rooms.get(currentRoom));
+      let messages = rooms.get(`${currentRoom}`);
+      if(messages) setMessages(messages);
     }
-    socket.on('message', listener);
 
-    return function cleanup() {
-      socket.off('message', listener);
-    };
+    if(socket) {
+      socket.on('message', listener);
+
+      return function cleanup() {
+        socket.off('message', listener);
+      };
+    } else {
+      console.log("Unable to connect to socket instance...")
+    }
   }, [socket, rooms, messages, currentRoom]);
 
   useEffect(() => {
@@ -30,9 +44,12 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
         let res = await axios.get(
           `${process.env.REACT_APP_API_SERVER}/messages/${currentRoom}`
         );
-        if (res.data.length > 0)
-          setRoomMessages({ messages: res.data, roomname: currentRoom });
-        setMessages(rooms.get(currentRoom));
+        if (res.data.length > 0) {
+          setRoomMessages({ messages: res.data, roomname: `${currentRoom}` });
+        }
+          
+        let messages = rooms.get(`${currentRoom}`);
+        if(messages) setMessages(messages);
       } catch (err) {
         console.log(err);
       }
@@ -40,8 +57,11 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
   }, [currentRoom, rooms, setRoomMessages]);
 
   useEffect(() => {
-    if (rooms.has(currentRoom)) {
-      setMessages(rooms.get(currentRoom));
+    if (rooms.has(`${currentRoom}`)) {
+      let messages = rooms.get(`${currentRoom}`);
+      if(messages) {
+        setMessages(messages);
+      }
     }
   }, [currentRoom, rooms]);
 
@@ -49,7 +69,7 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
     <>
       {messages && messages.length >= 1 && (
         <div className="message-container" data-testid="message-stream">
-          {messages.map((msg, idx) => {
+          {messages.map((msg: Message, idx) => {
               let date = new Date(msg.timestamp)
             return (
               <React.Fragment key={idx}>
@@ -98,14 +118,14 @@ const MessageStream = ({ setRoomMessages, rooms, username }) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ rooms }: StoreState) => {
   return {
-    rooms: state.rooms.rooms,
+    rooms: rooms.rooms,
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  setRoomMessages: (data) => dispatch(setRoomMessages(data)),
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setRoomMessages: (data: Room) => dispatch(setRoomMessages(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageStream);
