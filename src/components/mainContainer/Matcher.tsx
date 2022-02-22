@@ -31,6 +31,8 @@ const theme: Theme = createTheme({
 
 const Matcher = () => {
   const { user } = useAuth0();
+  const nickname: string = (user && user.nickname) ? user.nickname : 'user';
+
   const { setCurrentRoom } = useContext(SocketContext) || {};
 
   const [selected, setSelected] = useState<string[]>([]);
@@ -88,8 +90,6 @@ const Matcher = () => {
   };
 
   const getRandomUser = async () => {
-    let nickname: string = (user && user.nickname) ? user.nickname : 'user';
-
     try {
       let res = await axios.get(
         `${process.env.REACT_APP_API_SERVER}/profiles/${nickname}/random`

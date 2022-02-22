@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Paper,
   Typography,
@@ -40,12 +40,14 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   },
 }));
 
-const Profile = () => {
+const Profile = (): JSX.Element => {
   const { user } = useAuth0();
-  const [selected, setSelected] = useState();
-  const [bio, setBio] = useState('');
-  const [currentFile, setCurrentFile] = useState(null);
-  const [previewImage, setPreviewImage] = useState(null);
+  const nickname: string = (user && user.nickname) ? user.nickname : 'user';
+
+  const [selected, setSelected] = useState<string>('');
+  const [bio, setBio] = useState<string>('');
+  const [currentFile, setCurrentFile] = useState<File | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const interests = [
     { label: 'Music', value: 'music' },
@@ -70,7 +72,7 @@ const Profile = () => {
       try {
         //auto-populates form fields with existing profile data, if they have a profile
         let res = await axios.get(
-          `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`
+          `${process.env.REACT_APP_API_SERVER}/profiles/${nickname}`
         );
         if (res.data[0]) {
           setSelected(res.data[0].interests);
@@ -81,13 +83,13 @@ const Profile = () => {
         console.log(err);
       }
     })();
-  }, [user.nickname]);
+  }, [nickname]);
 
-  const handleSelected = (event, newSelection) => {
+  const handleSelected = (newSelection: string) => {
     setSelected(newSelection);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -96,26 +98,27 @@ const Profile = () => {
 
     formData.append("interests", selected);
     formData.append("bio", bio);
-    formData.append("username", user.nickname);
+    formData.append("username", nickname);
 
     let method;
     let url;
     let res = await axios.get(
-      `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}`
+      `${process.env.REACT_APP_API_SERVER}/profiles/${nickname}`
     );
 
     //if there is a user profile already update it, else create a new one
     method = res.data.length > 0 ? 'put' : 'post';
     url = res.data.length > 0 ?
-      `${process.env.REACT_APP_API_SERVER}/profiles/${user.nickname}` :
+      `${process.env.REACT_APP_API_SERVER}/profiles/${nickname}` :
       `${process.env.REACT_APP_API_SERVER}/profiles`;
+    
+    let headers = { headers: { "Content-Type": "multipart/form-data" }};
 
-    await axios({
-      method,
-      url,
-      data: formData,
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+    if(method === 'put') {
+      await axios.put<FormData>(url, formData, headers);
+    } else {
+      await axios.post<FormData>(url, formData, headers);
+    }
 
     swal({
       title: 'Success!',
@@ -124,9 +127,11 @@ const Profile = () => {
     });
   };
 
-  const selectFile = (e) => {
-    setCurrentFile(e.target.files[0]);
-    setPreviewImage(URL.createObjectURL(e.target.files[0]));
+  const selectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(e.target && e.target.files ) {
+      setCurrentFile(e.target.files[0]);
+      setPreviewImage(URL.createObjectURL(e.target.files[0]));
+    }
   }
 
   return (
@@ -142,7 +147,7 @@ const Profile = () => {
           }}
         >
           <Typography variant="h6" className="letterSpacing" mb={2} style={{textAlign: 'center'}}>Profile</Typography>
-          <Typography variant="h6">Name: {user.nickname}</Typography>
+          <Typography variant="h6">Name: {nickname}</Typography>
           <form onSubmit={handleSubmit}>
             <label htmlFor="profileImg">
               <input
@@ -178,7 +183,7 @@ const Profile = () => {
               size="small"
               value={selected}
               aria-label="text formatting"
-              onChange={handleSelected}
+              onChange={(_, value: string) => handleSelected(value)}
             >
               {interests.map((interest) => {
                 return (
