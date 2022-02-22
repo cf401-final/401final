@@ -1,4 +1,3 @@
-import React from 'react';
 import { TreeItem } from '@mui/lab';
 
 function Public({ publicRooms, joinRoom }) {

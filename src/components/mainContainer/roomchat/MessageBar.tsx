@@ -1,4 +1,4 @@
-import React, { useContext, FormEvent } from 'react';
+import { useContext, FormEvent } from 'react';
 import { Paper, InputBase } from '@mui/material';
 import { SocketContext } from '../../../context/socket';
 import { useAuth0 } from '@auth0/auth0-react';

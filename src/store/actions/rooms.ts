@@ -1,26 +1,8 @@
-import { ActionTypes } from './types';
-
-export type Message = {
-  roomname: string;
-  username: string;
-  content: string;
-  timestamp: string;
-  _id?: string;
-  __v?: number;
-};
-
-export type Room = {
-  roomname: string;
-  messages: Message[];
-};
-
-export type Rooms = {
-  rooms: Map<string, Message[]>;
-};
+import { ActionTypes, Message, Room } from './types';
 
 export interface SetRoomsAction {
   type: ActionTypes.setRooms;
-  payload: string[];
+  payload: Room[];
 }
 
 export interface AddMessageToRoomAction {
@@ -33,7 +15,7 @@ export interface SetRoomMessagesAction {
   payload: Room;
 }
 
-export const setRooms = (payload: string[]): SetRoomsAction => {
+export const setRooms = (payload: Room[]): SetRoomsAction => {
   return {
     type: ActionTypes.setRooms,
     payload,
