@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Typography } from '@mui/material';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { SocketContext } from '../../../context/socket';
 
-const CurrentRoom = () => {
-  const { currentRoom } = useContext(SocketContext);
+const CurrentRoom = (): JSX.Element => {
+  const { currentRoom } = useContext(SocketContext) || {};
 
   if(currentRoom) {
     return (

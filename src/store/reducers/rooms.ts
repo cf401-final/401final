@@ -4,7 +4,6 @@ let initialState = {
   rooms: new Map().set('general', []),
 };
 
-// Reducer
 export default function reducer(state = initialState, action: Action) {
   switch (action.type) {
     case ActionTypes.setRooms:

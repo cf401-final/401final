@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, MouseEvent } from 'react';
 import {
   Box,
   Tooltip,
@@ -18,10 +18,10 @@ import { useNavigate } from 'react-router-dom';
 function UserButton() {
   let navigate = useNavigate();
   const { logout, user } = useAuth0();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleClick = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(currentTarget);
   };
 
   const handleClose = () => {
@@ -79,15 +79,17 @@ function UserButton() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem>Signed in as {user.nickname}</MenuItem>
+
+        {user && <MenuItem>Signed in as {user.nickname}</MenuItem>}
         <Divider />
         <MenuItem
           onClick={() => {
             navigate('/profile');
           }}
         >
-          <Avatar alt={user.nickname} src={user.picture} /> Profile
+          {user && <Avatar alt={user.nickname} src={user.picture} />} Profile
         </MenuItem>
+      
         <Divider />
         <MenuItem
           onClick={() => {

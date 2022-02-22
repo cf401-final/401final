@@ -1,11 +1,16 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 import { useLocation } from 'react-router-dom';
+import { Location } from 'history';
 
-const MainContainer = (props) => {
-  const location = useLocation();
+interface MainContainerProps {
+  children: React.ReactNode;
+}
 
-  let feature;
+const MainContainer = ({ children }: MainContainerProps): JSX.Element => {
+  const location: Location = useLocation();
+
+  let feature: string = '';
   if (location.pathname === '/profile') {
     feature = '';
   } else if (location.pathname === '/roomchat') {
@@ -32,7 +37,7 @@ const MainContainer = (props) => {
         >
           {feature}
         </Typography>
-        {props.children}
+        {children}
       </div>
     </>
   );
