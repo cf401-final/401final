@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { IconButton, Box, Menu } from '@mui/material';
 import CreateRoomForm from './CreateRoomForm';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider, Theme } from '@mui/material/styles';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Tooltip from '@mui/material/Tooltip';
 
-const theme = createTheme({
+const theme: Theme = createTheme({
   palette: {
     primary: {
       main: '#7289da',
@@ -13,14 +13,15 @@ const theme = createTheme({
   },
 });
 
-const CreateRoom = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
+const CreateRoom = (): JSX.Element => {
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    setAnchorEl(e.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     setAnchorEl(null);
   };
 

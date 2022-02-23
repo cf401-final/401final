@@ -6,14 +6,14 @@ import {
   Typography,
   Divider,
 } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider, Theme } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import swal from 'sweetalert';
 import { SocketContext } from '../../../../context/socket';
 
-const theme = createTheme({
+const theme: Theme = createTheme({
   palette: {
     primary: {
       main: '#7db1b1',
@@ -21,43 +21,57 @@ const theme = createTheme({
   },
 });
 
-const PrivateRoomForm = ({ handleClose, roomname }) => {
-  const { user } = useAuth0();
-  const { socket, setCurrentRoom } = useContext(SocketContext);
+interface PrivateRoomProps {
+  handleClose(): void;
+  roomname: string;
+}
 
-  const handleSubmit = async (e) => {
+const Private = ({ handleClose, roomname }: PrivateRoomProps): JSX.Element => {
+  const { user } = useAuth0();
+  const { socket, setCurrentRoom } = useContext(SocketContext) || {};
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    await validationCheck(e.target.password.value);
+    await validationCheck(e.currentTarget.password.value);
     handleClose();
   };
 
-  const validationCheck = async (password) => {
-    let res = null;
+  const displayAlert = (alertText: string): void => {
+    swal({
+      title: 'Oh no!',
+      text: alertText,
+      icon: 'warning',
+      dangerMode: true,
+    });      
+  }
+
+  const validationCheck = async (password: string): Promise<void> => {
     try {
-      res = await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms/${roomname}`, {}, {
+      let res = await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms/${roomname}`, {}, {
         auth: {
           username: roomname,
           password
         }
       });
-      setCurrentRoom(res.data.roomname);
+
+      setCurrentRoom && setCurrentRoom(res.data.roomname);
+    
       try {
-        socket.emit('join', {
-          room: res.data.roomname,
-          user: user.nickname,
-        });
-        setCurrentRoom(roomname);
+        if(socket && user) {
+          socket.emit('join', {
+            room: res.data.roomname,
+            user: user.nickname,
+          });
+          setCurrentRoom && setCurrentRoom(roomname);
+        } else {
+          displayAlert('Unable to connect with server.');
+        }
       } catch (err) {
         console.log(err);
       }
     } catch (err) {
       console.log(err);
-      swal({
-        title: 'Oh no!',
-        text: 'Unable to create a room with that name.',
-        icon: 'warning',
-        dangerMode: true,
-      });
+      displayAlert('Unable to create a room with that name.');
     }
   }
 
@@ -93,4 +107,4 @@ const PrivateRoomForm = ({ handleClose, roomname }) => {
   );
 };
 
-export default PrivateRoomForm;
+export default Private;

@@ -1,10 +1,15 @@
-import React from 'react';
 import { TreeItem } from '@mui/lab';
+import { RoomProps } from './types';
+import { Room } from '../../../../store/actions';
 
-function DirectMessage({ startNodeId, directMsgRooms, joinRoom }) {
+interface DirectMessageProps extends RoomProps {
+  startNodeId: string;
+}
+
+function DirectMessage({ startNodeId, rooms, joinRoom }: DirectMessageProps): JSX.Element {
   return (
     <TreeItem nodeId={startNodeId} label="DIRECT MESSAGES">
-      {directMsgRooms.map((room, idx) => {
+      {rooms.map((room: Room, idx: number) => {
         return (
           <TreeItem
             nodeId={room.roomname}

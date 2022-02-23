@@ -1,6 +1,6 @@
 import Rooms from './Rooms';
 
-const ChatSidebar = () => {
+const ChatSidebar = (): JSX.Element => {
   return (
     <>
       <Rooms />
