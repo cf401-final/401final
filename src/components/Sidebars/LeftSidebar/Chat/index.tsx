@@ -1,9 +1,10 @@
 import Rooms from './Rooms';
+import { LeftSidebarComponentsProps } from '../../LeftSidebar';
 
-const ChatSidebar = (): JSX.Element => {
+const ChatSidebar = ({ joinRoom, getDirectRoomsForUser }:  LeftSidebarComponentsProps): JSX.Element => {
   return (
     <>
-      <Rooms />
+      <Rooms joinRoom={joinRoom} getDirectRoomsForUser={getDirectRoomsForUser} />
     </>
   );
 };

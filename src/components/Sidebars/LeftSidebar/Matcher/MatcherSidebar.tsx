@@ -1,26 +1,34 @@
 import React, { useEffect, useContext } from 'react';
-import { useStateIfMounted } from 'use-state-if-mounted';
 import axios from 'axios';
+import { useStateIfMounted } from 'use-state-if-mounted';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { setRooms } from '../../../../store/actions';
+import { setRooms, SetRoomsAction, Room } from '../../../../store/actions';
 import { SocketContext } from '../../../../context/socket';
 import { useAuth0 } from '@auth0/auth0-react';
-import DirectMessage from '../Chat/DirectMessage';
 import { TreeView } from '@mui/lab';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { LeftSidebarComponentsProps } from '../../LeftSidebar';
+import DirectMessage from '../Chat/DirectMessage';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
-const MatcherSidebar = (props) => {
+interface MatcherSidebarProps extends LeftSidebarComponentsProps {
+  setRooms(rooms: Room[]): SetRoomsAction;
+}
+
+const MatcherSidebar = ({ setRooms, joinRoom, getDirectRoomsForUser }: MatcherSidebarProps) => {
   const location = useLocation();
   let navigate = useNavigate();
+
   const { user, isAuthenticated } = useAuth0();
-  const { socket, setCurrentRoom, currentRoom } = useContext(SocketContext);
-  const [directMsgRooms, setDirectMsgRooms] = useStateIfMounted([]);
+  
+  const { currentRoom } = useContext(SocketContext) || {};
+  const [directMsgRooms, setDirectMsgRooms] = useStateIfMounted<Room[]>([]);
 
   let username = isAuthenticated
-    ? user.nickname
+  ? (user && user.nickname) ? user.nickname : 'user'
     : `Test-User#${Math.round(Math.random() * 1000)}`;
 
   useEffect(() => {
@@ -28,32 +36,16 @@ const MatcherSidebar = (props) => {
       let res = null;
       try {
         res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`);
-        props.setRooms(res.data);
-        setDirectMsgRooms(
-          res.data.filter((room) =>
-            room.users?.length > 0 && room.roomname.split('-').includes(username)
-              ? room
-              : false
-          )
-        );
+        setRooms && setRooms(res.data);
+        setDirectMsgRooms(getDirectRoomsForUser(res.data));
       } catch (err) {
         console.log(err);
       }
     })();
-  }, [props, currentRoom, username]);
+  }, [setRooms, currentRoom, username]);
 
-  const joinRoom = (e) => {
-    let room = e.target.innerText;
-
-    try {
-      socket.emit('join', {
-        room,
-        username,
-      });
-      setCurrentRoom(room);
-    } catch (err) {
-      console.log(err);
-    }
+  const joinDirectMessageRoom = (e: React.MouseEvent<HTMLLIElement>) => {
+    joinRoom(e);
 
     if (location.pathname !== '/roomchat') navigate('/roomchat');
   };
@@ -62,7 +54,6 @@ const MatcherSidebar = (props) => {
     <div className="rooms-container" data-testid="matcher-rooms">
       <TreeView
         defaultExpanded={['0']}
-        mt={3}
         aria-label="room navigator"
         defaultCollapseIcon={<ExpandMoreIcon />}
         defaultExpandIcon={<ChevronRightIcon />}
@@ -71,8 +62,8 @@ const MatcherSidebar = (props) => {
         {directMsgRooms?.length > 0 && (
           <DirectMessage
             startNodeId="0"
-            joinRoom={joinRoom}
-            directMsgRooms={directMsgRooms}
+            joinRoom={joinDirectMessageRoom}
+            rooms={directMsgRooms}
           />
         )}
       </TreeView>
@@ -80,8 +71,8 @@ const MatcherSidebar = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  setRooms: (rooms) => dispatch(setRooms(rooms)),
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setRooms: (rooms: Room[]) => dispatch(setRooms(rooms)),
 });
 
 export default connect(null, mapDispatchToProps)(MatcherSidebar);

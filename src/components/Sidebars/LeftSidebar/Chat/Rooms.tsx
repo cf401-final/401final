@@ -13,6 +13,7 @@ import { SocketContext } from '../../../../context/socket';
 import Public from './Public';
 import DirectMessage from './DirectMessage';
 import CreateRoom from './CreateRoom';
+import { LeftSidebarComponentsProps } from '../';
 
 const theme: Theme = createTheme({
   palette: {
@@ -22,12 +23,12 @@ const theme: Theme = createTheme({
   },
 });
 
-interface RoomsProps {
+interface RoomsProps extends LeftSidebarComponentsProps {
   setRooms(rooms: Room[]): SetRoomsAction;
 }
 
-const Rooms = ({setRooms}: RoomsProps): JSX.Element => {
-  const { socket, setCurrentRoom, currentRoom } = useContext(SocketContext) || {};
+const Rooms = ({ setRooms, joinRoom, getDirectRoomsForUser }: RoomsProps): JSX.Element => {
+  const { currentRoom } = useContext(SocketContext) || {};
   const { isAuthenticated, user } = useAuth0();
 
   let username = isAuthenticated
@@ -49,33 +50,12 @@ const Rooms = ({setRooms}: RoomsProps): JSX.Element => {
             !room.password && room.users?.length === 0 ? room : false
           )
         );
-        setDirectMsgRooms(
-          res.data.filter((room: Room) => {
-            if(room.users && room.users?.length > 0 && room.roomname.split('-').includes(username)) {
-              return room;
-            } else return false;
-          })
-        );
+        setDirectMsgRooms(getDirectRoomsForUser(res.data))
       } catch (err) {
         console.log(err);
       }
     })();
   }, [setRooms, currentRoom, username]);
-
-  const joinRoom = (e: React.MouseEvent<HTMLLIElement>) => {
-    let room = e.currentTarget.innerText;
-    if(socket) {
-      try {
-        socket.emit('join', {
-          room,
-          username,
-        });
-        setCurrentRoom && setCurrentRoom(room);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  };
 
   return (
     <div className="rooms-container">
