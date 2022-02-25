@@ -6,10 +6,14 @@ import App from '../App';
 import SocketProvider from '../context/socket';
 import { server } from '../mocks/server';
 import { useAuth0 } from "@auth0/auth0-react";
+import ResizeObserver from 'resize-observer-polyfill';
+global.ResizeObserver = ResizeObserver
 
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
+
+window.ResizeObserver = ResizeObserver;
 
 const user = {
   email: "foo@test.com",
