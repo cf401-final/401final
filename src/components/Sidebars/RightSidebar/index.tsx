@@ -1,9 +1,8 @@
-import React from 'react';
 import UserList from './UserList';
 
-const RightSidebar = () => {
+const RightSidebar = (): JSX.Element => {
   return (
-    <div className="right-sidebar" elevation={10}>
+    <div className="right-sidebar">
       <UserList />
     </div>
   );

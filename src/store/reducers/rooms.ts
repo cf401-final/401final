@@ -9,10 +9,8 @@ export default function reducer(state = initialState, action: Action) {
     case ActionTypes.setRooms:
       if (Array.isArray(action.payload)) {
         action.payload.forEach((room) => {
-          if (typeof room === 'string') {
-            if (!state.rooms.has(room)) {
-              state.rooms.set(room, []);
-            }
+          if (!state.rooms.has(room)) {
+            state.rooms.set(room, []);
           }
         });
       }

@@ -1,17 +1,18 @@
-import React from 'react';
 import { TreeItem } from '@mui/lab';
+import { RoomProps } from './types';
+import { Room } from '../../../../store/actions';
 
-function Public({ publicRooms, joinRoom }) {
+function Public({ rooms, joinRoom }: RoomProps) {
   return (
     <TreeItem nodeId="0" label="PUBLIC ROOMS">
-      {publicRooms.map((room, idx) => {
+      {rooms.map((room: Room, idx: number) => {
         return (
           <TreeItem
             data-testid={`room-${room.roomname}`}
             nodeId={room.roomname}
             key={idx}
             label={room?.roomname}
-            onClick={joinRoom}
+            onClick={(e) => {joinRoom(e)}}
           />
         );
       })}

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import {
   MenuItem,
   InputBase,
@@ -6,14 +6,15 @@ import {
   Typography,
   Divider,
 } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider, Theme } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
 import axios from 'axios';
+import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import swal from 'sweetalert';
 import { SocketContext } from '../../../../context/socket';
 
-const theme = createTheme({
+const theme: Theme = createTheme({
   palette: {
     primary: {
       main: '#7db1b1',
@@ -21,39 +22,52 @@ const theme = createTheme({
   },
 });
 
-const CreateRoomForm = ({ handleClose }) => {
-  const { user } = useAuth0();
-  const { socket, setCurrentRoom } = useContext(SocketContext);
+interface CreateRoomFormProps {
+  handleClose(): void; 
+}
 
-  const handleSubmit = async (e) => {
+const CreateRoomForm = ({ handleClose }: CreateRoomFormProps): JSX.Element => {
+  const { user } = useAuth0();
+  const { socket, setCurrentRoom } = useContext(SocketContext) || {};
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    await addRoomToServer(e.target.roomname.value);
+    await addRoomToServer(e.currentTarget.roomname.value);
     handleClose();
   };
 
-  const addRoomToServer = async (roomname) => {
+  const displayAlert = (alertText: string): void => {
+    swal({
+      title: 'Oh no!',
+      text: alertText,
+      icon: 'warning',
+      dangerMode: true,
+    });      
+  }
+
+  const addRoomToServer = async (roomname: string): Promise<void> => {
     let body = { roomname };
-    let res = null;
+
     try {
-      res = await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body);
-      setCurrentRoom(res.data.roomname);
+      let res = await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body);
+      setCurrentRoom && setCurrentRoom(res.data.roomname);
       try {
-        socket.emit('join', {
-          room: res.data.roomname,
-          user: user.nickname,
-        });
-        setCurrentRoom(roomname);
+        if(socket && user) {
+          socket.emit('join', {
+            room: res.data.roomname,
+            user: user.nickname,
+          });
+
+          setCurrentRoom && setCurrentRoom(roomname);
+        } else {
+          displayAlert('Unable to connect with server.');
+        }
       } catch (err) {
         console.log(err);
       }
     } catch (err) {
       console.log(err);
-      swal({
-        title: 'Oh no!',
-        text: 'Unable to create a room with that name.',
-        icon: 'warning',
-        dangerMode: true,
-      });
+      displayAlert('Unable to create a room with that name. It may already exist.');
     }
   };
 

@@ -3,9 +3,10 @@ import Header from './Header';
 import LeftSidebar from './Sidebars/LeftSidebar';
 import RightSidebar from './Sidebars/RightSidebar';
 import { Outlet, useLocation } from 'react-router-dom';
+import { Location } from 'history';
 
-function Layout() {
-  const location = useLocation();
+function Layout(): JSX.Element {
+  const location: Location = useLocation();
 
   return (
     <>

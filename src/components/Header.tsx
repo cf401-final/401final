@@ -1,7 +1,6 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Tooltip } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider, Theme } from '@mui/material/styles';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -9,7 +8,7 @@ import github from '../img/github.png';
 import UserButton from './auth/UserButton';
 import SigninButton from './auth/SigninButton';
 
-const theme = createTheme({
+const theme: Theme = createTheme({
   palette: {
     primary: {
       main: '#36393f',
@@ -17,7 +16,7 @@ const theme = createTheme({
   },
 });
 
-const Header = () => {
+const Header = (): JSX.Element => {
   const { isAuthenticated } = useAuth0();
 
   return (
