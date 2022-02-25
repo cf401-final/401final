@@ -1,7 +1,5 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-
 import { useAuth0 } from '@auth0/auth0-react';
-
 import './App.scss';
 import Profile from './components/mainContainer/Profile';
 import Roomchat from './components/mainContainer/roomchat';
@@ -12,7 +10,7 @@ import Layout from './components/Layout';
 function App() {
   let { isAuthenticated } = useAuth0();
 
-  function RequireAuth({ children, redirectTo }) {
+  function RequireAuth({ children, redirectTo }: { children: JSX.Element, redirectTo: string }): JSX.Element {
     return isAuthenticated ? children : <Navigate to={redirectTo} />;
   }
 
