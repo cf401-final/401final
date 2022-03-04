@@ -41,7 +41,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
 }));
 
 const Profile = (): JSX.Element => {
-  const { user } = useAuth0();
+  const { user, getIdTokenClaims } = useAuth0();
   const nickname: string = (user && user.nickname) ? user.nickname : 'user';
 
   const [selected, setSelected] = useState<string>('');
@@ -102,9 +102,15 @@ const Profile = (): JSX.Element => {
 
     let method;
     let url;
-    let res = await axios.get(
-      `${process.env.REACT_APP_API_SERVER}/profiles/${nickname}`
-    );
+
+    let tokenClaims = await getIdTokenClaims();
+    const jwt = tokenClaims.__raw;
+
+    const config = {
+      headers: { Authorization: `Bearer ${jwt}` },
+    };
+
+    let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/profiles/${nickname}`, config);
 
     //if there is a user profile already update it, else create a new one
     method = res.data.length > 0 ? 'put' : 'post';

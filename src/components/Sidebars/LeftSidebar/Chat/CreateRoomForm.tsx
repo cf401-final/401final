@@ -27,7 +27,7 @@ interface CreateRoomFormProps {
 }
 
 const CreateRoomForm = ({ handleClose }: CreateRoomFormProps): JSX.Element => {
-  const { user } = useAuth0();
+  const { user, getIdTokenClaims } = useAuth0();
   const { socket, setCurrentRoom } = useContext(SocketContext) || {};
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -48,8 +48,15 @@ const CreateRoomForm = ({ handleClose }: CreateRoomFormProps): JSX.Element => {
   const addRoomToServer = async (roomname: string): Promise<void> => {
     let body = { roomname };
 
+    let tokenClaims = await getIdTokenClaims();
+    const jwt = tokenClaims.__raw;
+
+    const config = {
+      headers: { Authorization: `Bearer ${jwt}` },
+    };
+    
     try {
-      let res = await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body);
+      let res = await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body, config);
       setCurrentRoom && setCurrentRoom(res.data.roomname);
       try {
         if(socket && user) {

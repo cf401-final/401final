@@ -12,7 +12,7 @@ interface UserButtonProps {
 
 const UserButton = ({ username }: UserButtonProps) => {
   const [userProfile, setUserProfile] = useState<{ image: { url: string } }>();
-  const { user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated, getIdTokenClaims } = useAuth0();
   const { socket, setCurrentRoom } = useContext(SocketContext) || {};
 
   const theme: Theme = createTheme({
@@ -29,8 +29,15 @@ const UserButton = ({ username }: UserButtonProps) => {
 
   useEffect(() => {
     (async () => {
+      let tokenClaims = await getIdTokenClaims();
+      const jwt = tokenClaims.__raw;
+  
+      const config = {
+        headers: { Authorization: `Bearer ${jwt}` },
+      };
+
       try {
-        let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/profiles/${username}`);
+        let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/profiles/${username}`, config);
         setUserProfile(res.data[0]);
       } catch(err) {
         console.log(err)

@@ -29,7 +29,7 @@ interface RoomsProps extends LeftSidebarComponentsProps {
 
 const Rooms = ({ setRooms, joinRoom, getDirectRoomsForUser }: RoomsProps): JSX.Element => {
   const { currentRoom } = useContext(SocketContext) || {};
-  const { isAuthenticated, user } = useAuth0();
+  const { isAuthenticated, user, getIdTokenClaims } = useAuth0();
 
   let username = isAuthenticated
     ? (user && user.nickname) ? user.nickname : 'user'
@@ -41,8 +41,15 @@ const Rooms = ({ setRooms, joinRoom, getDirectRoomsForUser }: RoomsProps): JSX.E
   useEffect(() => {
     (async () => {
       let res = null;
+      let tokenClaims = await getIdTokenClaims();
+      const jwt = tokenClaims.__raw;
+  
+      const config = {
+        headers: { Authorization: `Bearer ${jwt}` },
+      };
+
       try {
-        res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`);
+        res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`, config);
 
         setRooms(res.data);
         setPublicRooms(

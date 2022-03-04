@@ -15,7 +15,7 @@ interface MessageStreamProps {
 }
 
 const MessageStream = ({ setRoomMessages, rooms }: MessageStreamProps) => {
-  const { user } = useAuth0();
+  const { user, getIdTokenClaims } = useAuth0();
   let username = (user && user.nickname) ? user.nickname: null;
 
   const { socket, currentRoom } = useContext(SocketContext) || {} ;
@@ -40,9 +40,16 @@ const MessageStream = ({ setRoomMessages, rooms }: MessageStreamProps) => {
 
   useEffect(() => {
     (async () => {
+      let tokenClaims = await getIdTokenClaims();
+      const jwt = tokenClaims.__raw;
+  
+      const config = {
+        headers: { Authorization: `Bearer ${jwt}` },
+      };
+
       try {
         let res = await axios.get(
-          `${process.env.REACT_APP_API_SERVER}/messages/${currentRoom}`
+          `${process.env.REACT_APP_API_SERVER}/messages/${currentRoom}`, config
         );
         if (res.data.length > 0) {
           setRoomMessages({ messages: res.data, roomname: `${currentRoom}` });

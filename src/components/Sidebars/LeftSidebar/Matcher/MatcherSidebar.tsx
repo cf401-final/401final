@@ -22,7 +22,7 @@ const MatcherSidebar = ({ setRooms, joinRoom, getDirectRoomsForUser }: MatcherSi
   const location = useLocation();
   let navigate = useNavigate();
 
-  const { user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated, getIdTokenClaims } = useAuth0();
   
   const { currentRoom } = useContext(SocketContext) || {};
   const [directMsgRooms, setDirectMsgRooms] = useStateIfMounted<Room[]>([]);
@@ -34,8 +34,15 @@ const MatcherSidebar = ({ setRooms, joinRoom, getDirectRoomsForUser }: MatcherSi
   useEffect(() => {
     (async () => {
       let res = null;
+      let tokenClaims = await getIdTokenClaims();
+      const jwt = tokenClaims.__raw;
+  
+      const config = {
+        headers: { Authorization: `Bearer ${jwt}` },
+      };
+
       try {
-        res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`);
+        res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`, config);
         setRooms && setRooms(res.data);
         setDirectMsgRooms(getDirectRoomsForUser(res.data));
       } catch (err) {
