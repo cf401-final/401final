@@ -13,12 +13,12 @@ export interface SocketValuesInterface {
   socket: Socket | null;
 }
 
-export const SocketContext = createContext<SocketValuesInterface | null>({} as SocketValuesInterface);
-
 interface SocketProviderProps {
   children: React.ReactNode;
   addMessageToRoom: Function;
 }
+
+export const SocketContext = createContext<SocketValuesInterface | null>({} as SocketValuesInterface);
 
 export const SocketProvider = ({ children, addMessageToRoom }: SocketProviderProps): JSX.Element => {
   let [currentRoom, setCurrentRoom] = useState<string | undefined>();

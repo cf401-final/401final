@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import {
   MenuItem,
   InputBase,
@@ -9,10 +9,10 @@ import {
 import { createTheme, ThemeProvider, Theme } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
 import axios from 'axios';
-import React from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
-import swal from 'sweetalert';
+import { AuthContext } from '../../../../context/auth';
 import { SocketContext } from '../../../../context/socket';
+import swal from 'sweetalert';
+
 
 const theme: Theme = createTheme({
   palette: {
@@ -27,7 +27,7 @@ interface CreateRoomFormProps {
 }
 
 const CreateRoomForm = ({ handleClose }: CreateRoomFormProps): JSX.Element => {
-  const { user, getIdTokenClaims } = useAuth0();
+  const { nickname, getAuthHeader } = useContext(AuthContext);
   const { socket, setCurrentRoom } = useContext(SocketContext) || {};
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -47,22 +47,16 @@ const CreateRoomForm = ({ handleClose }: CreateRoomFormProps): JSX.Element => {
 
   const addRoomToServer = async (roomname: string): Promise<void> => {
     let body = { roomname };
+    let config = await getAuthHeader();
 
-    let tokenClaims = await getIdTokenClaims();
-    const jwt = tokenClaims.__raw;
-
-    const config = {
-      headers: { Authorization: `Bearer ${jwt}` },
-    };
-    
     try {
       let res = await axios.post(`${process.env.REACT_APP_API_SERVER}/rooms`, body, config);
       setCurrentRoom && setCurrentRoom(res.data.roomname);
       try {
-        if(socket && user) {
+        if(socket) {
           socket.emit('join', {
             room: res.data.roomname,
-            user: user.nickname,
+            user: nickname,
           });
 
           setCurrentRoom && setCurrentRoom(roomname);

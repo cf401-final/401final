@@ -3,7 +3,7 @@ import { Box, Tooltip, Button, Avatar } from '@mui/material';
 import { createTheme, ThemeProvider, Theme } from '@mui/material/styles';
 import axios, { AxiosError } from 'axios';
 import swal from 'sweetalert';
-import { useAuth0 } from '@auth0/auth0-react';
+import { AuthContext } from '../../../context/auth';
 import { SocketContext } from '../../../context/socket';
 
 interface UserButtonProps {
@@ -12,7 +12,8 @@ interface UserButtonProps {
 
 const UserButton = ({ username }: UserButtonProps) => {
   const [userProfile, setUserProfile] = useState<{ image: { url: string } }>();
-  const { user, isAuthenticated, getIdTokenClaims } = useAuth0();
+  
+  const { nickname, getAuthHeader } = useContext(AuthContext)
   const { socket, setCurrentRoom } = useContext(SocketContext) || {};
 
   const theme: Theme = createTheme({
@@ -23,18 +24,9 @@ const UserButton = ({ username }: UserButtonProps) => {
     },
   });
 
-  let nickname = isAuthenticated
-    ? (user && user.nickname) ? user.nickname : 'user'
-    : `Test-User#${Math.round(Math.random() * 1000)}`;
-
   useEffect(() => {
     (async () => {
-      let tokenClaims = await getIdTokenClaims();
-      const jwt = tokenClaims.__raw;
-  
-      const config = {
-        headers: { Authorization: `Bearer ${jwt}` },
-      };
+      let config = await getAuthHeader();
 
       try {
         let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/profiles/${username}`, config);

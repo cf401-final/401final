@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Paper,
   Typography,
@@ -7,7 +7,7 @@ import {
   TextField,
   Button,
 } from '@mui/material';
-import { useAuth0 } from '@auth0/auth0-react';
+import { AuthContext } from '../../context/auth';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
 import axios from 'axios';
@@ -41,8 +41,7 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
 }));
 
 const Profile = (): JSX.Element => {
-  const { user, getIdTokenClaims } = useAuth0();
-  const nickname: string = (user && user.nickname) ? user.nickname : 'user';
+  const { nickname, getAuthHeader } = useContext(AuthContext);
 
   const [selected, setSelected] = useState<string>('');
   const [bio, setBio] = useState<string>('');
@@ -69,11 +68,10 @@ const Profile = (): JSX.Element => {
 
   useEffect(() => {
     (async () => {
+      let config = await getAuthHeader();
       try {
         //auto-populates form fields with existing profile data, if they have a profile
-        let res = await axios.get(
-          `${process.env.REACT_APP_API_SERVER}/profiles/${nickname}`
-        );
+        let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/profiles/${nickname}`, config);
         if (res.data[0]) {
           setSelected(res.data[0].interests);
           setBio(res.data[0].bio);
@@ -103,12 +101,7 @@ const Profile = (): JSX.Element => {
     let method;
     let url;
 
-    let tokenClaims = await getIdTokenClaims();
-    const jwt = tokenClaims.__raw;
-
-    const config = {
-      headers: { Authorization: `Bearer ${jwt}` },
-    };
+    const config = await getAuthHeader();
 
     let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/profiles/${nickname}`, config);
 

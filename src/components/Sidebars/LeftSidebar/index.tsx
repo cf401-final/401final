@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Route, Routes } from 'react-router-dom';
 import { Typography } from '@mui/material';
+import { AuthContext } from '../../../context/auth';
 import { SocketContext } from '../../../context/socket';
 import { Room } from '../../../store/actions';
 import Nav from './Nav';
@@ -14,12 +15,10 @@ export interface LeftSidebarComponentsProps {
 }
 
 const LeftSidebar = (): JSX.Element => {
-  const { user, isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth0();
+  
+  const { nickname: username } = useContext(AuthContext);
   const { socket, setCurrentRoom } = useContext(SocketContext) || {};
-
-  let username = isAuthenticated
-    ? (user && user.nickname) ? user.nickname : 'user'
-    : `Test-User#${Math.round(Math.random() * 1000)}`;
 
   const joinRoom = (e: React.MouseEvent<HTMLLIElement>) => {
     let room = e.currentTarget.innerText;
