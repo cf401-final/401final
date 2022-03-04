@@ -101,7 +101,13 @@ const Profile = (): JSX.Element => {
     let method;
     let url;
 
-    const config = await getAuthHeader();
+    const authHeader = await getAuthHeader();
+    let config = { 
+      headers: { 
+        "Content-Type": "multipart/form-data", 
+        Authorization: authHeader.headers.Authorization 
+      }
+    };
 
     let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/profiles/${nickname}`, config);
 
@@ -111,12 +117,12 @@ const Profile = (): JSX.Element => {
       `${process.env.REACT_APP_API_SERVER}/profiles/${nickname}` :
       `${process.env.REACT_APP_API_SERVER}/profiles`;
     
-    let headers = { headers: { "Content-Type": "multipart/form-data" }};
+
 
     if(method === 'put') {
-      await axios.put<FormData>(url, formData, headers);
+      await axios.put<FormData>(url, formData, config);
     } else {
-      await axios.post<FormData>(url, formData, headers);
+      await axios.post<FormData>(url, formData, config);
     }
 
     swal({
