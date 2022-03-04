@@ -3,11 +3,12 @@ import '@testing-library/jest-dom/extend-expect';
 import { Provider } from 'react-redux';
 import store from '../store';
 import App from '../App';
+import AuthProvider from '../context/auth';
 import SocketProvider from '../context/socket';
 import { server } from '../mocks/server';
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from '@auth0/auth0-react';
 import ResizeObserver from 'resize-observer-polyfill';
-global.ResizeObserver = ResizeObserver
+global.ResizeObserver = ResizeObserver;
 
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
@@ -16,32 +17,36 @@ afterAll(() => server.close());
 window.ResizeObserver = ResizeObserver;
 
 const user = {
-  email: "foo@test.com",
-  nickname: "testymctesterson",
+  email: 'foo@test.com',
+  nickname: 'testymctesterson',
   email_verified: true,
-  sub: "google-oauth2|12345678901234",
+  sub: 'google-oauth2|12345678901234',
   isAuthenticated: true,
 };
 
-jest.mock("@auth0/auth0-react");
+jest.mock('@auth0/auth0-react');
 
 beforeEach(() => {
-  useAuth0.mockReturnValue({
+  (useAuth0 as jest.Mock).mockReturnValue({
     isAuthenticated: true,
     user,
+    // eslint-disable-next-line no-unused-labels
+    getIdTokenClaims: jest.fn().mockReturnValue({ __raw: undefined }),
   });
 
-  render (
+  render(
     <Provider store={store()}>
-      <SocketProvider>
-        <App />
-      </SocketProvider>
+      <AuthProvider>
+        <SocketProvider>
+          <App />
+        </SocketProvider>
+      </AuthProvider>
     </Provider>
   );
 });
 
 describe('Testing core behaviors of app', () => {
-  it('Should properly render the application\'s landing page components', async () => {
+  it("Should properly render the application's landing page components", async () => {
     let header = screen.getByTestId('header');
     let mainContainer = screen.getByTestId('main-container');
     let leftSidebar = screen.getByTestId('left-sidebar');
@@ -55,7 +60,7 @@ describe('Testing core behaviors of app', () => {
 
   it('Should have the roomchat page render the proper components when first visited', async () => {
     let roomchatBtn = screen.getByTestId('roomchat-btn');
-    
+
     await waitFor(() => {
       fireEvent.click(roomchatBtn);
     });
@@ -70,7 +75,7 @@ describe('Testing core behaviors of app', () => {
 
   it('Should have the matcher page render the proper components when first visited', async () => {
     let matcherBtn = screen.getByTestId('matcher-left-btn');
-    
+
     await waitFor(() => {
       fireEvent.click(matcherBtn);
     });
@@ -105,14 +110,14 @@ describe('Testing core behaviors of app', () => {
   });
 
   it('Should render a "random" user\'s card when the matcher feature is used', async () => {
-    server.listen()
-    
+    server.listen();
+
     let matcherBtn = screen.getByTestId('matcher-left-btn');
 
     let matcherLanding;
     await waitFor(() => {
       fireEvent.click(matcherBtn);
-      matcherLanding = screen.getByTestId('matcher-landing'); 
+      matcherLanding = screen.getByTestId('matcher-landing');
     });
 
     expect(matcherLanding).toBeInTheDocument();
@@ -124,14 +129,13 @@ describe('Testing core behaviors of app', () => {
       fireEvent.click(matcherLandingBtn);
       matcherCard = screen.getByTestId('matcher-card');
     });
-    
-    
+
     expect(matcherCard).toBeInTheDocument();
 
     let matcherUsername = screen.getByTestId('matcher-username');
     let matcherInterests = screen.getByTestId('matcher-interests-music');
     let matcherBio = screen.getByTestId('matcher-bio');
-    
+
     expect(matcherUsername).toHaveTextContent('nottestymctesterson');
     expect(matcherInterests).toHaveTextContent('music');
     expect(matcherBio).toHaveTextContent('Hello there.');
