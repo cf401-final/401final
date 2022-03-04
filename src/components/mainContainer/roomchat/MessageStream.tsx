@@ -2,11 +2,11 @@ import React, { useEffect, useContext } from 'react';
 import { useStateIfMounted } from 'use-state-if-mounted';
 import { StoreState } from '../../../store';
 import { SocketContext } from '../../../context/socket';
+import { AuthContext } from '../../../context/auth';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import axios from 'axios';
 import { setRoomMessages, Room, Rooms, Message, SetRoomMessagesAction } from '../../../store/actions';
-import { useAuth0 } from '@auth0/auth0-react';
 import { Typography } from '@mui/material';
 
 interface MessageStreamProps {
@@ -15,10 +15,9 @@ interface MessageStreamProps {
 }
 
 const MessageStream = ({ setRoomMessages, rooms }: MessageStreamProps) => {
-  const { user } = useAuth0();
-  let username = (user && user.nickname) ? user.nickname: null;
+  const { nickname: username, getAuthHeader } = useContext(AuthContext);
+  const { socket, currentRoom } = useContext(SocketContext) || {};
 
-  const { socket, currentRoom } = useContext(SocketContext) || {} ;
   let [messages, setMessages] = useStateIfMounted([] as Message[]);
 
   useEffect(() => {
@@ -40,9 +39,11 @@ const MessageStream = ({ setRoomMessages, rooms }: MessageStreamProps) => {
 
   useEffect(() => {
     (async () => {
+      let config = await getAuthHeader();
+
       try {
         let res = await axios.get(
-          `${process.env.REACT_APP_API_SERVER}/messages/${currentRoom}`
+          `${process.env.REACT_APP_API_SERVER}/messages/${currentRoom}`, config
         );
         if (res.data.length > 0) {
           setRoomMessages({ messages: res.data, roomname: `${currentRoom}` });

@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
+import { AuthContext } from '../../context/auth';
 import axios, { AxiosError } from 'axios';
 import swal from 'sweetalert';
 import {
@@ -30,9 +30,7 @@ const theme: Theme = createTheme({
 });
 
 const Matcher = () => {
-  const { user } = useAuth0();
-  const nickname: string = (user && user.nickname) ? user.nickname : 'user';
-
+  const { nickname, getAuthHeader } = useContext(AuthContext);
   const { setCurrentRoom } = useContext(SocketContext) || {};
 
   const [selected, setSelected] = useState<string[]>([]);
@@ -56,12 +54,13 @@ const Matcher = () => {
   }
 
   const createDirectMessageRoom = async () => {
-    let nickname: string = (user && user.nickname) ? user.nickname : 'user';
+    let config = await getAuthHeader();
+
     let roomname = `${nickname}-${username}`;
     let body: NewRoom = { roomname, users: [nickname, username] };
 
     try {
-      await axios.post<NewRoom>(`${process.env.REACT_APP_API_SERVER}/rooms`, body);
+      await axios.post<NewRoom>(`${process.env.REACT_APP_API_SERVER}/rooms`, body, config);
       swal({
         title: "User Liked!",
         text: `This user has been added to your Direct Messages.`
@@ -90,10 +89,10 @@ const Matcher = () => {
   };
 
   const getRandomUser = async () => {
+    let config = await getAuthHeader();
+    
     try {
-      let res = await axios.get(
-        `${process.env.REACT_APP_API_SERVER}/profiles/${nickname}/random`
-      );
+      let res = await axios.get(`${process.env.REACT_APP_API_SERVER}/profiles/${nickname}/random`, config);
 
       if (res.data) {
         setSelected(res.data.interests);

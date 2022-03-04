@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { useStateIfMounted } from 'use-state-if-mounted';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -9,6 +9,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useAuth0 } from '@auth0/auth0-react';
 import { setRooms, SetRoomsAction, Room } from '../../../../store/actions';
+import { AuthContext } from '../../../../context/auth';
 import { SocketContext } from '../../../../context/socket';
 import Public from './Public';
 import DirectMessage from './DirectMessage';
@@ -28,12 +29,8 @@ interface RoomsProps extends LeftSidebarComponentsProps {
 }
 
 const Rooms = ({ setRooms, joinRoom, getDirectRoomsForUser }: RoomsProps): JSX.Element => {
+  const { nickname, getAuthHeader } = useContext(AuthContext);
   const { currentRoom } = useContext(SocketContext) || {};
-  const { isAuthenticated, user } = useAuth0();
-
-  let username = isAuthenticated
-    ? (user && user.nickname) ? user.nickname : 'user'
-    : `Test-User#${Math.round(Math.random() * 1000)}`;
 
   const [publicRooms, setPublicRooms] = useStateIfMounted<Room[]>([]);
   const [directMsgRooms, setDirectMsgRooms] = useStateIfMounted<Room[]>([]);
@@ -41,8 +38,10 @@ const Rooms = ({ setRooms, joinRoom, getDirectRoomsForUser }: RoomsProps): JSX.E
   useEffect(() => {
     (async () => {
       let res = null;
+      const config = await getAuthHeader();
+
       try {
-        res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`);
+        res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`, config);
 
         setRooms(res.data);
         setPublicRooms(
@@ -55,7 +54,7 @@ const Rooms = ({ setRooms, joinRoom, getDirectRoomsForUser }: RoomsProps): JSX.E
         console.log(err);
       }
     })();
-  }, [setRooms, currentRoom, username]);
+  }, [setRooms, currentRoom, nickname]);
 
   return (
     <div className="rooms-container">
