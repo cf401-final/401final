@@ -93,7 +93,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.27.1",
     "jest": "^27.4.5",
-    "msw": "^0.36.3",
+    "msw": "^0.36.8",
     "prettier": "^2.5.1"
   }
 }

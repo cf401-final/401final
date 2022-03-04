@@ -4,8 +4,8 @@ import { useStateIfMounted } from 'use-state-if-mounted';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { setRooms, SetRoomsAction, Room } from '../../../../store/actions';
+import { AuthContext } from '../../../../context/auth';
 import { SocketContext } from '../../../../context/socket';
-import { useAuth0 } from '@auth0/auth0-react';
 import { TreeView } from '@mui/lab';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
@@ -22,20 +22,17 @@ const MatcherSidebar = ({ setRooms, joinRoom, getDirectRoomsForUser }: MatcherSi
   const location = useLocation();
   let navigate = useNavigate();
 
-  const { user, isAuthenticated } = useAuth0();
-  
+  const { nickname: username, getAuthHeader } = useContext(AuthContext);
   const { currentRoom } = useContext(SocketContext) || {};
   const [directMsgRooms, setDirectMsgRooms] = useStateIfMounted<Room[]>([]);
-
-  let username = isAuthenticated
-  ? (user && user.nickname) ? user.nickname : 'user'
-    : `Test-User#${Math.round(Math.random() * 1000)}`;
 
   useEffect(() => {
     (async () => {
       let res = null;
+      let config = await getAuthHeader();
+
       try {
-        res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`);
+        res = await axios.get(`${process.env.REACT_APP_API_SERVER}/rooms`, config);
         setRooms && setRooms(res.data);
         setDirectMsgRooms(getDirectRoomsForUser(res.data));
       } catch (err) {
