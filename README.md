@@ -13,6 +13,7 @@
 ## Usage & Deployment
 
 - Find our deployed app on [Heroku](https://jangle-app.herokuapp.com/).
+- [![Run Javascript Tests](https://github.com/jangle401/jangle-front/actions/workflows/javascript-tests.yml/badge.svg)](https://github.com/jangle401/jangle-front/actions/workflows/javascript-tests.yml)
 
 ## Dependencies
 
